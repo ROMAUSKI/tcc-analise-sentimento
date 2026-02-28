@@ -1,0 +1,32 @@
+# === Backups e ZIPs ===
+_backup/
+
+# === Documentos UTFPR (regulamentos, templates, checklists) ===
+documentos/
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# === Python ===
+__pycache__/
+*.pyc
+.env
+venv/
+
+# === LaTeX build ===
+artigo/*.aux
+artigo/*.log
+artigo/*.bbl
+artigo/*.blg
+artigo/*.dvi
+artigo/*.out
+artigo/*.synctex.gz
+artigo/*.fls
+artigo/*.fdb_latexmk
+artigo/*.toc
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
