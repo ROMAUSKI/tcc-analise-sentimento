@@ -34,30 +34,50 @@ TCC/
 
 ## Estado Atual
 
-**Última atualização:** 27/02/2026
-**Branch:** main (limpo)
-**Último commit:** `83bf102 — fix: atualizar caminhos do notebook 01`
+**Última atualização:** 18/03/2026
+**Branch:** main
+**Último commit:** `83bf102 — fix: atualizar caminhos do notebook 01` (pendente commit do notebook 02)
 
 ### O que já foi feito
 - [x] Geração dos 9 datasets sintéticos (manualmente via interfaces web)
 - [x] Refactor da estrutura de pastas do projeto
 - [x] Correção dos caminhos do notebook `01` para nova estrutura
 - [x] Execução do notebook `01` no Colab (resultados abaixo)
+- [x] Notebook `02` — Célula 1: setup com detecção automática Colab/Local
+- [x] Notebook `02` — Célula 2: validação cruzada (Accuracy + F1-Score) para NB e LR com k=5 e k=10
+- [x] Notebook `02` — Célula 3: salvar tabela comparativa em `resultados/validacao_cruzada.csv`
+- [x] Notebook `02` — Célula 4: boxplot comparativo Accuracy e F1-Score por modelo/k-fold
 
-### Pendente
-- [ ] Executar notebook `02` (análise de robustez)
+### Pendente — Notebook 02
+- [ ] Curva de aprendizado (learning curve)
+- [ ] Teste com dados reais (ex: AdoroCinema ou IMDb-pt) — validação externa para sair da "bolha sintética"
+- [ ] Commit + push das alterações do notebook 02
+
+### Pendente — Geral
 - [ ] Revisar e finalizar artigo com os resultados
 - [ ] Monografia
+- [ ] Tratar no artigo a limitação: validação feita apenas com dados sintéticos (seção de Limitações)
 
 ---
 
-## Resultados dos Modelos Baseline
+## Resultados dos Modelos Baseline (Notebook 01)
 
 | Modelo | Acurácia | Precisão | Recall | F1-Score |
 |---|---|---|---|---|
 | Regressão Logística | 85.83% | 85.86% | 85.83% | 85.84% |
 | Naive Bayes | 90.28% | 90.57% | 90.28% | 90.30% |
-| NB (Validação Cruzada, k=10) | — | — | — | 89.12% ± 2.2% |
+
+## Resultados da Validação Cruzada (Notebook 02)
+
+| Modelo | k | Accuracy Média | Accuracy DP | F1 Média | F1 DP |
+|---|---|---|---|---|---|
+| Naive Bayes | 5 | 89.10% | ±0.72% | 89.11% | ±0.73% |
+| Naive Bayes | 10 | 89.10% | ±1.81% | 89.11% | ±1.82% |
+| Regressão Logística | 5 | 87.04% | ±1.52% | 87.00% | ±1.54% |
+| Regressão Logística | 10 | 87.60% | ±2.70% | 87.53% | ±2.78% |
+
+> **Arquivos gerados:** `resultados/validacao_cruzada.csv` e `resultados/boxplot_validacao_cruzada.png`
+> **Observação crítica:** Toda validação até agora usa dados sintéticos. Falta teste com dados reais.
 
 **Dataset:** 1798 frases únicas (600 por classe: Positiva, Negativa, Neutra)
 **Fontes:** Claude, Gemini, ChatGPT (200 frases cada por classe)
@@ -67,7 +87,8 @@ TCC/
 
 ## Observações Técnicas
 
-- Notebooks rodam no **Google Colab** (não localmente)
-- Se o repo já estava clonado no Colab, rodar antes: `!rm -rf tcc-analise-sentimento` para puxar atualizações
+- Notebooks rodam no **Google Colab** ou **VS Code local** (célula 1 detecta automaticamente)
+- No Colab: clona o repo do GitHub automaticamente
+- No VS Code: usa caminhos relativos a partir da raiz do projeto
 - Caminhos dos dados: `dados/brutos/` → `dados/processado/` → `resultados/`
 - Git configurado com `safe.directory` para o path local do Windows

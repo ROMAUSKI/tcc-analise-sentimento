@@ -1,0 +1,5 @@
+Modelo,k,Accuracy Média (%),Accuracy DP (%),F1-Score Média (%),F1-Score DP (%)
+Naive Bayes (k=5),5,89.099814,0.721575,89.107628,0.731193
+Naive Bayes (k=10),10,89.099317,1.813204,89.105894,1.823337
+Regressão Logística (k=5),5,87.039152,1.516400,86.995631,1.537905
+Regressão Logística (k=10),10,87.596214,2.703767,87.532606,2.779426
