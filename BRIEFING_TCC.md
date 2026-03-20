@@ -34,9 +34,9 @@ TCC/
 
 ## Estado Atual
 
-**Última atualização:** 18/03/2026
+**Última atualização:** 19/03/2026
 **Branch:** main
-**Último commit:** `83bf102 — fix: atualizar caminhos do notebook 01` (pendente commit do notebook 02)
+**Último commit:** `8bc81ba — feat(nb02): validação cruzada com Accuracy e F1-Score` (pendente commit do notebook 02 com curvas de aprendizado)
 
 ### O que já foi feito
 - [x] Geração dos 9 datasets sintéticos (manualmente via interfaces web)
@@ -47,9 +47,10 @@ TCC/
 - [x] Notebook `02` — Célula 2: validação cruzada (Accuracy + F1-Score) para NB e LR com k=5 e k=10
 - [x] Notebook `02` — Célula 3: salvar tabela comparativa em `resultados/validacao_cruzada.csv`
 - [x] Notebook `02` — Célula 4: boxplot comparativo Accuracy e F1-Score por modelo/k-fold
+- [x] Notebook `02` — Célula 5: curvas de aprendizado (NB e LR) com F1-Score treino vs validação
+- [x] Notebook `02` — Célula 6: análise markdown (overfitting, platô, convergência)
 
 ### Pendente — Notebook 02
-- [ ] Curva de aprendizado (learning curve)
 - [ ] Teste com dados reais (ex: AdoroCinema ou IMDb-pt) — validação externa para sair da "bolha sintética"
 - [ ] Commit + push das alterações do notebook 02
 
@@ -76,7 +77,7 @@ TCC/
 | Regressão Logística | 5 | 87.04% | ±1.52% | 87.00% | ±1.54% |
 | Regressão Logística | 10 | 87.60% | ±2.70% | 87.53% | ±2.78% |
 
-> **Arquivos gerados:** `resultados/validacao_cruzada.csv` e `resultados/boxplot_validacao_cruzada.png`
+> **Arquivos gerados:** `resultados/validacao_cruzada.csv`, `resultados/boxplot_validacao_cruzada.png`, `resultados/curva_aprendizado_nb.png`, `resultados/curva_aprendizado_lr.png`
 > **Observação crítica:** Toda validação até agora usa dados sintéticos. Falta teste com dados reais.
 
 **Dataset:** 1798 frases únicas (600 por classe: Positiva, Negativa, Neutra)
