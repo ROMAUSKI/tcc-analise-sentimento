@@ -121,6 +121,8 @@ Gráficos que mostram a evolução do desempenho (treino e validação) conforme
 
 O dataset foi construído inteiramente a partir de dados sintéticos gerados por três LLMs: ChatGPT (OpenAI), Claude (Anthropic) e Gemini (Google). A escolha por múltiplos modelos teve como objetivo reduzir o viés de geração de uma única fonte, já que cada LLM possui características próprias de vocabulário, estrutura de frases e estilo de escrita.
 
+**Nota sobre a escolha dos modelos geradores:** A proposta original do TCC1 previa o uso de ChatGPT, Gemini e Copilot. Durante a execução, o Copilot foi substituído pelo Claude (Anthropic). A justificativa é que o Copilot utiliza o mesmo motor do ChatGPT (modelos GPT da OpenAI) por baixo, o que resultaria em dois geradores com a mesma base — gerando frases com estilo e vocabulário muito similares e comprometendo a diversidade do dataset. Ao usar o Claude, que é um modelo de arquitetura e treinamento independentes (Anthropic), garantiu-se que as três fontes geradoras são de fato distintas, cada uma com suas características próprias. Os resultados confirmaram essa decisão: o Claude produz frases significativamente mais longas (~95 caracteres em média, contra ~50 do ChatGPT) e com estilo diferente dos demais.
+
 **Processo de geração:**
 - Para cada LLM, foram solicitadas 200 frases em português brasileiro para cada classe de sentimento (positiva, negativa, neutra) no domínio de críticas de cinema e séries de TV
 - A geração foi feita manualmente via interfaces web dos respectivos modelos, com prompts padronizados
