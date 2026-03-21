@@ -1,3 +1,5 @@
 ,Acurácia,Precisão,Recall,F1-Score
-Regressão Logística,0.8611,0.8618,0.8611,0.861
-Naive Bayes,0.8861,0.8872,0.8861,0.8863
+Regressão Logística,0.8361,0.838,0.8361,0.8354
+Naive Bayes,0.8611,0.8619,0.8611,0.8613
+SVM Linear,0.8611,0.8621,0.8611,0.8609
+NB (Validação Cruzada),,,,0.8963
