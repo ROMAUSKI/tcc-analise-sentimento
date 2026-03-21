@@ -36,41 +36,49 @@ TCC/
 
 **Última atualização:** 21/03/2026
 **Branch:** main
-**Último commit:** `22d6e9b — feat(nb02): curvas de aprendizado NB e LR` (pendente commit com SVM, análise de erros, tabela consolidada e refatoração)
+**Último commit:** `19ef1b5 — feat: adicionar SVM, tabela consolidada, referência técnica e re-execução dos notebooks`
 
-### O que já foi feito
+### Semana 1 do checklist — CONCLUÍDA (parte técnica)
 - [x] Geração dos 9 datasets sintéticos (manualmente via interfaces web)
 - [x] Refactor da estrutura de pastas do projeto
-- [x] Correção dos caminhos do notebook `01` para nova estrutura
-- [x] Notebook `01` — Setup com detecção automática Colab/Local
-- [x] Notebook `01` — Pipeline completo: LR, NB e SVM Linear (treino, avaliação, gráficos)
+- [x] Notebook `01` — Setup Colab/Local, pipeline completo com LR, NB e SVM Linear
 - [x] Notebook `01` — Validação cruzada k=10 para NB
-- [x] Notebook `01` — Texto para o artigo + referências sugeridas
-- [x] Notebook `02` — Setup com detecção automática Colab/Local
-- [x] Notebook `02` — Validação cruzada (Accuracy + F1-Score) para NB, LR e SVM com k=5 e k=10
-- [x] Notebook `02` — Salvar tabela comparativa em `resultados/validacao_cruzada.csv`
-- [x] Notebook `02` — Boxplot comparativo Accuracy e F1-Score por modelo/k-fold
-- [x] Notebook `02` — Curvas de aprendizado (NB, LR e SVM) com F1-Score treino vs validação
-- [x] Notebook `02` — Análise de erros do Naive Bayes (erros por fonte, confusões, exemplos)
+- [x] Notebook `02` — Setup Colab/Local
+- [x] Notebook `02` — Validação cruzada (Accuracy + F1) para NB, LR e SVM com k=5 e k=10
+- [x] Notebook `02` — Boxplot comparativo, curvas de aprendizado (NB, LR, SVM)
+- [x] Notebook `02` — Análise de erros do NB (erros por fonte, confusões, 15 exemplos)
 - [x] Notebook `02` — Tabela consolidada `resultados/metricas_consolidadas.csv`
-- [x] Notebook `02` — Texto para o artigo + referências sugeridas
-- [x] Refatoração dos notebooks para código mais natural e acadêmico
-- [x] Execução local dos dois notebooks com outputs gerados
+- [x] Refatoração dos notebooks (código mais natural, menos cara de IA)
+- [x] Re-execução local dos dois notebooks com todos os outputs gerados
+- [x] SVM Linear como terceiro modelo (dia 5 — opcional, feito)
+- [x] `CONCLUSOES.md` — documento-base para o artigo com todas as seções, figuras e referências
+- [x] Remoção da pasta duplicada `src/tcc-analise-sentimento/` (clone antigo)
+- [x] Git atualizado — 4 commits pushados desde 19/03
 
-### Pendente — Notebook 02
-- [ ] Teste com dados reais (ex: AdoroCinema ou IMDb-pt) — validação externa para sair da "bolha sintética"
+### Pendente — Semana 1 (não é código)
+- [ ] Falar com o orientador (marcar reunião, confirmar formato de entrega)
 
-### Pendente — Artigo
-- [ ] Escrever artigo no formato SBC com base nos textos dos notebooks
-- [ ] Ler as referências sugeridas nos notebooks antes de escrever
-- [ ] Seção de Metodologia: dataset, pré-processamento, modelos, métricas
-- [ ] Seção de Resultados: baseline, validação cruzada, curvas de aprendizado, análise de erros
-- [ ] Seção de Discussão: limitações (dados sintéticos), diferenças entre LLMs, limitações do bag-of-words
-- [ ] Seção de Trabalhos Futuros: validação com dados reais, modelos com embeddings/transformers
+### Pendente — Semana 2 (pesquisa + escrita)
+- [ ] Ler artigos das referências do `CONCLUSOES.md` (pelo menos 10-12)
+- [ ] Criar `documentos/notas_leitura.md` com anotações de cada artigo
+- [ ] Baixar PDFs em `documentos/referencias/`
+- [ ] Atualizar `artigo/referencias.bib` com todas as referências
+- [ ] Escrever Introdução no LaTeX (~1 página)
+- [ ] Escrever Trabalhos Relacionados (~1 página)
+- [ ] Escrever Metodologia completa
 
-### Pendente — Geral
-- [ ] Monografia
-- [ ] Commit + push das alterações pendentes
+### Pendente — Semana 3 (resultados + discussão)
+- [ ] Escrever Resultados e Discussão no LaTeX (tabelas, figuras, análise de erros)
+- [ ] Escrever Conclusão + Trabalhos Futuros
+- [ ] Escrever Resumo + Abstract
+- [ ] Copiar gráficos de `resultados/` para `artigo/imagens/`
+
+### Pendente — Semanas 4-6 (revisão + defesa)
+- [ ] Enviar artigo para orientador e aplicar correções
+- [ ] Limpar `requirements.txt` (tem libs do Colab que não são usadas)
+- [ ] Montar slides da apresentação
+- [ ] Ensaiar apresentação cronometrada
+- [ ] Entrega final + defesa
 
 ---
 
