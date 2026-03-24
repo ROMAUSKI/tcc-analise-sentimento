@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
 
 
     
@@ -63,6 +64,76 @@ points of space before each paragraph. Page numbers must be suppressed.
 
 Full papers must respect the page limits defined by the conference.
 Conferences that publish just abstracts ask for \textbf{one}-page texts.
+
+% ####################################################################
+% ## SEÇÕES ADICIONADAS — FUNDAMENTAÇÃO + TRABALHOS RELACIONADOS ##
+% ####################################################################
+
+\section{Fundamentação Teórica}
+
+Esta seção apresenta os conceitos que embasam o trabalho: análise de sentimento como tarefa de PLN, as técnicas de representação de texto utilizadas, os algoritmos de classificação adotados e o papel dos grandes modelos de linguagem na geração de dados sintéticos.
+
+\subsection{Análise de Sentimento}
+
+A análise de sentimento é uma das tarefas mais estudadas em Processamento de Linguagem Natural (PLN). O objetivo principal é identificar automaticamente a polaridade de um texto — se ele expressa uma opinião positiva, negativa ou neutra em relação a algum objeto, produto ou experiência \cite{jm3}. As aplicações são diversas: desde monitoramento de redes sociais e análise de reputação de marcas até pesquisas de satisfação e moderação de conteúdo.
+
+Do ponto de vista da granularidade, a análise de sentimento pode ser realizada em três níveis: no nível do documento, avaliando o sentimento geral do texto como um todo; no nível da sentença, classificando cada frase individualmente; e no nível de aspecto, identificando a polaridade em relação a atributos específicos de um produto ou serviço \cite{pang2002}. Neste trabalho, a classificação é feita no nível da sentença, com três classes possíveis: Positiva, Negativa e Neutra.
+
+Um dos desafios conhecidos da tarefa é o tratamento de negações e ambiguidades linguísticas. Uma frase como ``não gostei nada desse filme'' tem polaridade oposta ao que seria esperado pela presença isolada do verbo ``gostar'', e esse tipo de construção tende a causar erros em classificadores baseados apenas em frequência de termos \cite{jm3}.
+
+\subsection{Representação de Texto: \textit{Bag-of-Words} e TF-IDF}
+
+Para que algoritmos de aprendizado de máquina possam processar texto, é necessário converter as frases em representações numéricas. A abordagem \textit{bag-of-words} (BoW) é uma das mais simples e tradicionais: cada documento é representado como um vetor de contagens de palavras, ignorando a ordem em que aparecem \cite{jm3}. Apesar de sua simplicidade, essa representação ainda apresenta resultados competitivos em muitas tarefas de classificação de texto.
+
+Uma extensão comum do BoW é o \textit{Term Frequency–Inverse Document Frequency} (TF-IDF), que ajusta as contagens de palavras pela frequência inversa delas no corpus. A ideia é penalizar termos muito frequentes — como preposições e artigos — que aparecem em quase todos os documentos e, portanto, têm pouco poder discriminativo. Formalmente, o peso TF-IDF de um termo $t$ em um documento $d$ é dado por:
+
+\begin{equation}
+\text{TF-IDF}(t, d) = \text{TF}(t, d) \times \log\left(\frac{N}{\text{DF}(t)}\right)
+\end{equation}
+
+\noindent onde $N$ é o número total de documentos e $\text{DF}(t)$ é o número de documentos que contêm o termo $t$. O TF-IDF foi escolhido neste trabalho como método de vetorização por ser amplamente utilizado em tarefas de classificação de sentimento e por apresentar bom desempenho com classificadores clássicos \cite{rossi2019}.
+
+\subsection{Algoritmos de Classificação}
+
+\subsubsection{Naive Bayes}
+
+O classificador Naive Bayes é um método probabilístico baseado no Teorema de Bayes, que assume independência condicional entre os atributos dado a classe. Embora essa suposição raramente seja verdadeira na prática — daí o nome ``naive'' (ingênuo) —, o algoritmo apresenta resultados surpreendentemente bons em tarefas de classificação de texto \cite{jm3}. Na versão multinomial, utilizada neste trabalho, o modelo calcula a probabilidade de cada classe dado o conjunto de termos presentes na frase e escolhe a classe de maior probabilidade a posteriori.
+
+\subsubsection{Regressão Logística}
+
+A Regressão Logística é um classificador discriminativo que aprende diretamente a fronteira de decisão entre as classes, ao contrário do Naive Bayes, que modela a distribuição gerativa dos dados \cite{jm3}. Em geral, classificadores discriminativos tendem a superar o Naive Bayes quando há grande quantidade de dados, pois não impõem a suposição de independência entre as \textit{features} \cite{pang2002}. Contudo, como discutido na seção de Resultados, os dados obtidos neste trabalho apresentaram o comportamento inverso, o que pode estar relacionado às características específicas dos dados sintéticos gerados por LLMs.
+
+\subsubsection{Support Vector Machine}
+
+A Support Vector Machine (SVM) é um algoritmo que busca o hiperplano de separação de máxima margem entre as classes no espaço de \textit{features}. Com kernel linear, é especialmente eficaz para problemas de alta dimensionalidade como classificação de texto, onde o número de \textit{features} (vocabulário) pode ser muito maior do que o número de exemplos \cite{jm3}. Neste trabalho, o SVM com kernel linear foi utilizado como terceiro modelo de comparação.
+
+\subsection{Grandes Modelos de Linguagem e Geração de Dados Sintéticos}
+
+Grandes Modelos de Linguagem (\textit{Large Language Models} — LLMs) são modelos baseados na arquitetura Transformer, pré-treinados em grandes corpora de texto para aprender representações ricas da linguagem. Nos últimos anos, modelos como GPT, Gemini e Claude demonstraram capacidade de gerar textos coerentes, fluentes e contextualmente adequados em diversas línguas e domínios \cite{jm3}.
+
+Uma das aplicações emergentes dos LLMs é a geração de dados sintéticos para treinamento de modelos de aprendizado de máquina. Essa abordagem é especialmente interessante em cenários onde a obtenção de dados reais rotulados é cara ou difícil — como é frequentemente o caso em tarefas de PLN em português. A ideia central é usar os LLMs como geradores de exemplos de treinamento, reduzindo a dependência de anotação humana.
+
+% ####################################################################
+
+\section{Trabalhos Relacionados}
+
+Esta seção revisa trabalhos que abordam análise de sentimento com aprendizado de máquina, com foco em aplicações em língua portuguesa e no uso de dados sintéticos para treinamento de classificadores.
+
+\subsection{Análise de Sentimento com Aprendizado de Máquina}
+
+O trabalho pioneiro de \cite{pang2002} estabeleceu que abordagens baseadas em aprendizado de máquina — especialmente Naive Bayes, SVM e Máxima Entropia — superam métodos baseados em regras para classificação de sentimento em resenhas de filmes. Os autores utilizaram o corpus de críticas do IMDb e observaram que o SVM com representação unigrama atingiu os melhores resultados, enquanto o Naive Bayes apresentou desempenho competitivo com menor custo computacional.
+
+No contexto brasileiro, \cite{kansaon2019} realizaram análise de sentimento em tweets em português, utilizando múltiplas variantes do Naive Bayes. Os autores reportaram acurácias entre 79\% e 85\% dependendo da configuração do classificador e do par de classes analisado, evidenciando que mesmo em língua portuguesa, com suas particularidades morfológicas, abordagens clássicas apresentam resultados satisfatórios.
+
+\cite{souza2021} propuseram um sistema de análise de sentimento em tempo real para notícias do mercado financeiro em português, utilizando TF-IDF combinado com Naive Bayes. O sistema atingiu acurácia de 76,8\% na classificação de tweets de veículos jornalísticos. Os autores destacam o papel do pré-processamento — especialmente a remoção de \textit{stopwords} e normalização textual — no desempenho final do classificador.
+
+\cite{rossi2019} desenvolveu um método de análise de sentimento aplicado a cidades inteligentes, utilizando classificadores como Regressão Logística, Naive Bayes Multinomial, SVM linear e Random Forest sobre representações BoW e TF-IDF. Os resultados demonstram que a escolha da técnica de extração de características impacta significativamente o desempenho, com TF-IDF apresentando ganhos consistentes sobre o BoW simples na maioria dos experimentos.
+
+\subsection{Dados Sintéticos para Treinamento de Modelos de PLN}
+
+A utilização de dados sintéticos gerados por LLMs para treinamento de modelos de aprendizado de máquina é uma área emergente de pesquisa. A motivação principal é reduzir o custo e o tempo associados à anotação manual de dados, que continua sendo um dos principais gargalos para o desenvolvimento de modelos de PLN em idiomas com menor disponibilidade de recursos, como o português.
+
+Diferentemente dos trabalhos anteriores, que coletam dados reais de plataformas como Twitter e portais de avaliação, este trabalho investiga se é possível obter classificadores com desempenho competitivo utilizando exclusivamente dados gerados por LLMs. Além disso, a comparação entre três geradores distintos — ChatGPT 2.5, Gemini 2.5 e Claude Sonnet 4.5 — permite avaliar se há diferenças significativas na qualidade dos dados produzidos por cada modelo, contribuindo para o entendimento sobre a adequação de LLMs como substitutos de anotadores humanos em tarefas de análise de sentimento.
 
 % ####################################################################
 % ## INÍCIO DA SEÇÃO ADICIONADA ##
