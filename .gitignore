@@ -4,6 +4,7 @@ _backup/
 # === Documentos UTFPR (regulamentos, templates, checklists) ===
 documentos/regulamentos/
 documentos/*.pdf
+documentos/referencias/*.pdf
 
 # === Jupyter ===
 .ipynb_checkpoints/
