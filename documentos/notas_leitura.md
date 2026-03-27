@@ -133,3 +133,69 @@ A maioria dos trabalhos encontrados:
 4. Não analisa a **coerência entre LLMs** na geração de dados
 
 Minha contribuição original: avaliar se dados sintéticos gerados por múltiplos LLMs são suficientes para treinar modelos clássicos de ML para análise de sentimento em PT-BR, e se há coerência na classificação entre os diferentes geradores.
+
+---
+
+## DIA 10 — Avaliação de Modelos + Trabalhos Similares
+
+### 12. Sokolova & Lapalme (2009) — A Systematic Analysis of Performance Measures for Classification Tasks
+
+- **Referência:** Sokolova, M. & Lapalme, G. (2009). A systematic analysis of performance measures for classification tasks. *Information Processing & Management*, 45(4), pp. 427–437. DOI: 10.1016/j.ipm.2009.03.002
+- **O que fizeram:** Análise sistemática de 24 métricas de desempenho usadas em tarefas de classificação de ML — binária, multi-classe, multi-label e hierárquica. Propõem uma taxonomia de invariância das métricas com relação a mudanças na matriz de confusão.
+- **Resultados:** Demonstram que diferentes métricas capturam aspectos distintos do desempenho de um classificador. Para problemas multi-classe (como o meu TCC), métricas como F1-macro são mais informativas que acurácia simples quando há desbalanceamento de classes. A análise mostra que a escolha da métrica deve ser guiada pela aplicação e pelas características dos dados.
+- **O que posso citar:** Fundamentação teórica para a escolha de métricas de avaliação (acurácia, precisão, recall, F1-Score) no meu TCC. Justifica por que reporto múltiplas métricas e não apenas acurácia. Referência canônica sobre métricas de classificação com mais de 5.000 citações.
+- **URL:** https://www.sciencedirect.com/science/article/abs/pii/S0306457309000259
+
+---
+
+### 13. Kohavi (1995) — A Study of Cross-Validation and Bootstrap for Accuracy Estimation and Model Selection
+
+- **Referência:** Kohavi, R. (1995). A study of cross-validation and bootstrap for accuracy estimation and model selection. *Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI)*, pp. 1137–1145.
+- **O que fizeram:** Experimento em larga escala (mais de 500.000 execuções) comparando métodos de estimação de acurácia — cross-validation e bootstrap — usando C4.5 e Naive Bayes em datasets reais. Variaram o número de folds na cross-validation e o número de amostras no bootstrap.
+- **Resultados:** Para seleção de modelo em datasets reais, a validação cruzada estratificada com 10 folds é o melhor método, mesmo quando há poder computacional para usar mais folds. Leave-one-out tende a ter alta variância. O estudo consolidou o k=10 como padrão de fato na comunidade de ML.
+- **O que posso citar:** Justificativa direta para a escolha de k=10 na validação cruzada do meu TCC. Referência fundamental (mais de 14.000 citações) que embasa a metodologia de avaliação dos modelos NB, LR e SVM.
+- **URL:** https://dl.acm.org/doi/10.5555/1643031.1643047
+
+---
+
+### 14. Pedregosa et al. (2011) — Scikit-learn: Machine Learning in Python
+
+- **Referência:** Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., ... & Duchesnay, E. (2011). Scikit-learn: Machine Learning in Python. *Journal of Machine Learning Research*, 12, pp. 2825–2830.
+- **O que fizeram:** Apresentação do scikit-learn, biblioteca Python de ML que integra algoritmos de classificação, regressão, clustering, redução de dimensionalidade, seleção de modelo e pré-processamento. Foco em facilidade de uso, performance e consistência de API.
+- **O que posso citar:** Referência obrigatória para qualquer trabalho que use scikit-learn. Justifica a ferramenta utilizada para implementar TF-IDF, Naive Bayes (MultinomialNB), Logistic Regression, SVM Linear, validação cruzada (StratifiedKFold) e curvas de aprendizado (learning_curve) no meu pipeline. Uma das publicações mais citadas em ML (>100.000 citações).
+- **URL:** https://jmlr.org/papers/v12/pedregosa11a.html
+
+---
+
+### 15. Souza (2019) — TCC UTFPR: Ferramentas de Análise de Sentimentos (Collabora)
+
+- **Referência:** Souza, [nome não disponível] (2019). Ferramentas de Análise de Sentimentos. *Trabalho de Conclusão de Curso*. Universidade Tecnológica Federal do Paraná (UTFPR).
+- **O que fizeram:** TCC da UTFPR que aborda ferramentas para análise de sentimento, possivelmente em contexto colaborativo.
+- **O que posso citar:** Evidência de que a UTFPR já possui trabalhos na área de análise de sentimento, o que contextualiza o meu TCC dentro da produção acadêmica da instituição. Diferencial: meu trabalho foca em dados sintéticos gerados por LLMs, abordagem que não aparece nos TCCs anteriores da UTFPR.
+- **URL:** https://repositorio.utfpr.edu.br/jspui/bitstream/1/26457/1/ferramentasanalisesentimentoscollabora.pdf
+- **Nota:** Preciso baixar o PDF completo para confirmar detalhes (autor, campus, orientador).
+
+---
+
+## Resumo Atualizado: Referências no .bib
+
+Após o Dia 10, o projeto conta com 15 referências relevantes (excluindo as 3 do template SBC que serão removidas):
+
+| # | Chave | Tema | Status no .bib |
+|---|---|---|---|
+| 1 | jm3 | Livro-base de PLN | ✅ |
+| 2 | pang2002 | Trabalho seminal SA + ML | ✅ |
+| 3 | souza2021 | SA em tempo real PT-BR | ✅ |
+| 4 | kansaon2019 | SA em tweets PT-BR | ✅ |
+| 5 | rossi2019 | SA cidades inteligentes | ✅ |
+| 6 | lecun2015deep | Deep learning (geral) | ✅ |
+| 7 | souza2022brazilian | SA em reviews PT-BR | ✅ |
+| 8 | araujo2024chatgpt | ChatGPT como SA solver | ✅ |
+| 9 | zhang2024sentiment | SA na era dos LLMs | ✅ |
+| 10 | hellwig2025exploring | Dados sintéticos ABSA | ✅ |
+| 11 | li2023synthetic | Dados sintéticos classificação | ✅ |
+| 12 | liu2024best | Best practices dados sintéticos | ✅ |
+| 13 | nadas2025synthetic | Survey dados sintéticos 2025 | ✅ |
+| 14 | sokolova2009 | Métricas de classificação | 🆕 adicionar |
+| 15 | kohavi1995 | Cross-validation k=10 | 🆕 adicionar |
+| 16 | pedregosa2011 | Scikit-learn | 🆕 adicionar |

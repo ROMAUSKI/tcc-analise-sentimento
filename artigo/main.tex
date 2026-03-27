@@ -6,68 +6,54 @@
 
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath}
+\usepackage{booktabs}
 
 
-    
+
 \sloppy
 
 \title{Avaliando a Capacidade de Modelos de Aprendizado de Máquina Treinados com Dados Sintéticos de Críticas em Filmes e Séries}
 
-\author{Luciana P. Nedel\inst{1}, Rafael H. Bordini\inst{2}, Flávio Rech
- Wagner\inst{1}, Jomi F. Hübner\inst{3} }
+\author{Davi Romauski Meurer\inst{1}, Marlon Marcon\inst{1}}
 
-
-\address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
- (UFRGS)\\
- Caixa Postal 15.064 -- 91.501-970 -- Porto Alegre -- RS -- Brazil
-\nextinstitute
- Department of Computer Science -- University of Durham\\
- Durham, U.K.
-\nextinstitute
- Departamento de Sistemas e Computação\\
- Universidade Regional de Blumenal (FURB) -- Blumenau, SC -- Brazil
- \email{\{nedel,flavio\}@inf.ufrgs.br, R.Bordini@durham.ac.uk,
- jomi@inf.furb.br}
+\address{Departamento de Engenharia de Software\\
+  Universidade Tecnológica Federal do Paraná (UTFPR) -- Dois Vizinhos, PR -- Brasil
+  \email{davimeurer@alunos.utfpr.edu.br, marlonmarcon@utfpr.edu.br}
 }
 
-\begin{document} 
+\begin{document}
 
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
+  % TODO — Escrever após a conclusão do artigo
 \end{abstract}
-    
-\begin{resumo} 
-  Este meta-artigo descreve o estilo a ser usado na confecção de artigos e
-  resumos de artigos para publicação nos anais das conferências organizadas
-  pela SBC. É solicitada a escrita de resumo e abstract apenas para os artigos
-  escritos em português. Artigos em inglês deverão apresentar apenas abstract.
-  Nos dois casos, o autor deve tomar cuidado para que o resumo (e o abstract)
-  não ultrapassem 10 linhas cada, sendo que ambos devem estar na primeira
-  página do artigo.
+
+\begin{resumo}
+  % TODO — Escrever após a conclusão do artigo
 \end{resumo}
 
 
-\section{General Information}
+% ====================================================================
+% SEÇÃO 1 — INTRODUÇÃO
+% ====================================================================
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
+\section{Introdução}
 
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
+A análise de sentimento é uma tarefa de classificação de texto que busca identificar a polaridade — positiva, negativa ou neutra — de uma opinião expressa em linguagem natural. Essa tarefa tem aplicações diretas em áreas como mineração de opinião, monitoramento de redes sociais e análise de feedback de produtos e serviços \cite{jm3}. No domínio de entretenimento, a classificação automática de críticas de filmes e séries permite compreender, em larga escala, como o público reage a uma obra, algo que seria inviável de forma manual dada a quantidade de conteúdo gerado diariamente em plataformas de avaliação.
 
-% ####################################################################
-% ## SEÇÕES ADICIONADAS — FUNDAMENTAÇÃO + TRABALHOS RELACIONADOS ##
-% ####################################################################
+No entanto, treinar modelos de aprendizado de máquina para essa tarefa depende de datasets rotulados de qualidade, cuja construção manual é custosa, demorada e suscetível a inconsistências entre anotadores humanos. Esse problema é ainda mais acentuado em língua portuguesa, onde a disponibilidade de recursos linguísticos anotados é significativamente menor quando comparada ao inglês \cite{souza2022brazilian}. A escassez de dados rotulados em português brasileiro representa um dos principais obstáculos para o avanço de pesquisas em Processamento de Linguagem Natural (PLN) voltadas a esse idioma.
+
+Uma alternativa que vem ganhando atenção na literatura recente é o uso de Grandes Modelos de Linguagem (\textit{Large Language Models} — LLMs) como geradores de dados sintéticos de treinamento \cite{liu2024best, nadas2025synthetic}. Modelos como ChatGPT, Gemini e Claude demonstram capacidade de produzir textos coerentes e contextualmente adequados em diversas línguas, o que abre a possibilidade de utilizá-los para criar datasets rotulados sem depender de anotação humana. Trabalhos recentes já investigaram essa abordagem para tarefas como classificação de texto e análise de sentimento baseada em aspectos, com resultados promissores em cenários de poucos recursos \cite{li2023synthetic, hellwig2025exploring}.
+
+Este trabalho investiga se dados sintéticos gerados por três LLMs distintos — ChatGPT, Gemini e Claude — são suficientes para treinar modelos clássicos de aprendizado de máquina capazes de classificar o sentimento de críticas de filmes e séries em português brasileiro. O dataset utilizado contém 1798 frases distribuídas em três classes (Positiva, Negativa e Neutra), geradas integralmente por esses modelos. Além de avaliar a assertividade dos classificadores treinados com esses dados, o trabalho analisa se há coerência na classificação entre os dados produzidos por cada LLM gerador. Para isso, são empregados três algoritmos — Naive Bayes, Regressão Logística e SVM Linear — avaliados por meio de métricas como acurácia, F1-Score, validação cruzada estratificada e análise de erros por fonte geradora.
+
+Este artigo está organizado da seguinte forma: a Seção~2 apresenta a fundamentação teórica sobre análise de sentimento, representação de texto e os algoritmos utilizados. A Seção~3 revisa trabalhos relacionados na literatura. A Seção~4 descreve a metodologia adotada para geração dos dados e treinamento dos modelos. A Seção~5 apresenta e discute os resultados obtidos. Por fim, a Seção~6 traz as conclusões e direções para trabalhos futuros.
+
+
+% ====================================================================
+% SEÇÃO 2 — FUNDAMENTAÇÃO TEÓRICA
+% ====================================================================
 
 \section{Fundamentação Teórica}
 
@@ -113,7 +99,16 @@ Grandes Modelos de Linguagem (\textit{Large Language Models} — LLMs) são mode
 
 Uma das aplicações emergentes dos LLMs é a geração de dados sintéticos para treinamento de modelos de aprendizado de máquina. Essa abordagem é especialmente interessante em cenários onde a obtenção de dados reais rotulados é cara ou difícil — como é frequentemente o caso em tarefas de PLN em português. A ideia central é usar os LLMs como geradores de exemplos de treinamento, reduzindo a dependência de anotação humana.
 
-% ####################################################################
+\subsection{Métricas de Avaliação}
+
+A avaliação de classificadores requer métricas que capturem diferentes aspectos do desempenho do modelo. Neste trabalho, são utilizadas quatro métricas principais, seguindo as recomendações de \cite{sokolova2009}: acurácia, que mede a proporção de classificações corretas sobre o total; precisão, que indica a proporção de verdadeiros positivos entre todas as predições positivas de uma classe; recall, que mede a proporção de verdadeiros positivos entre todos os exemplos reais de uma classe; e F1-Score, que é a média harmônica entre precisão e recall, sendo especialmente útil quando se deseja um equilíbrio entre ambas.
+
+Para obter estimativas mais robustas do desempenho dos modelos, foi adotada a validação cruzada estratificada com $k=10$ folds, conforme recomendado por \cite{kohavi1995} como o método mais adequado para seleção e avaliação de modelos em datasets de tamanho moderado. Essa técnica divide o dataset em 10 partições mantendo a proporção das classes em cada fold, de modo que cada partição é usada uma vez como conjunto de teste enquanto as demais servem para treinamento. Todo o pipeline de vetorização, treinamento e avaliação foi implementado com a biblioteca scikit-learn \cite{pedregosa2011}.
+
+
+% ====================================================================
+% SEÇÃO 3 — TRABALHOS RELACIONADOS
+% ====================================================================
 
 \section{Trabalhos Relacionados}
 
@@ -131,15 +126,22 @@ No contexto brasileiro, \cite{kansaon2019} realizaram análise de sentimento em 
 
 \subsection{Dados Sintéticos para Treinamento de Modelos de PLN}
 
-A utilização de dados sintéticos gerados por LLMs para treinamento de modelos de aprendizado de máquina é uma área emergente de pesquisa. A motivação principal é reduzir o custo e o tempo associados à anotação manual de dados, que continua sendo um dos principais gargalos para o desenvolvimento de modelos de PLN em idiomas com menor disponibilidade de recursos, como o português.
+A utilização de dados sintéticos gerados por LLMs para treinamento de modelos de aprendizado de máquina é uma área emergente de pesquisa. \cite{zhang2024sentiment} realizaram uma avaliação abrangente do desempenho de LLMs em tarefas de análise de sentimento, comparando-os com modelos menores \textit{fine-tuned}. Os resultados indicam que LLMs apresentam desempenho satisfatório em tarefas mais simples de classificação de polaridade, mas ficam atrás em tarefas que requerem compreensão mais profunda de fenômenos de sentimento, como detecção de ironia ou análise baseada em aspectos.
 
-Diferentemente dos trabalhos anteriores, que coletam dados reais de plataformas como Twitter e portais de avaliação, este trabalho investiga se é possível obter classificadores com desempenho competitivo utilizando exclusivamente dados gerados por LLMs. Além disso, a comparação entre três geradores distintos — ChatGPT 2.5, Gemini 2.5 e Claude Sonnet 4.5 — permite avaliar se há diferenças significativas na qualidade dos dados produzidos por cada modelo, contribuindo para o entendimento sobre a adequação de LLMs como substitutos de anotadores humanos em tarefas de análise de sentimento.
+\cite{hellwig2025exploring} exploraram o uso de GPT-3.5-turbo e Llama-3-70B para gerar dados anotados para análise de sentimento baseada em aspectos (ABSA) em cenários de poucos recursos. Com apenas 25 exemplos de referência, a adição de dados sintéticos via \textit{few-shot prompting} resultou em ganhos expressivos de F1-Score, demonstrando o potencial dessa abordagem quando dados rotulados são escassos.
 
-% ####################################################################
-% ## INÍCIO DA SEÇÃO ADICIONADA ##
-% ####################################################################
+\cite{li2023synthetic} avaliaram a geração de dados sintéticos com GPT-3.5-Turbo para classificação de texto, reportando que a efetividade dos dados gerados varia conforme a subjetividade da tarefa — tarefas mais objetivas tendem a se beneficiar mais dos dados sintéticos. \cite{liu2024best} compilaram as melhores práticas para uso de dados sintéticos, incluindo técnicas de filtragem, ponderação e refinamento iterativo, além de discutir riscos como amplificação de viés. \cite{nadas2025synthetic} apresentaram o survey mais recente sobre o tema, cobrindo desde geração baseada em prompts até pipelines com refinamento iterativo.
+
+Diferentemente dos trabalhos anteriores, que em sua maioria utilizam um único LLM como gerador ou focam em inglês, este trabalho investiga a geração de dados sintéticos por três LLMs distintos em português brasileiro, analisando tanto a qualidade individual dos dados de cada gerador quanto a coerência entre eles.
+
+
+% ====================================================================
+% SEÇÃO 4 — METODOLOGIA
+% ====================================================================
 
 \section{Metodologia}
+
+% TODO — Expandir com base no notebook 01 e 02
 
 Neste tópico está a descrição e procedimentos escolhidos para a formação da base de dados sintética e o esclarecimento de como está imputada a definição de cada classe (Positiva, Negativa, Neutra) utilizadas, para criação de prompts e dos dados sintéticos gerados nas ferramentas de IA.
 
@@ -165,89 +167,24 @@ Contempla os textos que apresentam informações factuais sobre um filme ou sér
 \textit{Exemplo: ``A série foi dirigida por Anna Kappel e estreou em 2025 na plataforma de streaming.''}
 \end{quote}
 
-\section{First Page} \label{sec:firstpage}
 
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
+% ====================================================================
+% SEÇÃO 5 — RESULTADOS E DISCUSSÃO
+% ====================================================================
 
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
+\section{Resultados e Discussão}
 
-\section{CD-ROMs and Printed Proceedings}
-
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
-
-\section{Sections and Paragraphs}
-
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
-
-\subsection{Subsections}
-
-The subsection titles must be in boldface, 12pt, flush left.
-
-\section{Figures and Captions}\label{sec:figs}
+% TODO — Escrever com base nos resultados dos notebooks 01 e 02
 
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+% ====================================================================
+% SEÇÃO 6 — CONCLUSÃO
+% ====================================================================
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{imagens/fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+\section{Conclusão}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{imagens/fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
+% TODO — Escrever após completar Resultados e Discussão
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
-
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\includegraphics[width=.7\textwidth]{imagens/table.jpg}
-\end{table}
-
-\section{Images}
-
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
 
 \bibliographystyle{sbc}
 \bibliography{referencias}
