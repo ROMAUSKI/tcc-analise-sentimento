@@ -34,9 +34,8 @@ TCC/
 
 ## Estado Atual
 
-**Última atualização:** 21/03/2026
+**Última atualização:** 26/03/2026
 **Branch:** main
-**Último commit:** `19ef1b5 — feat: adicionar SVM, tabela consolidada, referência técnica e re-execução dos notebooks`
 
 ### Semana 1 do checklist — CONCLUÍDA (parte técnica)
 - [x] Geração dos 9 datasets sintéticos (manualmente via interfaces web)
@@ -53,19 +52,24 @@ TCC/
 - [x] SVM Linear como terceiro modelo (dia 5 — opcional, feito)
 - [x] `CONCLUSOES.md` — documento-base para o artigo com todas as seções, figuras e referências
 - [x] Remoção da pasta duplicada `src/tcc-analise-sentimento/` (clone antigo)
-- [x] Git atualizado — 4 commits pushados desde 19/03
+- [x] Git atualizado
 
 ### Pendente — Semana 1 (não é código)
 - [ ] Falar com o orientador (marcar reunião, confirmar formato de entrega)
 
-### Pendente — Semana 2 (pesquisa + escrita)
-- [ ] Ler artigos das referências do `CONCLUSOES.md` (pelo menos 10-12)
-- [ ] Criar `documentos/notas_leitura.md` com anotações de cada artigo
-- [ ] Baixar PDFs em `documentos/referencias/`
-- [ ] Atualizar `artigo/referencias.bib` com todas as referências
-- [ ] Escrever Introdução no LaTeX (~1 página)
-- [ ] Escrever Trabalhos Relacionados (~1 página)
-- [ ] Escrever Metodologia completa
+### Semana 2 do checklist — EM PROGRESSO (pesquisa + escrita)
+- [x] Ler artigos das referências (11 artigos anotados no Dia 8 e 9)
+- [x] Criar `documentos/notas_leitura.md` com anotações de cada artigo
+- [x] Pesquisar 2-3 artigos sobre avaliação de modelos NLP (Dia 10)
+- [x] Pesquisar TCCs/artigos da UTFPR sobre tema similar (Dia 10)
+- [x] Atualizar `artigo/referencias.bib` — agora com 16 referências (meta: 10-12 ✅)
+- [x] Limpar template SBC — removido todo texto de exemplo (Dia 11)
+- [x] Substituir autores e afiliações (Davi + Marlon, UTFPR DV) (Dia 11)
+- [x] Criar estrutura de seções: Intro / Fund. Teórica / Trab. Relacionados / Metodologia / Resultados / Conclusão (Dia 11)
+- [x] Escrever rascunho da Introdução (~1 página, 5 parágrafos) (Dia 11)
+- [x] Adicionar subseção de Métricas de Avaliação na Fundamentação Teórica (Dia 11)
+- [ ] Escrever Metodologia completa (pipeline, geração, pré-processamento)
+- [ ] Escrever Trabalhos Relacionados — texto de posicionamento final
 
 ### Pendente — Semana 3 (resultados + discussão)
 - [ ] Escrever Resultados e Discussão no LaTeX (tabelas, figuras, análise de erros)
