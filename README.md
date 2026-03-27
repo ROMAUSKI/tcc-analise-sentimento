@@ -1,81 +1,88 @@
-# Análise de Sentimento com Dados Sintéticos Gerados por IA
+# Análise de Sentimento com Dados Sintéticos Gerados por LLMs
 
 **Trabalho de Conclusão de Curso** — Engenharia de Software
 Universidade Tecnológica Federal do Paraná — Câmpus Dois Vizinhos (UTFPR-DV)
 
+**Autor:** Davi Romauski Meurer
+**Orientador:** Prof. Marlon Marcon
+
 ## Sobre
 
-Este projeto investiga a viabilidade de utilizar dados sintéticos gerados por modelos de linguagem (LLMs) para treinar classificadores de análise de sentimento no domínio de críticas de filmes e séries.
-
-Três ferramentas de IA foram utilizadas para gerar o dataset: **ChatGPT**, **Gemini** e **Claude**. Os dados foram classificados em três categorias de sentimento: **Positiva**, **Negativa** e **Neutra**.
+Este projeto investiga se dados sintéticos gerados por três LLMs distintos — **ChatGPT**, **Gemini** e **Claude** — são suficientes para treinar modelos clássicos de aprendizado de máquina capazes de classificar o sentimento de críticas de filmes e séries em português brasileiro.
 
 ### Perguntas de Pesquisa
 
-1. Qual o nível de assertividade de um modelo treinado com frases geradas artificialmente?
-2. A classificação gerada artificialmente é consistente e coerente?
+1. Qual a assertividade dos modelos treinados com dados sintéticos?
+2. A classificação é coerente entre os diferentes LLMs geradores?
+
+## Dataset
+
+- **1.798 frases** sintéticas geradas integralmente por LLMs
+- **3 classes:** Positiva (600), Negativa (598), Neutra (600)
+- **3 fontes:** ChatGPT, Gemini, Claude (~200 frases por classe por LLM)
+- Pré-processamento: remoção de duplicatas, caracteres especiais, normalização para minúsculas
+
+## Modelos e Resultados
+
+### Avaliação no Conjunto de Teste (80/20, seed=42)
+
+| Modelo | Acurácia | Precisão | Recall | F1-Score |
+|---|---|---|---|---|
+| Naive Bayes | 86.11% | 86.19% | 86.11% | 86.13% |
+| SVM Linear | 86.11% | 86.21% | 86.11% | 86.09% |
+| Regressão Logística | 83.61% | 83.80% | 83.61% | 83.54% |
+
+### Validação Cruzada Estratificada
+
+| Modelo | F1-Score (k=5) | F1-Score (k=10) |
+|---|---|---|
+| SVM Linear | 88.88% ± 1.33 | 89.10% ± 2.51 |
+| Naive Bayes | 88.86% ± 1.82 | 89.63% ± 2.15 |
+| Regressão Logística | 87.31% ± 1.42 | 88.02% ± 2.44 |
+
+Vetorização: TF-IDF | Split: 80/20 estratificado | Seed: 42
 
 ## Estrutura do Projeto
 
 ```
-├── src/                        # Notebooks Jupyter (Google Colab)
-│   ├── 00_data_generation.ipynb      # Planejamento e geração dos dados
-│   ├── 01_training_evaluation.ipynb  # Treino e avaliação dos modelos
-│   └── 02_robustness_analysis.ipynb  # Experimentos de robustez
+├── src/                              # Notebooks Jupyter
+│   ├── 00_data_generation.ipynb      # Documentação da geração dos dados
+│   ├── 01_training_evaluation.ipynb  # Pipeline: unificação, TF-IDF, treino, métricas
+│   └── 02_robustness_analysis.ipynb  # CV, curvas de aprendizado, análise de erros
 │
-├── dados/                      # Datasets
-│   ├── brutos/                       # CSVs gerados por cada IA (9 arquivos)
-│   └── processado/                   # Dataset unificado e limpo
+├── dados/
+│   ├── brutos/                       # 9 CSVs gerados por cada LLM (3 classes × 3 fontes)
+│   └── processado/                   # Dataset unificado (synthetic_dataset.csv)
 │
-├── resultados/                 # Gráficos e métricas geradas
+├── resultados/                       # Gráficos (.png) e métricas (.csv)
 │
-├── artigo/                     # Artigo LaTeX (formato SBC)
-│   └── imagens/
+├── artigo/                           # Artigo LaTeX (formato SBC)
 │
-├── requirements.txt            # Dependências Python
-└── README.md
+├── documentos/                       # Notas de leitura e referências
+│   ├── notas_leitura.md
+│   └── referencias/                  # PDFs dos artigos citados
+│
+└── BRIEFING_TCC.md                   # Estado atual do projeto (doc interno)
 ```
-
-## Dataset
-
-- **1.798 frases** sintéticas (600 por IA, ~200 por classe por IA)
-- **3 classes:** Positiva, Negativa, Neutra
-- **3 fontes:** ChatGPT, Gemini, Claude
-- Pré-processamento: remoção de duplicatas, caracteres especiais, normalização
-
-## Modelos e Resultados
-
-| Modelo              | Acurácia | Precisão | Recall | F1-Score |
-|---------------------|----------|----------|--------|----------|
-| Regressão Logística | 86.11%   | 86.18%   | 86.11% | 86.10%   |
-| Naive Bayes         | 88.61%   | 88.72%   | 88.61% | 88.63%   |
-
-Vetorização: TF-IDF | Split: 80/20 com seed fixa
 
 ## Como Executar
 
-1. Abra os notebooks no [Google Colab](https://colab.research.google.com/)
-2. Faça upload da pasta `dados/` para o Google Drive
+Os notebooks detectam automaticamente o ambiente (Google Colab ou local).
+
+**No Google Colab:**
+1. Abra o notebook no Colab — ele clona o repo automaticamente
+2. Execute as células na ordem
+
+**Localmente:**
+1. Clone o repositório
+2. Instale as dependências: `pip install pandas scikit-learn matplotlib seaborn nltk`
 3. Execute os notebooks na ordem: `00` → `01` → `02`
-
-### Dependências
-
-```bash
-pip install pandas scikit-learn matplotlib seaborn nltk wordcloud
-```
 
 ## Tecnologias
 
-- Python 3 (Google Colab)
-- scikit-learn (ML)
-- pandas (manipulação de dados)
-- matplotlib / seaborn (visualização)
-- TF-IDF (vetorização de texto)
-- LaTeX (artigo no formato SBC)
-
-## Autor
-
-**Davi Romauski Meurer**
-Engenharia de Software — UTFPR Dois Vizinhos
+- Python 3 | pandas | scikit-learn | matplotlib | seaborn | NLTK
+- TF-IDF (vetorização) | MultinomialNB | LogisticRegression | LinearSVC
+- LaTeX (artigo formato SBC) | Google Colab
 
 ## Licença
 
