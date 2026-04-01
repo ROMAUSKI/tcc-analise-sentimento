@@ -34,7 +34,7 @@ TCC/
 
 ## Estado Atual
 
-**Última atualização:** 26/03/2026
+**Última atualização:** 31/03/2026
 **Branch:** main
 
 ### Semana 1 do checklist — CONCLUÍDA (parte técnica)
@@ -57,7 +57,7 @@ TCC/
 ### Pendente — Semana 1 (não é código)
 - [ ] Falar com o orientador (marcar reunião, confirmar formato de entrega)
 
-### Semana 2 do checklist — EM PROGRESSO (pesquisa + escrita)
+### Semana 2 do checklist — CONCLUÍDA (pesquisa + escrita)
 - [x] Ler artigos das referências (11 artigos anotados no Dia 8 e 9)
 - [x] Criar `documentos/notas_leitura.md` com anotações de cada artigo
 - [x] Pesquisar 2-3 artigos sobre avaliação de modelos NLP (Dia 10)
@@ -68,14 +68,19 @@ TCC/
 - [x] Criar estrutura de seções: Intro / Fund. Teórica / Trab. Relacionados / Metodologia / Resultados / Conclusão (Dia 11)
 - [x] Escrever rascunho da Introdução (~1 página, 5 parágrafos) (Dia 11)
 - [x] Adicionar subseção de Métricas de Avaliação na Fundamentação Teórica (Dia 11)
-- [ ] Escrever Metodologia completa (pipeline, geração, pré-processamento)
-- [ ] Escrever Trabalhos Relacionados — texto de posicionamento final
+- [x] Escrever Trabalhos Relacionados — revisado com 3 subseções + posicionamento (Dia 12)
+- [x] Metodologia completa — 7 subseções com tabela do dataset (Dia 13)
 
-### Pendente — Semana 3 (resultados + discussão)
-- [ ] Escrever Resultados e Discussão no LaTeX (tabelas, figuras, análise de erros)
+### Semana 3 do checklist — EM PROGRESSO (resultados + discussão + ajustes visuais)
+- [x] Copiar gráficos de `resultados/` para `artigo/imagens/` (8 PNGs)
+- [x] Escrever Resultados e Discussão — 5 subseções com 3 tabelas e 6 figuras (Dia 15)
+- [x] Dividir figuras compostas em individuais para melhor legibilidade (Dia 15):
+  - Boxplot CV → `boxplot_accuracy.png` + `boxplot_f1.png`
+  - Análise de erros → `erros_por_fonte.png` + `erros_heatmap.png`
+- [x] Fixar posicionamento de figuras no LaTeX (`[H]` com pacote `float`) (Dia 15)
+- [x] Compilar PDF — 14 páginas, todas figuras no lugar correto (Dia 15)
 - [ ] Escrever Conclusão + Trabalhos Futuros
 - [ ] Escrever Resumo + Abstract
-- [ ] Copiar gráficos de `resultados/` para `artigo/imagens/`
 
 ### Pendente — Semanas 4-6 (revisão + defesa)
 - [ ] Enviar artigo para orientador e aplicar correções
@@ -115,6 +120,7 @@ TCC/
 - **Padrão:** Gemini gera frases mais ambíguas; ChatGPT é mais direto no sentimento
 
 > **Arquivos gerados:** `resultados/validacao_cruzada.csv`, `resultados/metricas_consolidadas.csv`, `resultados/baseline_metrics.csv`, `resultados/boxplot_validacao_cruzada.png`, `resultados/curva_aprendizado_nb.png`, `resultados/curva_aprendizado_lr.png`, `resultados/analise_erros.csv`, `resultados/analise_erros_graficos.png`, gráficos de F1/confusão por modelo
+> **Figuras do artigo (individuais):** `artigo/imagens/boxplot_accuracy.png`, `artigo/imagens/boxplot_f1.png`, `artigo/imagens/erros_por_fonte.png`, `artigo/imagens/erros_heatmap.png`
 > **Observação crítica:** Toda validação até agora usa dados sintéticos. Falta teste com dados reais.
 
 **Dataset:** 1798 frases únicas (600 por classe: Positiva, Negativa, Neutra)

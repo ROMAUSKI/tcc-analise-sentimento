@@ -7,6 +7,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{float}
 
 
 
@@ -116,23 +117,21 @@ Esta seção revisa trabalhos que abordam análise de sentimento com aprendizado
 
 \subsection{Análise de Sentimento com Aprendizado de Máquina}
 
-O trabalho pioneiro de \cite{pang2002} estabeleceu que abordagens baseadas em aprendizado de máquina — especialmente Naive Bayes, SVM e Máxima Entropia — superam métodos baseados em regras para classificação de sentimento em resenhas de filmes. Os autores utilizaram o corpus de críticas do IMDb e observaram que o SVM com representação unigrama atingiu os melhores resultados, enquanto o Naive Bayes apresentou desempenho competitivo com menor custo computacional.
+O trabalho pioneiro de \cite{pang2002} estabeleceu que abordagens baseadas em aprendizado de máquina — especialmente Naive Bayes, SVM e Máxima Entropia — superam métodos baseados em regras para classificação de sentimento em resenhas de filmes. Os autores utilizaram o corpus de críticas do IMDb e observaram que o SVM com representação unigrama atingiu os melhores resultados (~82,9\% de acurácia), enquanto o Naive Bayes apresentou desempenho competitivo com menor custo computacional. Esse resultado é relevante para o presente trabalho porque demonstra, já em 2002, que classificadores clássicos com representações simples são capazes de capturar a polaridade de críticas de cinema com boa acurácia.
 
-No contexto brasileiro, \cite{kansaon2019} realizaram análise de sentimento em tweets em português, utilizando múltiplas variantes do Naive Bayes. Os autores reportaram acurácias entre 79\% e 85\% dependendo da configuração do classificador e do par de classes analisado, evidenciando que mesmo em língua portuguesa, com suas particularidades morfológicas, abordagens clássicas apresentam resultados satisfatórios.
+No contexto brasileiro, \cite{kansaon2019} realizaram análise de sentimento em tweets em português, utilizando múltiplas variantes do Naive Bayes. Os autores reportaram acurácias entre 79\% e 85\% dependendo da configuração do classificador e do par de classes analisado, evidenciando que mesmo em língua portuguesa, com suas particularidades morfológicas, abordagens clássicas apresentam resultados satisfatórios. \cite{souza2021} propuseram um sistema de análise de sentimento em tempo real para notícias do mercado financeiro em português, utilizando TF-IDF combinado com Naive Bayes, e atingiram acurácia de 76,8\% na classificação de tweets jornalísticos. \cite{rossi2019} comparou classificadores como Regressão Logística, Naive Bayes Multinomial, SVM linear e Random Forest sobre representações BoW e TF-IDF em um contexto de cidades inteligentes, demonstrando que o TF-IDF apresenta ganhos consistentes sobre o BoW simples na maioria dos cenários. \cite{souza2022brazilian} unificaram cinco datasets de análise de sentimento em português brasileiro e evidenciaram a escassez de recursos linguísticos anotados para o idioma, o que reforça a necessidade de alternativas como a geração de dados sintéticos.
 
-\cite{souza2021} propuseram um sistema de análise de sentimento em tempo real para notícias do mercado financeiro em português, utilizando TF-IDF combinado com Naive Bayes. O sistema atingiu acurácia de 76,8\% na classificação de tweets de veículos jornalísticos. Os autores destacam o papel do pré-processamento — especialmente a remoção de \textit{stopwords} e normalização textual — no desempenho final do classificador.
+\subsection{Dados Sintéticos e LLMs para Geração de Dados de Treinamento}
 
-\cite{rossi2019} desenvolveu um método de análise de sentimento aplicado a cidades inteligentes, utilizando classificadores como Regressão Logística, Naive Bayes Multinomial, SVM linear e Random Forest sobre representações BoW e TF-IDF. Os resultados demonstram que a escolha da técnica de extração de características impacta significativamente o desempenho, com TF-IDF apresentando ganhos consistentes sobre o BoW simples na maioria dos experimentos.
+A utilização de dados sintéticos gerados por LLMs para treinamento de modelos de aprendizado de máquina é uma área recente de pesquisa. \cite{zhang2024sentiment} realizaram uma avaliação abrangente do desempenho de LLMs em tarefas de análise de sentimento, comparando-os com modelos menores \textit{fine-tuned}. Os resultados indicam que LLMs apresentam desempenho satisfatório em tarefas mais simples de classificação de polaridade, mas ficam atrás em tarefas que requerem compreensão mais profunda de fenômenos de sentimento, como detecção de ironia ou análise baseada em aspectos. Esse resultado sugere que os LLMs podem ser mais confiáveis como geradores de dados para tarefas de polaridade simples do que para tarefas mais complexas.
 
-\subsection{Dados Sintéticos para Treinamento de Modelos de PLN}
+\cite{hellwig2025exploring} exploraram o uso de GPT-3.5-turbo e Llama-3-70B para gerar dados anotados para análise de sentimento baseada em aspectos (ABSA) em cenários de poucos recursos. Com apenas 25 exemplos de referência, a adição de dados sintéticos via \textit{few-shot prompting} resultou em ganhos expressivos de F1-Score, demonstrando que mesmo pequenas quantidades de dados sintéticos podem complementar datasets escassos. \cite{li2023synthetic} avaliaram a geração de dados sintéticos com GPT-3.5-Turbo para classificação de texto e reportaram que a efetividade dos dados gerados varia conforme a subjetividade da tarefa — tarefas mais objetivas tendem a se beneficiar mais, o que é relevante para o presente trabalho já que a classificação de sentimento de filmes envolve um grau moderado de subjetividade.
 
-A utilização de dados sintéticos gerados por LLMs para treinamento de modelos de aprendizado de máquina é uma área emergente de pesquisa. \cite{zhang2024sentiment} realizaram uma avaliação abrangente do desempenho de LLMs em tarefas de análise de sentimento, comparando-os com modelos menores \textit{fine-tuned}. Os resultados indicam que LLMs apresentam desempenho satisfatório em tarefas mais simples de classificação de polaridade, mas ficam atrás em tarefas que requerem compreensão mais profunda de fenômenos de sentimento, como detecção de ironia ou análise baseada em aspectos.
+Do ponto de vista metodológico, \cite{liu2024best} compilaram as melhores práticas para uso de dados sintéticos no treinamento de modelos de linguagem, incluindo técnicas de filtragem, ponderação e refinamento iterativo, além de discutir riscos como amplificação de viés e colapso de modelo. \cite{nadas2025synthetic} apresentaram o survey mais recente sobre o tema, cobrindo desde geração baseada em prompts até pipelines com refinamento iterativo, e destacaram que a abordagem é especialmente promissora para tarefas com poucos recursos em idiomas que não o inglês. \cite{araujo2024chatgpt} investigaram especificamente as capacidades do ChatGPT para análise de sentimento zero-shot em português brasileiro, demonstrando que o modelo se destaca na determinação de polaridade, embora tenha dificuldades com sentenças subjetivas e comparativas — resultado que valida o uso de LLMs como geradores de dados de sentimento em português.
 
-\cite{hellwig2025exploring} exploraram o uso de GPT-3.5-turbo e Llama-3-70B para gerar dados anotados para análise de sentimento baseada em aspectos (ABSA) em cenários de poucos recursos. Com apenas 25 exemplos de referência, a adição de dados sintéticos via \textit{few-shot prompting} resultou em ganhos expressivos de F1-Score, demonstrando o potencial dessa abordagem quando dados rotulados são escassos.
+\subsection{Posicionamento deste Trabalho}
 
-\cite{li2023synthetic} avaliaram a geração de dados sintéticos com GPT-3.5-Turbo para classificação de texto, reportando que a efetividade dos dados gerados varia conforme a subjetividade da tarefa — tarefas mais objetivas tendem a se beneficiar mais dos dados sintéticos. \cite{liu2024best} compilaram as melhores práticas para uso de dados sintéticos, incluindo técnicas de filtragem, ponderação e refinamento iterativo, além de discutir riscos como amplificação de viés. \cite{nadas2025synthetic} apresentaram o survey mais recente sobre o tema, cobrindo desde geração baseada em prompts até pipelines com refinamento iterativo.
-
-Diferentemente dos trabalhos anteriores, que em sua maioria utilizam um único LLM como gerador ou focam em inglês, este trabalho investiga a geração de dados sintéticos por três LLMs distintos em português brasileiro, analisando tanto a qualidade individual dos dados de cada gerador quanto a coerência entre eles.
+A maioria dos trabalhos revisados utiliza LLMs como classificadores diretos em cenários zero-shot ou few-shot, e não como geradores de dados de treinamento para modelos clássicos. Além disso, a maior parte das pesquisas foca no idioma inglês e utiliza um único LLM como fonte de dados. Este trabalho se diferencia em três aspectos: utiliza dados 100\% sintéticos gerados por três LLMs distintos (ChatGPT, Gemini e Claude) como conjunto de treinamento, foca em português brasileiro, e analisa não apenas a acurácia dos classificadores, mas também a coerência dos dados gerados entre os diferentes modelos — uma perspectiva pouco explorada na literatura até o momento.
 
 
 % ====================================================================
@@ -141,31 +140,66 @@ Diferentemente dos trabalhos anteriores, que em sua maioria utilizam um único L
 
 \section{Metodologia}
 
-% TODO — Expandir com base no notebook 01 e 02
-
-Neste tópico está a descrição e procedimentos escolhidos para a formação da base de dados sintética e o esclarecimento de como está imputada a definição de cada classe (Positiva, Negativa, Neutra) utilizadas, para criação de prompts e dos dados sintéticos gerados nas ferramentas de IA.
+Esta seção descreve o pipeline completo adotado no trabalho, desde a definição das classes e geração do dataset sintético até o protocolo de avaliação dos classificadores. As subseções a seguir detalham cada etapa com as respectivas justificativas das escolhas realizadas.
 
 \subsection{Definição das Classes de Sentimento}
 
-Para garantir a consistência na geração e uma classificação mais coerente dos dados, foram estabelecidas definições para cada classe de sentimento (Positiva, Negativa, Neutra), focadas no nicho de filmes e séries, baseadas em conceitos fundamentais do processamento de linguagem natural \cite{jm3}.
+Para garantir consistência na geração e coerência na classificação dos dados, foram estabelecidas definições explícitas para cada classe de sentimento, focadas no domínio de críticas de filmes e séries de televisão em português brasileiro \cite{jm3}. A definição prévia das classes foi necessária para que os prompts enviados aos LLMs fossem suficientemente precisos e para reduzir a ambiguidade nas frases geradas.
 
-\paragraph{Classe: Positiva}
-Contempla as críticas ou comentários que expressam de forma clara e sem equívocos sentimentos de satisfação, alegria, admiração ou recomendação explícita sobre um filme ou série. Incluindo elogios a elementos específicos como atuação, roteiro, direção, fotografia, trilha sonora ou ao impacto emocional geral da obra.
+A classe \textbf{Positiva} contempla críticas ou comentários que expressam sentimentos de satisfação, admiração ou recomendação explícita sobre uma obra, incluindo elogios a elementos específicos como atuação, roteiro, direção ou impacto emocional. A classe \textbf{Negativa} abrange textos que expressam insatisfação, desapontamento ou desaprovação, com críticas a aspectos como roteiro inconsistente, ritmo lento ou personagens mal desenvolvidos. Por fim, a classe \textbf{Neutra} compreende textos com informações factuais sobre a obra — sinopses, descrição de elenco, dados de lançamento — sem emitir juízo de valor. Os exemplos a seguir ilustram cada classe:
+
 \begin{quote}
-\textit{Exemplo: ``Adorei o filme, o roteiro é top e as atuações são ótimas. Recomendo a todos!''}
+\textit{Positiva: ``Adorei o filme, o roteiro é top e as atuações são ótimas. Recomendo a todos!''}\\
+\textit{Negativa: ``Que decepção, o filme tem um roteiro cheio de furos e os personagens são muito chatos.''}\\
+\textit{Neutra: ``A série foi dirigida por Anna Kappel e estreou em 2025 na plataforma de streaming.''}
 \end{quote}
 
-\paragraph{Classe: Negativa}
-Contempla as críticas ou comentários que expressam de forma clara e sem equívocos sentimentos de insatisfação, desapontamento ou desaprovação sobre um filme ou série. Incluindo críticas a elementos específicos como atuação fraca, furos no roteiro, direção confusa, ritmo lento ou personagens mal desenvolvidos.
-\begin{quote}
-\textit{Exemplo: ``Que decepção, o filme tem um roteiro cheio de furos e os personagens são muito chatos. Perdi meu tempo.''}
-\end{quote}
+\subsection{Construção do Dataset}
 
-\paragraph{Classe: Neutra}
-Contempla os textos que apresentam informações factuais sobre um filme ou série, sem emitir um juízo de valor ou opinião. Incluindo sinopses, listagem de elenco, informações sobre o diretor, ano de lançamento, gênero, descrição de uma cena específica sem opinião ou perguntas sobre a obra.
-\begin{quote}
-\textit{Exemplo: ``A série foi dirigida por Anna Kappel e estreou em 2025 na plataforma de streaming.''}
-\end{quote}
+O dataset foi construído inteiramente a partir de dados sintéticos gerados por três LLMs: ChatGPT (OpenAI), Gemini (Google) e Claude (Anthropic). A escolha por múltiplos modelos geradores teve como objetivo reduzir o viés de geração associado a uma única fonte, já que cada LLM possui características próprias de vocabulário, estrutura de frases e estilo de escrita. A proposta original do trabalho previa o uso do Copilot (Microsoft) como terceira fonte, mas o modelo foi substituído pelo Claude porque o Copilot utiliza modelos da família GPT por baixo, o que resultaria em dois geradores com a mesma base e comprometeria a diversidade estilística do dataset.
+
+Para cada LLM, foram solicitadas 200 frases por classe de sentimento via prompts padronizados, enviados manualmente pelas interfaces web dos respectivos modelos. Os prompts descreviam a classe desejada, forneciam a definição adotada e restringiam o domínio a críticas de cinema e séries em português brasileiro. O processo resultou em 9 arquivos CSV (3 modelos × 3 classes), posteriormente unificados em um único dataset. A Tabela~\ref{tab:distribuicao_dataset} apresenta a composição final após a etapa de limpeza.
+
+\begin{table}[h]
+\centering
+\caption{Distribuição de frases por fonte geradora e classe de sentimento.}
+\label{tab:distribuicao_dataset}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Fonte} & \textbf{Positiva} & \textbf{Negativa} & \textbf{Neutra} & \textbf{Total} \\
+\midrule
+ChatGPT & 200 & 198 & 200 & 598 \\
+Claude  & 200 & 200 & 200 & 600 \\
+Gemini  & 200 & 200 & 200 & 600 \\
+\midrule
+\textbf{Total} & \textbf{600} & \textbf{598} & \textbf{600} & \textbf{1798} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As três fontes apresentam características estilísticas distintas, com diferenças notáveis no comprimento médio das frases: o ChatGPT produz textos mais curtos e diretos (média de aproximadamente 50 caracteres), o Gemini gera frases intermediárias (~61 caracteres) com vocabulário mais descritivo, e o Claude produz frases consideravelmente mais longas e elaboradas (~95 caracteres). Essa diversidade estilística entre as fontes é relevante para a análise de erros discutida na Seção~\ref{sec:resultados}.
+
+\subsection{Pré-processamento}
+
+Antes da vetorização, os textos brutos passaram por quatro operações sequenciais de limpeza: conversão de todos os caracteres para minúsculas, remoção de pontuação, números e caracteres especiais, normalização de espaços extras e eliminação de frases duplicadas. A normalização para minúsculas foi adotada de modo a garantir que variações de capitalização não gerem features distintas no vocabulário — ``Filme'' e ``filme'' são tratados como o mesmo token. A remoção de duplicatas eliminou 2 frases do conjunto original de 1800, resultando no dataset final de 1798 amostras únicas.
+
+\subsection{Vetorização}
+
+A conversão dos textos em representações numéricas foi realizada com o \texttt{TfidfVectorizer} do scikit-learn \cite{pedregosa2011}, com os parâmetros padrão da biblioteca, sem limitação de vocabulário e sem remoção explícita de stopwords. A fundamentação teórica do TF-IDF está descrita na Seção~2.2. A escolha dessa técnica de vetorização justifica-se pelo seu desempenho comprovado em tarefas de classificação de sentimento combinadas com classificadores baseline \cite{pang2002, souza2022brazilian} e por sua eficiência computacional para vocabulários de tamanho moderado. Cada frase foi transformada em um vetor esparso de dimensão igual ao tamanho do vocabulário completo do corpus de treino.
+
+\subsection{Modelos de Classificação}
+
+Três classificadores foram treinados e avaliados, todos implementados via scikit-learn \cite{pedregosa2011} com hiperparâmetros padrão da biblioteca. O uso dos parâmetros padrão foi intencional: o objetivo do trabalho não é otimizar configurações, mas avaliar a capacidade de generalização dos classificadores clássicos quando treinados exclusivamente com dados sintéticos. O Naive Bayes Multinomial foi instanciado com \texttt{MultinomialNB()} (alpha=1,0), a Regressão Logística com \texttt{LogisticRegression(random\_state=42)} (C=1,0, solver=lbfgs, estratégia one-vs-rest) e o SVM Linear com \texttt{LinearSVC(random\_state=42, max\_iter=5000)} (C=1,0, estratégia one-vs-rest). A descrição teórica de cada algoritmo está apresentada na Seção~2.3.
+
+\subsection{Protocolo de Avaliação}
+
+A avaliação foi conduzida em três etapas progressivas. Na primeira, o dataset foi dividido em 80\% para treino (1438 amostras) e 20\% para teste (360 amostras), com estratificação por classe (\texttt{stratify=y}) e semente fixa (\texttt{random\_state=42}) para garantir reprodutibilidade. Nessa configuração foram calculadas acurácia, precisão, recall e F1-Score ponderado para os três modelos.
+
+Na segunda etapa, foi aplicada a validação cruzada estratificada com k=5 e k=10 folds \cite{kohavi1995}, que fornece estimativas mais robustas do desempenho ao garantir que cada amostra seja utilizada exatamente uma vez como conjunto de teste. Os resultados são reportados como média e desvio padrão do F1-Score e da acurácia ao longo dos folds. Na terceira etapa, foram geradas curvas de aprendizado para os três modelos, variando a fração de dados de treino de 10\% a 100\% com validação cruzada de 5 folds em cada ponto, de modo a diagnosticar a presença de overfitting e avaliar a sensibilidade dos modelos ao volume de dados. Por fim, uma análise qualitativa dos erros do Naive Bayes foi conduzida, identificando padrões de confusão entre classes e diferenças de desempenho por fonte geradora.
+
+\subsection{Ambiente Experimental}
+
+Todos os experimentos foram implementados em Python 3, com as bibliotecas scikit-learn \cite{pedregosa2011}, pandas e matplotlib. O código foi desenvolvido em notebooks Jupyter e estruturado para execução tanto no Google Colab quanto em ambiente local (VS Code), com detecção automática do ambiente na célula de inicialização. A divisão entre os dois notebooks segue a separação natural do pipeline: o notebook \texttt{01\_training\_evaluation.ipynb} cobre o treinamento e avaliação baseline, enquanto o \texttt{02\_robustness\_analysis.ipynb} abrange a validação cruzada, curvas de aprendizado e análise de erros. O repositório está disponível publicamente em \url{https://github.com/ROMAUSKI/tcc-analise-sentimento}.
 
 
 % ====================================================================
@@ -173,8 +207,122 @@ Contempla os textos que apresentam informações factuais sobre um filme ou sér
 % ====================================================================
 
 \section{Resultados e Discussão}
+\label{sec:resultados}
 
-% TODO — Escrever com base nos resultados dos notebooks 01 e 02
+Esta seção apresenta os resultados obtidos nas três etapas de avaliação descritas na Metodologia: avaliação no conjunto de teste, validação cruzada estratificada e análise de erros. Os resultados são discutidos à luz das perguntas de pesquisa do trabalho.
+
+\subsection{Avaliação no Conjunto de Teste}
+
+A Tabela~\ref{tab:baseline} apresenta as métricas de desempenho dos três classificadores no conjunto de teste (360 amostras, 20\% do dataset). O Naive Bayes e o SVM Linear obtiveram acurácia idêntica de 86,11\%, enquanto a Regressão Logística ficou ligeiramente abaixo, com 83,61\%. O F1-Score ponderado acompanha o mesmo padrão, com valores de 86,13\% para o Naive Bayes, 86,09\% para o SVM Linear e 83,54\% para a Regressão Logística.
+
+\begin{table}[h]
+\centering
+\caption{Métricas de desempenho no conjunto de teste (80/20, seed=42).}
+\label{tab:baseline}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Modelo} & \textbf{Acurácia (\%)} & \textbf{Precisão (\%)} & \textbf{Recall (\%)} & \textbf{F1-Score (\%)} \\
+\midrule
+Naive Bayes       & 86,11 & 86,19 & 86,11 & 86,13 \\
+SVM Linear        & 86,11 & 86,21 & 86,11 & 86,09 \\
+Reg. Logística    & 83,61 & 83,80 & 83,61 & 83,54 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Esse resultado é interessante porque contraria a expectativa teórica de que classificadores discriminativos (como a Regressão Logística) tendem a superar o Naive Bayes quando há dados suficientes \cite{pang2002}. Uma possível explicação é que os dados sintéticos gerados por LLMs possuem uma distribuição de vocabulário mais regular e previsível do que dados reais, o que favorece a suposição de independência condicional do Naive Bayes. Cada LLM tende a utilizar um conjunto relativamente estável de palavras-chave para cada classe de sentimento, e essa regularidade é exatamente o tipo de padrão que o Naive Bayes captura de forma eficiente com TF-IDF.
+
+A Figura~\ref{fig:cm_nb} apresenta a matriz de confusão do Naive Bayes. As maiores confusões ocorrem entre as classes Positiva e Negativa, o que sugere que certas construções linguísticas — como negações compostas ou vocabulário ambíguo — dificultam a distinção de polaridade por classificadores baseados em frequência de termos.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.75\textwidth]{imagens/matriz_confusao_nb.png}
+\caption{Matriz de confusão do Naive Bayes no conjunto de teste.}
+\label{fig:cm_nb}
+\end{figure}
+
+\subsection{Validação Cruzada}
+
+Para obter estimativas mais robustas do desempenho, os três modelos foram avaliados com validação cruzada estratificada usando k=5 e k=10 folds. A Tabela~\ref{tab:cv} apresenta os resultados em termos de F1-Score médio e desvio padrão.
+
+\begin{table}[h]
+\centering
+\caption{F1-Score (\%) com validação cruzada estratificada.}
+\label{tab:cv}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{k} & \textbf{Acurácia (\%)} & \textbf{F1-Score (\%)} \\
+\midrule
+Naive Bayes    & 5  & 88,82 $\pm$ 1,83 & 88,86 $\pm$ 1,82 \\
+Naive Bayes    & 10 & 89,60 $\pm$ 2,16 & 89,63 $\pm$ 2,15 \\
+Reg. Logística & 5  & 87,32 $\pm$ 1,43 & 87,31 $\pm$ 1,42 \\
+Reg. Logística & 10 & 88,04 $\pm$ 2,42 & 88,02 $\pm$ 2,44 \\
+SVM Linear     & 5  & 88,88 $\pm$ 1,33 & 88,88 $\pm$ 1,33 \\
+SVM Linear     & 10 & 89,10 $\pm$ 2,49 & 89,10 $\pm$ 2,51 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Com validação cruzada, os três modelos apresentam desempenho superior ao observado no split simples, o que indica que a partição fixa de 80/20 pode não ser a mais representativa. O Naive Bayes atinge o maior F1-Score médio com k=10 (89,63\%), seguido de perto pelo SVM Linear (89,10\%). A Regressão Logística, embora com desempenho inferior, ainda supera 88\% com k=10. O desvio padrão do SVM com k=10 (2,51\%) é o maior entre os modelos, sugerindo uma sensibilidade um pouco maior à composição dos folds.
+
+As Figuras~\ref{fig:boxplot_acc} e~\ref{fig:boxplot_f1} apresentam a distribuição dos scores de Accuracy e F1-Score ao longo dos folds, permitindo visualizar a dispersão e a presença de outliers. O SVM Linear apresenta a menor mediana de dispersão com k=5 (desvio de 1,33\%), enquanto o Naive Bayes mostra o comportamento mais estável entre as duas configurações de k.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.85\textwidth]{imagens/boxplot_accuracy.png}
+\caption{Distribuição de Accuracy na validação cruzada (k=5 e k=10) para os três modelos.}
+\label{fig:boxplot_acc}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.85\textwidth]{imagens/boxplot_f1.png}
+\caption{Distribuição de F1-Score na validação cruzada (k=5 e k=10) para os três modelos.}
+\label{fig:boxplot_f1}
+\end{figure}
+
+\subsection{Curvas de Aprendizado}
+
+As curvas de aprendizado foram geradas variando a fração de dados de treino de 10\% a 100\%, com validação cruzada de 5 folds em cada ponto. A Figura~\ref{fig:lc_nb} mostra a curva do Naive Bayes: o modelo atinge desempenho próximo ao platô com apenas 50--60\% dos dados de treino, o que indica que o volume atual de dados é suficiente para esse classificador. O gap entre a curva de treino e a de validação é pequeno, sugerindo baixo overfitting.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.80\textwidth]{imagens/curva_aprendizado_nb.png}
+\caption{Curva de aprendizado do Naive Bayes (F1-Score vs. fração do dataset).}
+\label{fig:lc_nb}
+\end{figure}
+
+A Regressão Logística e o SVM Linear apresentam um padrão similar, mas convergem mais lentamente — o platô de validação é atingido com aproximadamente 70--80\% dos dados. Esse comportamento é esperado, já que classificadores discriminativos como a Regressão Logística e o SVM tendem a se beneficiar mais de volumes maiores de dados para estimar a fronteira de decisão. O gap entre treino e validação é levemente maior nesses modelos, o que indica um ajuste mais justo aos dados de treino sem configurar overfitting severo.
+
+\subsection{Análise de Erros}
+
+Para compreender os padrões de erro, as predições incorretas do Naive Bayes no conjunto de teste foram analisadas em detalhe. Dos 360 exemplos de teste, 50 foram classificados incorretamente (13,9\% de taxa de erro). A análise revelou dois padrões principais de confusão.
+
+O primeiro e mais frequente padrão é a confusão entre as classes Positiva e Negativa. Das 50 classificações incorretas, 24 envolvem inversão de polaridade — 13 frases negativas classificadas como positivas e 11 positivas classificadas como negativas. Esse tipo de erro está associado a construções linguísticas que contêm tanto palavras positivas quanto negativas na mesma frase, como ``os efeitos especiais são muito ruins para a época'', onde o termo ``especiais'' tem conotação positiva isoladamente, mas o contexto é negativo. Classificadores baseados em frequência de termos, como o Naive Bayes com TF-IDF, não capturam relações de dependência entre palavras, o que dificulta o tratamento de negações compostas e construções irônicas.
+
+O segundo padrão envolve frases neutras classificadas com polaridade. Frases como ``O roteiro de Pulp Fiction é conhecido por sua narrativa não linear'' contêm termos que, em outros contextos, carregam sentimento (``conhecido'', ``não linear''), mas neste caso são puramente descritivos. A fronteira entre neutralidade e opinião é particularmente difícil para classificadores que operam no nível lexical.
+
+A análise por fonte geradora revelou diferenças relevantes na taxa de erro: frases do ChatGPT apresentaram a menor taxa de erros (9,9\%), seguidas por Claude (14,1\%) e Gemini (17,4\%). Esse resultado sugere que o ChatGPT gera frases com polaridade mais explícita e menos ambígua, enquanto o Gemini produz textos com vocabulário mais descritivo que, em alguns casos, dificulta a distinção automática de sentimento. A Figura~\ref{fig:erros_fonte} apresenta a taxa de erros por fonte geradora, e a Figura~\ref{fig:erros_heatmap} mostra a heatmap de confusões entre classes.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.75\textwidth]{imagens/erros_por_fonte.png}
+\caption{Taxa de erro do Naive Bayes por fonte geradora (ChatGPT, Claude e Gemini).}
+\label{fig:erros_fonte}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.65\textwidth]{imagens/erros_heatmap.png}
+\caption{Heatmap de confusões entre classes nas predições incorretas do Naive Bayes.}
+\label{fig:erros_heatmap}
+\end{figure}
+
+\subsection{Discussão Geral}
+
+Os resultados respondem às duas perguntas de pesquisa do trabalho. Em relação à primeira pergunta — qual a assertividade dos modelos treinados com dados sintéticos —, os três classificadores atingem F1-Score entre 86\% e 89\% dependendo do protocolo de avaliação, o que pode ser considerado um desempenho satisfatório para modelos baseline treinados exclusivamente com dados gerados por LLMs. Esses valores são comparáveis aos reportados em trabalhos que utilizam dados reais para tarefas similares em português \cite{kansaon2019, souza2021}.
+
+Em relação à segunda pergunta — se a classificação é coerente entre os diferentes LLMs geradores —, a análise de erros mostra que há diferenças relevantes: o ChatGPT gera dados com menor taxa de ambiguidade (9,9\% de erro), enquanto o Gemini produz frases mais propensas a confusão (17,4\%). Essa variação indica que a escolha do LLM gerador impacta a qualidade do dataset e, consequentemente, o desempenho dos classificadores. A combinação de múltiplas fontes, como adotada neste trabalho, tende a mitigar o viés individual de cada gerador.
 
 
 % ====================================================================
