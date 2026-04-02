@@ -57,10 +57,16 @@ tcc-analise-sentimento/
 4. Alteração no 01 pode quebrar o 02 — verificar cadeia
 5. Artigo formato SBC — seções: Resumo, Introdução, Referencial, Metodologia, Resultados, Conclusão
 
-## Estado Atual (Março/2026)
+## Estado Atual (Abril/2026)
 - ✅ Dataset gerado e processado
-- ✅ Notebook 01 completo
-- ✅ Notebook 02: células 1-4 prontas (cross-validation + boxplot)
-- 🔧 Notebook 02: faltam learning curves e análise de erros
-- ❌ Artigo: ~10% concluído (maior gargalo)
+- ✅ Notebook 01 completo (treinamento + avaliação baseline)
+- ✅ Notebook 02 completo (cross-validation, boxplots, learning curves, análise de erros)
+- ✅ Artigo: Seções 1-5 completas (Introdução, Fund. Teórica, Trab. Relacionados, Metodologia, Resultados)
+  - 5.1 Avaliação no Conjunto de Teste ✅
+  - 5.2 Validação Cruzada ✅ (tabela + boxplots separados accuracy/f1)
+  - 5.3 Curvas de Aprendizado ✅ (figuras NB, LR e SVM)
+  - 5.4 Análise de Erros ✅ (por fonte + heatmap)
+  - 5.5 Discussão Geral ✅
+- ❌ Artigo: Seção 6 Conclusão (TODO)
+- ❌ Artigo: Resumo e Abstract (TODO — escrever por último)
 - ❌ Slides: não iniciados

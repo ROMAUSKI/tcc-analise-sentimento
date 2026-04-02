@@ -292,7 +292,23 @@ As curvas de aprendizado foram geradas variando a fração de dados de treino de
 \label{fig:lc_nb}
 \end{figure}
 
-A Regressão Logística e o SVM Linear apresentam um padrão similar, mas convergem mais lentamente — o platô de validação é atingido com aproximadamente 70--80\% dos dados. Esse comportamento é esperado, já que classificadores discriminativos como a Regressão Logística e o SVM tendem a se beneficiar mais de volumes maiores de dados para estimar a fronteira de decisão. O gap entre treino e validação é levemente maior nesses modelos, o que indica um ajuste mais justo aos dados de treino sem configurar overfitting severo.
+A Regressão Logística, apresentada na Figura~\ref{fig:lc_lr}, converge mais lentamente — o platô de validação é atingido com aproximadamente 70--80\% dos dados. O gap entre treino e validação é maior do que o observado no Naive Bayes, o que indica que o modelo se ajusta mais fortemente aos dados de treino, embora essa diferença diminua conforme o volume de dados cresce. Esse comportamento sugere que a Regressão Logística se beneficiaria de um dataset maior para estimar a fronteira de decisão com mais precisão.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.80\textwidth]{imagens/curva_aprendizado_lr.png}
+\caption{Curva de aprendizado da Regressão Logística (F1-Score vs. fração do dataset).}
+\label{fig:lc_lr}
+\end{figure}
+
+O SVM Linear, mostrado na Figura~\ref{fig:lc_svm}, apresenta padrão semelhante ao da Regressão Logística em termos de velocidade de convergência, com o platô sendo atingido por volta de 70--80\% dos dados. O gap entre treino e validação tende a ser levemente maior, o que é esperado dado que o SVM busca a margem máxima de separação e pode se ajustar mais fortemente a exemplos próximos da fronteira. Ainda assim, nenhum dos três modelos apresenta sinais claros de overfitting severo — as curvas de validação se estabilizam em valores próximos aos de treino conforme o dataset completo é utilizado.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.80\textwidth]{imagens/curva_aprendizado_svm.png}
+\caption{Curva de aprendizado do SVM Linear (F1-Score vs. fração do dataset).}
+\label{fig:lc_svm}
+\end{figure}
 
 \subsection{Análise de Erros}
 
