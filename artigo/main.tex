@@ -318,6 +318,26 @@ O primeiro e mais frequente padrão é a confusão entre as classes Positiva e N
 
 O segundo padrão envolve frases neutras classificadas com polaridade. Frases como ``O roteiro de Pulp Fiction é conhecido por sua narrativa não linear'' contêm termos que, em outros contextos, carregam sentimento (``conhecido'', ``não linear''), mas neste caso são puramente descritivos. A fronteira entre neutralidade e opinião é particularmente difícil para classificadores que operam no nível lexical.
 
+A Tabela~\ref{tab:exemplos_erros} apresenta exemplos representativos de frases classificadas incorretamente, ilustrando os padrões de confusão descritos acima. Nos casos de inversão de polaridade, nota-se a presença de termos com conotação oposta ao sentimento real da frase — ``efeitos especiais'' e ``entende seu público'' são expressões que, isoladamente, carregam valor positivo, mas que no contexto completo da frase podem não indicar aprovação. Já nos erros envolvendo a classe Neutra, o padrão recorrente é a presença de palavras descritivas que o modelo associa a sentimento por terem alta frequência em frases opinativas do dataset de treino.
+
+\begin{table}[h]
+\centering
+\caption{Exemplos de frases classificadas incorretamente pelo Naive Bayes.}
+\label{tab:exemplos_erros}
+\small
+\begin{tabular}{p{5.8cm}ccc}
+\toprule
+\textbf{Frase} & \textbf{Real} & \textbf{Predita} & \textbf{Fonte} \\
+\midrule
+``Os efeitos especiais são muito ruins para a época.'' & Neg. & Pos. & ChatGPT \\
+``Um filme que entende seu público e entrega exatamente o que prometeu.'' & Pos. & Neg. & Claude \\
+``O roteiro de Pulp Fiction é conhecido por sua narrativa não linear.'' & Neutra & Neg. & Gemini \\
+``A série How I Met Your Mother tem 208 episódios.'' & Neutra & Pos. & Gemini \\
+``O filme parece um comercial longo.'' & Neg. & Neutra & ChatGPT \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 A análise por fonte geradora revelou diferenças relevantes na taxa de erro: frases do ChatGPT apresentaram a menor taxa de erros (9,9\%), seguidas por Claude (14,1\%) e Gemini (17,4\%). Esse resultado sugere que o ChatGPT gera frases com polaridade mais explícita e menos ambígua, enquanto o Gemini produz textos com vocabulário mais descritivo que, em alguns casos, dificulta a distinção automática de sentimento. A Figura~\ref{fig:erros_fonte} apresenta a taxa de erros por fonte geradora, e a Figura~\ref{fig:erros_heatmap} mostra a heatmap de confusões entre classes.
 
 \begin{figure}[H]
@@ -336,9 +356,11 @@ A análise por fonte geradora revelou diferenças relevantes na taxa de erro: fr
 
 \subsection{Discussão Geral}
 
-Os resultados respondem às duas perguntas de pesquisa do trabalho. Em relação à primeira pergunta — qual a assertividade dos modelos treinados com dados sintéticos —, os três classificadores atingem F1-Score entre 86\% e 89\% dependendo do protocolo de avaliação, o que pode ser considerado um desempenho satisfatório para modelos baseline treinados exclusivamente com dados gerados por LLMs. Esses valores são comparáveis aos reportados em trabalhos que utilizam dados reais para tarefas similares em português \cite{kansaon2019, souza2021}.
+Os resultados respondem às duas perguntas de pesquisa do trabalho. Em relação à primeira pergunta — qual a assertividade dos modelos treinados com dados sintéticos —, os três classificadores atingem F1-Score entre 86\% e 89\% dependendo do protocolo de avaliação, o que pode ser considerado um desempenho satisfatório para modelos baseline treinados exclusivamente com dados gerados por LLMs. Esses valores são comparáveis aos reportados por \cite{kansaon2019}, que obtiveram acurácias entre 79\% e 85\% com Naive Bayes em tweets reais em português, e por \cite{souza2021}, que atingiram 76,8\% com TF-IDF e Naive Bayes em notícias financeiras. O fato de os classificadores treinados com dados sintéticos apresentarem desempenho igual ou superior ao de trabalhos com dados reais sugere que os LLMs conseguem produzir exemplos com polaridade suficientemente clara para tarefas de classificação ternária. A validação cruzada com k=10 reforça essa conclusão, com desvios padrão inferiores a 2,5\% para todos os modelos, o que indica estabilidade nas estimativas e baixa sensibilidade à composição dos folds. As curvas de aprendizado complementam essa análise ao mostrar que o Naive Bayes atinge platô com 50--60\% dos dados, enquanto a Regressão Logística e o SVM Linear convergem com 70--80\%, sem sinais de overfitting severo em nenhum dos casos.
 
-Em relação à segunda pergunta — se a classificação é coerente entre os diferentes LLMs geradores —, a análise de erros mostra que há diferenças relevantes: o ChatGPT gera dados com menor taxa de ambiguidade (9,9\% de erro), enquanto o Gemini produz frases mais propensas a confusão (17,4\%). Essa variação indica que a escolha do LLM gerador impacta a qualidade do dataset e, consequentemente, o desempenho dos classificadores. A combinação de múltiplas fontes, como adotada neste trabalho, tende a mitigar o viés individual de cada gerador.
+Em relação à segunda pergunta — se a classificação é coerente entre os diferentes LLMs geradores —, a análise de erros mostra que há diferenças relevantes: o ChatGPT gera dados com menor taxa de ambiguidade (9,9\% de erro), seguido pelo Claude (14,1\%) e pelo Gemini (17,4\%). As frases do ChatGPT tendem a ser mais curtas e diretas, com polaridade explícita, o que facilita a classificação por modelos baseados em frequência de termos. O Gemini, por outro lado, utiliza vocabulário mais descritivo e produz frases com fronteiras mais tênues entre opinião e neutralidade, o que explica sua maior taxa de confusão. Essa variação indica que a escolha do LLM gerador impacta a qualidade do dataset e, consequentemente, o desempenho dos classificadores. A combinação de múltiplas fontes, como adotada neste trabalho, tende a mitigar o viés individual de cada gerador e a produzir um dataset mais diverso estilisticamente. Esse achado é consistente com o resultado de \cite{li2023synthetic}, que reportaram que a efetividade de dados sintéticos varia conforme a subjetividade da tarefa, e com \cite{araujo2024chatgpt}, que demonstraram que o ChatGPT se destaca na determinação de polaridade em português.
+
+Algumas limitações devem ser consideradas na interpretação desses resultados. A principal é que o dataset é composto inteiramente por dados sintéticos, sem validação contra um corpus de críticas reais de filmes em português — o que impede afirmar que os classificadores teriam desempenho equivalente em cenários de produção. O tamanho do dataset (1798 frases) é moderado, e os resultados das curvas de aprendizado sugerem que modelos discriminativos como a Regressão Logística e o SVM se beneficiariam de mais dados. Além disso, a geração foi feita via interface web dos LLMs com prompts manuais, sem controle fino sobre temperatura ou outros parâmetros de geração, o que limita a reprodutibilidade exata do dataset. Por fim, os classificadores utilizados são modelos lineares com representação TF-IDF, que não capturam relações de dependência entre palavras — abordagens baseadas em embeddings contextuais, como BERT, poderiam potencialmente tratar melhor os casos de negação e ambiguidade identificados na análise de erros.
 
 
 % ====================================================================
