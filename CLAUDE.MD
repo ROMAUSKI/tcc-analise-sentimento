@@ -88,7 +88,6 @@ Todos encapsulados em `Pipeline([('tfidf', TfidfVectorizer(...)), ('clf', ...)])
 - ✅ Dataset gerado e processado
 - ✅ Notebook 01 completo (treinamento + avaliação baseline)
 - ✅ Notebook 02 completo (cross-validation, boxplots, learning curves, análise de erros)
-- ✅ Artigo: Seções 1-5 completas
-- ❌ Artigo: Seção 6 Conclusão (TODO)
-- ❌ Artigo: Resumo e Abstract (TODO — escrever por último)
+- ✅ Artigo: PRIMEIRA VERSÃO COMPLETA (Seções 1-6 + Resumo + Abstract)
+- ❌ Revisão final do artigo (leitura corrida, ortografia, consistência)
 - ❌ Slides: não iniciados
