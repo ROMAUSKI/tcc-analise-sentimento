@@ -96,7 +96,7 @@ A Support Vector Machine (SVM) é um algoritmo que busca o hiperplano de separa�
 
 \subsection{Grandes Modelos de Linguagem e Geração de Dados Sintéticos}
 
-Grandes Modelos de Linguagem (\textit{Large Language Models} — LLMs) são modelos baseados na arquitetura Transformer, pré-treinados em grandes corpora de texto para aprender representações ricas da linguagem. Nos últimos anos, modelos como GPT, Gemini e Claude demonstraram capacidade de gerar textos coerentes, fluentes e contextualmente adequados em diversas línguas e domínios \cite{jm3}.
+Grandes Modelos de Linguagem (\textit{Large Language Models} — LLMs) são modelos baseados na arquitetura Transformer, que por sua vez se insere no contexto mais amplo da revolução do aprendizado profundo (\textit{deep learning}) nas últimas décadas \cite{lecun2015deep}. Pré-treinados em grandes corpora de texto para aprender representações ricas da linguagem, modelos como GPT, Gemini e Claude demonstraram capacidade de gerar textos coerentes, fluentes e contextualmente adequados em diversas línguas e domínios \cite{jm3}.
 
 Uma das aplicações emergentes dos LLMs é a geração de dados sintéticos para treinamento de modelos de aprendizado de máquina. Essa abordagem é especialmente interessante em cenários onde a obtenção de dados reais rotulados é cara ou difícil — como é frequentemente o caso em tarefas de PLN em português. A ideia central é usar os LLMs como geradores de exemplos de treinamento, reduzindo a dependência de anotação humana.
 
@@ -156,7 +156,7 @@ A classe \textbf{Positiva} contempla críticas ou comentários que expressam sen
 
 \subsection{Construção do Dataset}
 
-O dataset foi construído inteiramente a partir de dados sintéticos gerados por três LLMs: ChatGPT (OpenAI), Gemini (Google) e Claude (Anthropic). A escolha por múltiplos modelos geradores teve como objetivo reduzir o viés de geração associado a uma única fonte, já que cada LLM possui características próprias de vocabulário, estrutura de frases e estilo de escrita. A proposta original do trabalho previa o uso do Copilot (Microsoft) como terceira fonte, mas o modelo foi substituído pelo Claude porque o Copilot utiliza modelos da família GPT por baixo, o que resultaria em dois geradores com a mesma base e comprometeria a diversidade estilística do dataset.
+O dataset foi construído inteiramente a partir de dados sintéticos gerados por três LLMs: ChatGPT (OpenAI), Gemini (Google) e Claude (Anthropic). A escolha por múltiplos modelos geradores teve como objetivo reduzir o viés de geração associado a uma única fonte, já que cada LLM possui características próprias de vocabulário, estrutura de frases e estilo de escrita. A proposta original do trabalho previa o uso do Copilot (Microsoft) como terceira fonte, mas o modelo foi substituído pelo Claude porque o Copilot utiliza modelos da família GPT da OpenAI como base\footnote{Conforme documentação oficial da Microsoft: \url{https://www.microsoft.com/en-us/microsoft-365/blog/2024/04/02/bringing-the-latest-capabilities-to-copilot-for-microsoft-365-customers/}.}, o que resultaria em dois geradores com a mesma família de modelos e comprometeria a diversidade estilística do dataset.
 
 Para cada LLM, foram solicitadas 200 frases por classe de sentimento via prompts padronizados, enviados manualmente pelas interfaces web dos respectivos modelos. Os prompts descreviam a classe desejada, forneciam a definição adotada e restringiam o domínio a críticas de cinema e séries em português brasileiro. O processo resultou em 9 arquivos CSV (3 modelos × 3 classes), posteriormente unificados em um único dataset. A Tabela~\ref{tab:distribuicao_dataset} apresenta a composição final após a etapa de limpeza.
 
@@ -177,7 +177,7 @@ Gemini  & 200 & 200 & 200 & 600 \\
 \end{tabular}
 \end{table}
 
-As três fontes apresentam características estilísticas distintas, com diferenças notáveis no comprimento médio das frases: o ChatGPT produz textos mais curtos e diretos (média de aproximadamente 50 caracteres), o Gemini gera frases intermediárias (~61 caracteres) com vocabulário mais descritivo, e o Claude produz frases consideravelmente mais longas e elaboradas (~95 caracteres). Essa diversidade estilística entre as fontes é relevante para a análise de erros discutida na Seção~\ref{sec:resultados}.
+As três fontes apresentam características estilísticas distintas, com diferenças notáveis no comprimento médio das frases\footnote{Valores calculados sobre o campo \texttt{frase\_limpa} do dataset após pré-processamento: ChatGPT $\approx$ 50 caracteres, Gemini $\approx$ 61 caracteres e Claude $\approx$ 95 caracteres por frase.}: o ChatGPT produz textos mais curtos e diretos, o Gemini gera frases intermediárias com vocabulário mais descritivo, e o Claude produz frases consideravelmente mais longas e elaboradas. Essa diversidade estilística entre as fontes é relevante para a análise de erros discutida na Seção~\ref{sec:resultados}.
 
 \subsection{Pré-processamento}
 
