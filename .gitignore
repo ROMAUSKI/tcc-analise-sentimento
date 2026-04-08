@@ -16,6 +16,24 @@ __pycache__/
 .env
 venv/
 
+# === LaTeX build ===
+# Arquivos temporários do LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+
+# Arquivos de sistema do Windows
+Thumbs.db
+desktop.ini
+
 # === OS ===
 .DS_Store
 Thumbs.db
