@@ -16,18 +16,6 @@ __pycache__/
 .env
 venv/
 
-# === LaTeX build ===
-artigo/*.aux
-artigo/*.log
-artigo/*.bbl
-artigo/*.blg
-artigo/*.dvi
-artigo/*.out
-artigo/*.synctex.gz
-artigo/*.fls
-artigo/*.fdb_latexmk
-artigo/*.toc
-
 # === OS ===
 .DS_Store
 Thumbs.db

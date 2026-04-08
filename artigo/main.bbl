@@ -1,0 +1,103 @@
+\begin{thebibliography}{}
+
+\bibitem[Araujo et~al. 2024]{araujo2024chatgpt}
+Araujo, G.~d., de~Melo, T., and Figueiredo, C. M.~S. (2024).
+\newblock Is {ChatGPT} an effective solver of sentiment analysis tasks in
+  {P}ortuguese? {A} preliminary study.
+\newblock In {\em Proceedings of the 16th International Conference on
+  Computational Processing of Portuguese (PROPOR 2024)}, pages 13--21, Santiago
+  de Compostela, Espanha. Association for Computational Linguistics.
+
+\bibitem[de~Souza et~al. 2021]{souza2021}
+de~Souza, V.~A., de~Souza, {\'{E}}.~F., and Meinerz, G.~V. (2021).
+\newblock An{\'{a}}lise de sentimento em tempo real.
+\newblock {\em Brazilian Journal of Development}, 7(1):11084--11091.
+
+\bibitem[Hellwig et~al. 2025]{hellwig2025exploring}
+Hellwig, N.~C., Fehle, J., and Wolff, C. (2025).
+\newblock Exploring large language models for the generation of synthetic
+  training samples for aspect-based sentiment analysis in low resource
+  settings.
+\newblock {\em Expert Systems with Applications}, 261:125514.
+
+\bibitem[Jurafsky and Martin 2025]{jm3}
+Jurafsky, D. and Martin, J.~H. (2025).
+\newblock {\em Speech and Language Processing: An Introduction to Natural
+  Language Processing, Computational Linguistics, and Speech Recognition, with
+  Language Models}.
+\newblock Stanford University, 3rd edition.
+\newblock Online manuscript released August 24, 2025.
+
+\bibitem[Kansaon and Moro 2019]{kansaon2019}
+Kansaon, D.~J. and Moro, S. (2019).
+\newblock An{\'{a}}lise de sentimentos em tweets em portugu{\^{e}}s brasileiro.
+\newblock In {\em Anais do BrasNAM 2019}. UFMG.
+
+\bibitem[Kohavi 1995]{kohavi1995}
+Kohavi, R. (1995).
+\newblock A study of cross-validation and bootstrap for accuracy estimation and
+  model selection.
+\newblock In {\em Proceedings of the 14th International Joint Conference on
+  Artificial Intelligence (IJCAI)}, pages 1137--1145, Montreal, Canada. Morgan
+  Kaufmann.
+
+\bibitem[Li et~al. 2023]{li2023synthetic}
+Li, Z., Zhu, H., Lu, Z., and Yin, M. (2023).
+\newblock Synthetic data generation with large language models for text
+  classification: Potential and limitations.
+\newblock In {\em Proceedings of the 2023 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP 2023)}.
+
+\bibitem[Liu et~al. 2024]{liu2024best}
+Liu, R., Wei, J., Liu, F., Si, C., Zhang, Y., Rao, J., Zheng, S., Peng, D.,
+  Yang, D., Zhou, D., and Dai, A.~M. (2024).
+\newblock Best practices and lessons learned on synthetic data for language
+  models.
+\newblock In {\em Proceedings of COLM 2024}.
+
+\bibitem[Nadas et~al. 2025]{nadas2025synthetic}
+Nadas, M., Diosan, L., and Tomescu, A. (2025).
+\newblock Synthetic data generation using large language models: Advances in
+  text and code.
+\newblock {\em arXiv preprint arXiv:2503.14023}.
+
+\bibitem[Pang et~al. 2002]{pang2002}
+Pang, B., Lee, L., and Vaithyanathan, S. (2002).
+\newblock Thumbs up? sentiment classification using machine learning
+  techniques.
+\newblock pages 79--86.
+
+\bibitem[Pedregosa et~al. 2011]{pedregosa2011}
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel,
+  O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., VanderPlas, J.,
+  Passos, A., Cournapeau, D., Brucher, M., Perrot, M., and Duchesnay, {\'{E}}.
+  (2011).
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830.
+
+\bibitem[Rossi 2019]{rossi2019}
+Rossi, R. H. P.~S. (2019).
+\newblock {\em An{\'{a}}lise de sentimentos para o aux{\'{i}}lio na
+  gest{\~{a}}o das Cidades Inteligentes}.
+\newblock Tese de doutorado, Universidade de S{\~{a}}o Paulo.
+
+\bibitem[Sokolova and Lapalme 2009]{sokolova2009}
+Sokolova, M. and Lapalme, G. (2009).
+\newblock A systematic analysis of performance measures for classification
+  tasks.
+\newblock {\em Information Processing \& Management}, 45(4):427--437.
+
+\bibitem[Souza and Filho 2021]{souza2022brazilian}
+Souza, F. and Filho, J.~A. (2021).
+\newblock Sentiment analysis on {B}razilian {P}ortuguese user reviews.
+\newblock {\em arXiv preprint arXiv:2112.05459}.
+\newblock Publicado em IEEE LA-CCI 2022.
+
+\bibitem[Zhang et~al. 2024]{zhang2024sentiment}
+Zhang, W., Deng, Y., Liu, B., Pan, S., and Bing, L. (2024).
+\newblock Sentiment analysis in the era of large language models: {A} reality
+  check.
+\newblock In {\em Findings of the Association for Computational Linguistics:
+  NAACL 2024}, pages 3881--3906, Cidade do M{\'{e}}xico, M{\'{e}}xico.
+
+\end{thebibliography}

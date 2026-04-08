@@ -34,90 +34,56 @@ TCC/
 
 ## Estado Atual
 
-**Última atualização:** 31/03/2026
+**Última atualização:** 08/04/2026
 **Branch:** main
 
-### Semana 1 do checklist — CONCLUÍDA (parte técnica)
+### O que já foi feito
 - [x] Geração dos 9 datasets sintéticos (manualmente via interfaces web)
 - [x] Refactor da estrutura de pastas do projeto
-- [x] Notebook `01` — Setup Colab/Local, pipeline completo com LR, NB e SVM Linear
-- [x] Notebook `01` — Validação cruzada k=10 para NB
-- [x] Notebook `02` — Setup Colab/Local
-- [x] Notebook `02` — Validação cruzada (Accuracy + F1) para NB, LR e SVM com k=5 e k=10
-- [x] Notebook `02` — Boxplot comparativo, curvas de aprendizado (NB, LR, SVM)
-- [x] Notebook `02` — Análise de erros do NB (erros por fonte, confusões, 15 exemplos)
-- [x] Notebook `02` — Tabela consolidada `resultados/metricas_consolidadas.csv`
-- [x] Refatoração dos notebooks (código mais natural, menos cara de IA)
-- [x] Re-execução local dos dois notebooks com todos os outputs gerados
-- [x] SVM Linear como terceiro modelo (dia 5 — opcional, feito)
-- [x] `CONCLUSOES.md` — documento-base para o artigo com todas as seções, figuras e referências
-- [x] Remoção da pasta duplicada `src/tcc-analise-sentimento/` (clone antigo)
-- [x] Git atualizado
+- [x] Notebook `01` completo — Setup Colab/Local, pipeline com NB, LR e SVM Linear
+- [x] Notebook `02` completo — CV k=5/k=10, boxplots, curvas de aprendizado, análise de erros
+- [x] Tabela consolidada `resultados/metricas_consolidadas.csv`
+- [x] Refatoração dos notebooks + re-execução local
+- [x] Leitura e anotação de 16 referências
+- [x] Artigo LaTeX: primeira versão completa (Seções 1–6 + Resumo + Abstract)
+- [x] Figuras do artigo individualizadas e posicionadas com `[H]`
+- [x] PDF compilado (14 páginas)
 
-### Pendente — Semana 1 (não é código)
-- [ ] Falar com o orientador (marcar reunião, confirmar formato de entrega)
-
-### Semana 2 do checklist — CONCLUÍDA (pesquisa + escrita)
-- [x] Ler artigos das referências (11 artigos anotados no Dia 8 e 9)
-- [x] Criar `documentos/notas_leitura.md` com anotações de cada artigo
-- [x] Pesquisar 2-3 artigos sobre avaliação de modelos NLP (Dia 10)
-- [x] Pesquisar TCCs/artigos da UTFPR sobre tema similar (Dia 10)
-- [x] Atualizar `artigo/referencias.bib` — agora com 16 referências (meta: 10-12 ✅)
-- [x] Limpar template SBC — removido todo texto de exemplo (Dia 11)
-- [x] Substituir autores e afiliações (Davi + Marlon, UTFPR DV) (Dia 11)
-- [x] Criar estrutura de seções: Intro / Fund. Teórica / Trab. Relacionados / Metodologia / Resultados / Conclusão (Dia 11)
-- [x] Escrever rascunho da Introdução (~1 página, 5 parágrafos) (Dia 11)
-- [x] Adicionar subseção de Métricas de Avaliação na Fundamentação Teórica (Dia 11)
-- [x] Escrever Trabalhos Relacionados — revisado com 3 subseções + posicionamento (Dia 12)
-- [x] Metodologia completa — 7 subseções com tabela do dataset (Dia 13)
-
-### Semana 3 do checklist — EM PROGRESSO (resultados + discussão + ajustes visuais)
-- [x] Copiar gráficos de `resultados/` para `artigo/imagens/` (8 PNGs)
-- [x] Escrever Resultados e Discussão — 5 subseções com 3 tabelas e 6 figuras (Dia 15)
-- [x] Dividir figuras compostas em individuais para melhor legibilidade (Dia 15):
-  - Boxplot CV → `boxplot_accuracy.png` + `boxplot_f1.png`
-  - Análise de erros → `erros_por_fonte.png` + `erros_heatmap.png`
-- [x] Fixar posicionamento de figuras no LaTeX (`[H]` com pacote `float`) (Dia 15)
-- [x] Compilar PDF — 14 páginas, todas figuras no lugar correto (Dia 15)
-- [ ] Escrever Conclusão + Trabalhos Futuros
-- [ ] Escrever Resumo + Abstract
-
-### Pendente — Semanas 4-6 (revisão + defesa)
+### Pendente
+- [ ] Revisão final do artigo (leitura corrida, ortografia, consistência)
 - [ ] Enviar artigo para orientador e aplicar correções
-- [ ] Limpar `requirements.txt` (tem libs do Colab que não são usadas)
 - [ ] Montar slides da apresentação
 - [ ] Ensaiar apresentação cronometrada
 - [ ] Entrega final + defesa
+- [ ] (Opcional) Teste com dados reais — validação externa
 
 ---
 
-## Resultados dos Modelos Baseline (Notebook 01)
+## Resultados dos Modelos Baseline (Notebook 01 — split 80/20, seed=42)
 
-> Valores aproximados — variam levemente a cada execução devido ao split aleatório.
-
-| Modelo | Acurácia | Precisão | Recall | F1-Score |
+| Modelo | Acurácia (%) | Precisão (%) | Recall (%) | F1-Score (%) |
 |---|---|---|---|---|
-| Naive Bayes | ~86% | ~86% | ~86% | ~86% |
-| SVM Linear | ~86% | ~86% | ~86% | ~86% |
-| Regressão Logística | ~84% | ~84% | ~84% | ~84% |
+| Naive Bayes | 86,11 | 86,19 | 86,11 | 86,13 |
+| SVM Linear | 86,11 | 86,21 | 86,11 | 86,09 |
+| Regressão Logística | 83,61 | 83,80 | 83,61 | 83,54 |
 
 ## Resultados da Validação Cruzada (Notebook 02)
 
-| Modelo | k | Accuracy Média | F1 Média |
+| Modelo | k | Acurácia Média (%) | F1 Média (%) |
 |---|---|---|---|
-| SVM Linear | 5 | ~89% ±1.3 | ~89% ±1.3 |
-| Naive Bayes | 5 | ~89% ±1.8 | ~89% ±1.8 |
-| Reg. Logística | 5 | ~87% ±1.4 | ~87% ±1.4 |
-| SVM Linear | 10 | ~89% ±2.5 | ~89% ±2.5 |
-| Naive Bayes | 10 | ~90% ±2.2 | ~90% ±2.2 |
-| Reg. Logística | 10 | ~88% ±2.4 | ~88% ±2.4 |
+| Naive Bayes | 5 | 88,82 ±1,83 | 88,86 ±1,82 |
+| Naive Bayes | 10 | 89,60 ±2,16 | 89,63 ±2,15 |
+| Reg. Logística | 5 | 87,32 ±1,43 | 87,31 ±1,42 |
+| Reg. Logística | 10 | 88,04 ±2,42 | 88,02 ±2,44 |
+| SVM Linear | 5 | 88,88 ±1,33 | 88,88 ±1,33 |
+| SVM Linear | 10 | 89,10 ±2,49 | 89,10 ±2,51 |
 
 ## Resultados da Análise de Erros (Notebook 02)
 
-- **Total de erros:** ~50/360 (~14%) no Naive Bayes
-- **Confusão mais frequente:** Negativa ↔ Positiva (~24 erros combinados)
-- **Erros por fonte:** ChatGPT ~10% | Claude ~14% | Gemini ~17%
-- **Padrão:** Gemini gera frases mais ambíguas; ChatGPT é mais direto no sentimento
+- **Total de erros:** 50/360 (13,9%) no Naive Bayes
+- **Confusão mais frequente:** Negativa ↔ Positiva (24 erros — 13 Neg→Pos + 11 Pos→Neg)
+- **Erros por fonte:** ChatGPT 9,9% | Claude 14,1% | Gemini 17,4%
+- **Padrão:** Gemini gera frases mais descritivas e ambíguas; ChatGPT é mais direto e explícito no sentimento
 
 > **Arquivos gerados:** `resultados/validacao_cruzada.csv`, `resultados/metricas_consolidadas.csv`, `resultados/baseline_metrics.csv`, `resultados/boxplot_validacao_cruzada.png`, `resultados/curva_aprendizado_nb.png`, `resultados/curva_aprendizado_lr.png`, `resultados/analise_erros.csv`, `resultados/analise_erros_graficos.png`, gráficos de F1/confusão por modelo
 > **Figuras do artigo (individuais):** `artigo/imagens/boxplot_accuracy.png`, `artigo/imagens/boxplot_f1.png`, `artigo/imagens/erros_por_fonte.png`, `artigo/imagens/erros_heatmap.png`
