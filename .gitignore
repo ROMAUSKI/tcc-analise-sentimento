@@ -1,6 +1,10 @@
 # === Backups e ZIPs ===
 _backup/
 
+# Ignorando datasets reais pesados
+src/dados_reais/
+src/utlc_movies.zip
+
 # === Documentos UTFPR (regulamentos, templates, checklists) ===
 documentos/regulamentos/
 documentos/*.pdf
