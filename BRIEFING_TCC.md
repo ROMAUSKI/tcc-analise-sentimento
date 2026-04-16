@@ -34,7 +34,7 @@ TCC/
 
 ## Estado Atual
 
-**Última atualização:** 08/04/2026
+**Última atualização:** 16/04/2026
 **Branch:** main
 
 ### O que já foi feito
@@ -50,7 +50,7 @@ TCC/
 - [x] PDF compilado (14 páginas)
 
 ### Pendente
-- [ ] Revisão final do artigo (leitura corrida, ortografia, consistência)
+- [ ] Revisão final do artigo (leitura corrida, ortografia, consistência) — primeira passada feita em 16/04/2026: corrigido `~82,9\%` → `cerca de 82,9\%`, separador de milhar padronizado (`1.798`, `1.800`, `1.438`), `overfitting` italicizado. Falta ler o artigo inteiro em voz alta pelo menos uma vez.
 - [ ] Enviar artigo para orientador e aplicar correções
 - [ ] Montar slides da apresentação
 - [ ] Ensaiar apresentação cronometrada
