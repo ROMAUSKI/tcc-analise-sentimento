@@ -43,4 +43,8 @@ desktop.ini
 Thumbs.db
 desktop.ini
 .claude
-.claude
+
+# === Arquivos de contexto de IA ===
+CLAUDE.md
+AGENTS.md
+BRIEFING_TCC.md
