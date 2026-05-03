@@ -12,3 +12,4 @@ scikit-learn==1.6.1
 seaborn==0.13.2
 sklearn-pandas==2.2.0
 wordcloud==1.9.4
+kagglehub==1.0.1
