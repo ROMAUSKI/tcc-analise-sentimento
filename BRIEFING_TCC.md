@@ -166,24 +166,31 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 
 ## 8. Resultados Atuais
 
-### Movies — 3 visões clássicas (notebook 03, 200/classe, seed=42)
+### Movies — 5 visões clássicas (notebook 03, seed=42) — **F1 weighted / F1 macro**
 
 | Visão | Naive Bayes | Reg. Logística | SVM Linear |
 |---|---|---|---|
-| V1: Sintético → Sintético | **84.09%** | 79.78% | 80.81% |
-| V2: Real → Real | 43.20% | 41.23% | 42.41% |
-| V3: Sintético → Real | 38.38% | 34.59% | 35.43% |
+| V1: Sintético → Sintético (controlado) | **84.09 / 84.09** | 79.78 / 79.78 | 80.81 / 80.81 |
+| V2: Real → Real (controlado) | 43.20 / 43.20 | 41.23 / 41.23 | 42.41 / 42.41 |
+| V3: Sintético → Real (controlado) | 38.38 / 38.38 | 34.59 / 34.59 | 35.43 / 35.43 |
+| V4: Real → Real (desbalanceado) | 64.36 / **38.48** | 70.93 / **52.05** | 70.59 / **51.92** |
+| V5: Sintético → Real (desbalanceado) | 49.62 / **33.65** | 47.28 / **33.42** | 47.35 / **33.88** |
 
-**Observações:**
-- V1 alto (sintético tem vocabulário regular)
-- V2 baixo controlando volume (200 frases reais não cobrem variabilidade)
-- V3 ≈ V2 → reality gap aparente é menor do que parecia com V2 = 9k/classe; o gap se deve a "real é difícil" + "sintético tem viés", não só ao sintético ser ruim
+*Distribuição real natural:* Positiva 70.77% / Neutra 19.98% / Negativa 9.25% (n=99.758).
+
+**Observações-chave para a defesa:**
+- **V1 alto** — sintético tem vocabulário regular por classe
+- **V2 ≈ V3 controlados** (~40%) — com 200 frases, real-em-real e sint-em-real performam similar; mostra que parte da queda é por escassez de dados, não só por sintético ruim
+- **V4 desbalanceado:** Acurácia 72-75% mas **F1 macro 38-52%** — gap exemplifica viés de classe majoritária. NB sofre mais (38%) que LR/SVM (52%) porque NB confia em P(classe) a priori
+- **V5 desbalanceado:** F1 weighted sobe vs V3 (35→47) mas F1 macro CAI (35→33) — modelo treinado em sintético prevê "muita Neutra" (33% no treino), acerta por sorte na distribuição real desbalanceada
+- **Reality gap consistente** (~30 pontos em F1 macro) entre treino sintético e treino real, em qualquer regime de volume
+- **Volume real ajuda muito** (V2 43% → V4 71% em F1w no LR/SVM); volume não compensa o gap de fonte (V3≈V5 em F1 macro)
 
 **Arquivos gerados:**
-- `resultados/metricas_3_visoes_movies.csv`
-- `resultados/grafico_3_visoes_movies.png` (F1 4 colunas — A ATUALIZAR com V4)
-- `resultados/grafico_3_visoes_movies_4metricas.png` (painel 2x2 com Acurácia/Precisão/Recall/F1)
-- `resultados/grafico_3_visoes_movies_{acuracia,precisao,recall,f1score}.png` (individuais)
+- `resultados/metricas_5_visoes_movies.csv` (+ alias `metricas_3_visoes_movies.csv`)
+- `resultados/grafico_5_visoes_movies.png` (F1 weighted, 5 colunas × 3 modelos)
+- `resultados/grafico_5_visoes_movies_5metricas.png` (painel 2×3 com 5 métricas)
+- `resultados/grafico_5_visoes_movies_{acuracia,precisao,recall,f1score,f1macro}.png` (individuais)
 
 ### Resultados antigos (notebook 01 — sintético puro, split 80/20)
 
