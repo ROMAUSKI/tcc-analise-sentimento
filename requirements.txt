@@ -13,3 +13,13 @@ seaborn==0.13.2
 sklearn-pandas==2.2.0
 wordcloud==1.9.4
 kagglehub==1.0.1
+
+# --- Deep Learning (notebook 04 — LSTM + BERT) ---
+# IMPORTANTE: instale o torch SEPARADAMENTE com suporte CUDA antes de instalar este requirements,
+# se quiser usar GPU. Comando para CUDA 12.1 (RTX 3000+):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+# Verificação: python -c "import torch; print(torch.cuda.is_available())"
+torch>=2.0
+transformers>=4.40
+accelerate>=0.30
+tqdm>=4.65
