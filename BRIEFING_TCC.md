@@ -136,20 +136,31 @@ Hardware-alvo: **RTX 3070 (8GB)** local ou **Colab T4** como fallback.
 
 ---
 
-## 7. Metodologia das 4 Visões (peça central do TCC)
+## 7. Metodologia das 5 Visões (peça central do TCC)
 
-| Visão | Treino | Teste | Volume | Função |
+Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
+
+|                          | **Volume controlado (200/classe)** | **Volume natural (todos ~100k)** |
+|--------------------------|---|---|
+| **Sintético → Sintético** | V1 | — (sintético é fixo em 200) |
+| **Real → Real**           | V2 | **V4** |
+| **Sintético → Real**      | V3 | **V5** |
+
+| Visão | Treino | Teste | Volume aprox. | Função |
 |---|---|---|---|---|
-| **V1** | Sintético (200/classe) | Sintético (200/classe) | 480 / 120 | Baseline sintético — qualidade dos dados sintéticos por si só |
+| **V1** | Sintético (200/classe) | Sintético (200/classe) | 480 / 120 | Baseline sintético — qualidade isolada dos dados sintéticos |
 | **V2** | Real (200/classe) | Real (200/classe) | 480 / 120 | Baseline real com mesmo volume — comparação justa de fonte |
-| **V3** | Sintético (200/classe) | Real (mesmo test set do V2) | 480 / 120 | **Cross-domain evaluation** — generalização sintético→real |
-| **V4** | Real desbalanceado (todos ~100k) | Real desbalanceado | ~80k / ~20k | Limite superior do real com dado abundante; mostra impacto do volume |
+| **V3** | Sintético (200/classe) | Real (**mesmo test set do V2**) | 480 / 120 | **Cross-domain controlado** — generalização sintético→real isolando volume |
+| **V4** | Real desbalanceado (todos) | Real desbalanceado | ~80k / ~20k | "Vida real" do real — limite superior com dado abundante |
+| **V5** | Sintético (200/classe) | Real desbalanceado (**mesmo test set do V4**) | 480 / ~20k | **Cross-domain "vida real"** — sintético escasso testado em real abundante |
 
-**Por que V3 reusa o test set do V2:** isolamento de variável. Treino diferente (real vs sintético), teste idêntico → única variável é a fonte do treino.
+**Pareamentos para comparações diretas:**
+- **V2 vs V3** (mesmo test set 120 reais): isola "fonte do treino" com volume controlado
+- **V4 vs V5** (mesmo test set ~20k reais): isola "fonte do treino" com volume natural
+- **V2 vs V4**: mostra ganho de volume no real
+- **V3 vs V5**: mostra como o sintético escala quando o teste é a distribuição natural
 
-**Por que 200/classe nas três primeiras:** controle metodológico. Comparação justa entre V1, V2, V3 só faz sentido com mesmo volume.
-
-**Por que V4 separada:** atende pedido do orientador de mostrar desempenho com volume natural (não-balanceado). Acurácia tenderá a ser alta mas F1 macro pode revelar baixo desempenho em classes minoritárias (Neutra).
+**Por que F1 macro será crítico para V4/V5:** distribuição real ~75% Positiva / ~15% Negativa / ~10% Neutra. Modelo "burro" prevendo só Positiva tem Acurácia ~75% mas F1 macro ~29%. Sempre reportar **Acurácia + F1 weighted + F1 macro**.
 
 ---
 
