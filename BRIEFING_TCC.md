@@ -261,8 +261,8 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 ### 2026-05-09 — Reorganização e novas demandas
 
 - ✅ **Etapa A:** BRIEFING_TCC.md reescrito centralizando tudo (CLAUDE.md, AGENTS.md, MODO DEFESA). Pointers reduzidos.
-- ⏳ **Etapa B (próxima):** adicionar V4 desbalanceada ao notebook 03
-- ⏳ **Etapa C (após):** criar `04_movies_avancado.ipynb` (LSTM + BERT)
+- ✅ **Etapa B:** notebook 03 expandido para **5 visões** (V1/V2/V3 controlados + **V4 Real desbalanceado + V5 Sint→Real desbalanceado**). Função `run_vision()` agora reporta F1 weighted **e** F1 macro. Distribuição real confirmada: 70.77% Pos / 19.98% Neu / 9.25% Neg. NB no V4 mostra Acc 73% × F1 macro 38% (gap de viés de classe majoritária). Detalhes na Seção 8 deste briefing.
+- ⏳ **Etapa C (próxima):** criar `04_movies_avancado.ipynb` (LSTM + BERT)
 - ✅ Plano completo salvo em `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md`
 
 ### 2026-05-09 (anterior) — 3 visões implementadas
