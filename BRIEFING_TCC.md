@@ -262,7 +262,8 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 
 - ✅ **Etapa A:** BRIEFING_TCC.md reescrito centralizando tudo (CLAUDE.md, AGENTS.md, MODO DEFESA). Pointers reduzidos.
 - ✅ **Etapa B:** notebook 03 expandido para **5 visões** (V1/V2/V3 controlados + **V4 Real desbalanceado + V5 Sint→Real desbalanceado**). Função `run_vision()` agora reporta F1 weighted **e** F1 macro. Distribuição real confirmada: 70.77% Pos / 19.98% Neu / 9.25% Neg. NB no V4 mostra Acc 73% × F1 macro 38% (gap de viés de classe majoritária). Detalhes na Seção 8 deste briefing.
-- ⏳ **Etapa C (próxima):** criar `04_movies_avancado.ipynb` (LSTM + BERT)
+- ✅ **Etapa C:** `04_movies_avancado.ipynb` criado (17 células) — LSTM (PyTorch, embeddings do zero) + BERT (Bertimbau base, fine-tuning) replicando V1..V5. Constantes configuráveis no topo (`MAX_SAMPLES_REAL`, `BERT_EPOCHS`, etc.). Detecção automática de GPU + checkpoints intermediários (não perde se travar). `requirements.txt` atualizado com `torch>=2.0`, `transformers>=4.40`, `accelerate`. **Sintaxe validada (todas as 10 células de código compilam)**, mas NÃO executado — Davi vai rodar overnight com `MAX_SAMPLES_REAL=None` (~7-10h). Saída: `metricas_avancado_movies.csv`, `metricas_consolidado_movies.csv`, `grafico_consolidado_movies_f1weighted.png`, `grafico_consolidado_movies_f1macro.png`.
+- ⏳ **Etapa D (próxima):** padronizar célula 1 dos notebooks 01 e 02 + arquivar `03_real_data_validation.ipynb` e `04_comparativo_3_visoes.ipynb` antigos
 - ✅ Plano completo salvo em `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md`
 
 ### 2026-05-09 (anterior) — 3 visões implementadas
