@@ -4,7 +4,7 @@
 > `CLAUDE.md` e `AGENTS.md` são apenas pointers para cá.
 > **Atualize SEMPRE este arquivo** ao final de cada etapa relevante (resultado novo, decisão tomada, arquivo criado/movido).
 
-> **Última atualização:** 2026-05-09 — Centralização de contexto + plano LSTM/BERT + V4 desbalanceada
+> **Última atualização:** 2026-05-09 — bootstrap local Python 3.12 + CUDA na célula 1 do notebook 04 + plano LSTM/BERT + V4 desbalanceada
 
 ---
 
@@ -30,37 +30,40 @@
 ```
 tcc-analise-sentimento/
 ├── BRIEFING_TCC.md              # ESTE ARQUIVO — fonte única de contexto
-├── CLAUDE.md                    # Pointer para BRIEFING
-├── AGENTS.md                    # Pointer para BRIEFING
+├── CLAUDE.md                    # Pointer para BRIEFING (3 linhas)
+├── AGENTS.md                    # Pointer para BRIEFING (3 linhas)
 ├── README.md                    # Descrição pública do projeto
-├── requirements.txt             # Dependências Python
-├── artigo/                      # Artigo LaTeX (formato SBC)
-│   ├── main.tex
-│   ├── sbc-template.sty
+├── requirements.txt             # Dependências Python (inclui torch/transformers)
+├── .gitignore                   # ignora dados pesados e checkpoints
+├── artigo/                      # Artigo LaTeX (formato SBC) — versão ATIVA
+│   ├── main.tex, main.pdf
+│   ├── sbc-template.sty, sbc.bst, caption2.sty, referencias.bib
 │   └── imagens/
 ├── dados/
 │   ├── brutos/                  # 9 CSVs sintéticos (Movies — Claude/Gemini/ChatGPT)
-│   ├── brutos_apps/             # (a criar) 9 CSVs sintéticos para Apps
+│   ├── brutos_apps/             # (a criar — Etapa E) 9 CSVs sintéticos para Apps
 │   └── processado/              # synthetic_dataset.csv, dataset_completo.csv
 ├── documentos/                  # Regulamentos, checklists, leituras
-├── resultados/                  # Gráficos (.png) e métricas (.csv)
-├── src/                         # Notebooks Jupyter
-│   ├── 00_data_generation.ipynb
-│   ├── 01_movies_training.ipynb           # NB/LR/SVM em sintético
-│   ├── 02_movies_robustness.ipynb         # CV k=10, learning curves, erros
-│   ├── 03_movies_3_visoes.ipynb           # V1/V2/V3/V4 clássicos (Movies)
-│   ├── 04_movies_avancado.ipynb           # (a criar) LSTM + BERT/Bertimbau
-│   ├── 05_apps_training.ipynb             # (esqueleto)
-│   ├── 06_apps_robustness.ipynb           # (esqueleto)
-│   ├── 07_apps_3_visoes.ipynb             # (a criar)
-│   ├── 08_apps_avancado.ipynb             # (a criar)
-│   ├── 09_comparativo_nichos.ipynb        # (a criar)
-│   └── dados_reais/                       # cache local do utlc_movies/utlc_apps via kagglehub
-├── archive/                     # Versões antigas/fora-de-escopo (ver README local)
-│   ├── notebooks/, scripts/, artigo/
-│   └── README.md
-└── _backup/                     # Backups
+├── resultados/                  # Gráficos (.png) e métricas (.csv) ATIVOS
+├── src/                         # Notebooks Jupyter ATIVOS
+│   ├── 00_data_generation.ipynb           # documentação geração via LLMs
+│   ├── 01_movies_training.ipynb           # NB/LR/SVM em sintético (célula 1 padronizada)
+│   ├── 02_movies_robustness.ipynb         # CV k=10, learning curves, erros (célula 1 padronizada)
+│   ├── 03_movies_3_visoes.ipynb           # V1/V2/V3/V4/V5 clássicos (Movies)
+│   ├── 04_movies_avancado.ipynb           # LSTM + BERT/Bertimbau (auto-setup CUDA)
+│   ├── 05_apps_training.ipynb             # esqueleto (Etapa E)
+│   ├── 06_apps_robustness.ipynb           # esqueleto (Etapa E)
+│   ├── checkpoints_avancado/              # gerado pelo notebook 04 (gitignored)
+│   └── dados_reais/                       # cache kagglehub (gitignored, ~877 MB)
+└── archive/                     # Versões antigas/fora-de-escopo (ver README local)
+    ├── README.md
+    ├── notebooks/  → 03_real_data_validation, 04_comparativo_3_visoes, 07_redes_neurais
+    ├── scripts/    → _update_charts.py, analise_3_visoes.py, reprocessar_dataset.py
+    ├── artigo/     → main_v1.tex, main_v1.pdf, artigo_compilado.pdf, artigo_TCC.pdf
+    └── resultados/ → grafico_redes_neurais.png, metricas_redes_neurais.csv, analise_3_visoes_movies.csv
 ```
+
+**Notebooks futuros (Etapa E + F):** `07_apps_3_visoes.ipynb`, `08_apps_avancado.ipynb`, `09_comparativo_nichos.ipynb`.
 
 ---
 
@@ -130,7 +133,7 @@ Todos encapsulados em `Pipeline([('tfidf', TfidfVectorizer()), ('clf', clf)])`.
 | Modelo | Framework | Hiperparâmetros previstos |
 |---|---|---|
 | LSTM | PyTorch | `nn.Embedding(vocab, 128) → nn.LSTM(hidden=128, layers=1) → Dropout(0.3) → Linear`. Treino: 10-20 epochs, batch=32, AdamW lr=1e-3 |
-| BERT (Bertimbau) | `transformers` | `neuralmind/bert-base-portuguese-cased`. Fine-tuning: 3 epochs, batch=8, AdamW lr=2e-5 |
+| BERT (Bertimbau) | `transformers` | `neuralmind/bert-base-portuguese-cased` **fixado na revisão `4a78cfb` com `model.safetensors`**. Fine-tuning: 3 epochs, batch=8, AdamW lr=2e-5 |
 
 Hardware-alvo: **RTX 3070 (8GB)** local ou **Colab T4** como fallback.
 
@@ -257,6 +260,26 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 ---
 
 ## 11. Histórico de Execução (rolling, mais recente no topo)
+
+### 2026-05-09 — Bootstrap local Python 3.12 + CUDA no notebook 04
+
+- ✅ `src/04_movies_avancado.ipynb` recebeu nova lógica na **Célula 1** para modo “GPU first”.
+- ✅ Se o notebook estiver em **Windows + Python fora da janela suportada pelo PyTorch CUDA** (caso atual: `Python 3.14.3`), a célula tenta **bootstrap automático com `uv`**: instala Python 3.12, cria `.venv-cu121-py312`, instala dependências base, tenta `torch` com CUDA (`cu121` e fallback `cu118`) e registra kernel Jupyter **`Python 3.12 (TCC CUDA)`**.
+- ✅ Limitação estrutural documentada: o notebook consegue **preparar** o kernel CUDA sozinho, mas ainda precisa que o usuário **troque o kernel** após o bootstrap, porque o Jupyter não troca o interpretador do kernel atual em runtime.
+- ✅ Validação local: a célula compila, detecta corretamente o bloqueio do `Python 3.14.3`, identifica GPU via `nvidia-smi` e interrompe com instrução explícita para usar `Python 3.12`/kernel CUDA.
+- ✅ Ajuste adicional para **prova de fogo**: `_torch_info_for_python()` agora diferencia corretamente **torch ausente** de **torch presente sem CUDA**, e `ALLOW_CPU_FALLBACK=False` faz a célula falhar explicitamente se a GPU não ativar.
+- ✅ Ajuste final de coerência: após `import torch`, se `torch.cuda.is_available()` continuar `False`, a célula encerra com `SystemExit("PROVA DE FOGO FALHOU ...")` em vez de apenas avisar e seguir.
+- ✅ Refinamento de reexecução: se `.venv-cu121-py312` já existir com CUDA ativa, a célula agora **reaproveita o ambiente** e só registra/atualiza o kernel Jupyter, evitando reinstalar tudo a cada nova execução a partir do `Python 3.14`.
+- ✅ Diagnóstico reforçado: a célula 1 agora imprime o **comando executado** e o **stdout/stderr completos** quando `uv`, `pip` ou `ipykernel` falham no bootstrap CUDA.
+- ✅ Correção de bootstrap: se `.venv-cu121-py312` já existir **sem** CUDA funcional ou em estado parcial, a célula agora recria o ambiente com `uv venv --clear` em vez de abortar com erro de ambiente já existente.
+- ✅ Correção de bootstrap 2: o ambiente criado por `uv venv` pode vir **sem `pip`**; por isso a célula passou a instalar dependências base e `torch` usando **`uv pip install --python <env_python>`**, sem depender de `python -m pip`.
+- ✅ Correção de compatibilidade BERT: `AutoModelForSequenceClassification.from_pretrained(...)` passou a usar **`use_safetensors=True`** e a revisão fixa `4a78cfbf83c9c97533dd6d6694ca4323029ff061` do `neuralmind/bert-base-portuguese-cased`, evitando o bloqueio recente do `torch.load` em checkpoints `.bin`.
+
+### 2026-05-09 — Fix da célula 1 do notebook 04
+
+- ✅ `src/04_movies_avancado.ipynb` ajustado na **Célula 1** para evitar `CalledProcessError` cru ao tentar trocar `torch` CPU por CUDA via `pip` no Windows.
+- ✅ `AUTO_INSTALL_PYTORCH_CUDA` passou a ser **False por padrão no ambiente local**. A célula agora diagnostica o ambiente, mostra o comando recomendado para CUDA, detecta `nvidia-smi` e segue com fallback controlado em CPU quando `torch` já está instalado.
+- ✅ Compatibilidade confirmada com **Python 3.14.3 local**: correção de `importlib.util`, JSON do notebook válido e célula 1 executada com sucesso em teste real neste ambiente (`torch 2.11.0+cpu`, sem CUDA ativa no Python).
 
 ### 2026-05-09 — Reorganização e novas demandas
 
