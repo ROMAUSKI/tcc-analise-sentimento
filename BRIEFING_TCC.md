@@ -169,25 +169,31 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 
 ## 8. Resultados Atuais
 
-### Movies — 5 visões clássicas (notebook 03, seed=42) — **F1 weighted / F1 macro**
+### Movies — 5 visões clássicas (notebook 03, seed=42, **600 frases/classe** = sintético inteiro 1800)
+
+**F1 weighted / F1 macro (%)**
 
 | Visão | Naive Bayes | Reg. Logística | SVM Linear |
 |---|---|---|---|
-| V1: Sintético → Sintético (controlado) | **84.09 / 84.09** | 79.78 / 79.78 | 80.81 / 80.81 |
-| V2: Real → Real (controlado) | 43.20 / 43.20 | 41.23 / 41.23 | 42.41 / 42.41 |
-| V3: Sintético → Real (controlado) | 38.38 / 38.38 | 34.59 / 34.59 | 35.43 / 35.43 |
+| V1: Sintético → Sintético (controlado) | **88.07 / 88.07** | 86.93 / 86.93 | 88.33 / 88.33 |
+| V2: Real → Real (controlado) | 52.10 / 52.10 | 54.45 / 54.45 | 54.80 / 54.80 |
+| V3: Sintético → Real (controlado) | 34.75 / 34.75 | 38.77 / 38.77 | 36.45 / 36.45 |
 | V4: Real → Real (desbalanceado) | 64.36 / **38.48** | 70.93 / **52.05** | 70.59 / **51.92** |
-| V5: Sintético → Real (desbalanceado) | 49.62 / **33.65** | 47.28 / **33.42** | 47.35 / **33.88** |
+| V5: Sintético → Real (desbalanceado) | 47.11 / **32.29** | 45.30 / **32.61** | 45.47 / **32.50** |
 
 *Distribuição real natural:* Positiva 70.77% / Neutra 19.98% / Negativa 9.25% (n=99.758).
 
+**Volumes de treino:** V1/V2/V3 = 1440 amostras; V4 = 79.806 amostras; V5 = 1440 sintéticas testadas em ~20k reais.
+
 **Observações-chave para a defesa:**
-- **V1 alto** — sintético tem vocabulário regular por classe
-- **V2 ≈ V3 controlados** (~40%) — com 200 frases, real-em-real e sint-em-real performam similar; mostra que parte da queda é por escassez de dados, não só por sintético ruim
+- **V1 alto e estável** (~88%) — sintético tem vocabulário regular por classe; modelos clássicos capturam bem
+- **V2 sobe pra ~54%** (era 43% com 200/cl) — volume real adicional ajuda na variabilidade
+- **V3 quase não mudou** (35-39%) mesmo triplicando treino sintético — **prova que o reality gap é ESTRUTURAL (diferença de distribuição), não estatístico (falta de dados)**
 - **V4 desbalanceado:** Acurácia 72-75% mas **F1 macro 38-52%** — gap exemplifica viés de classe majoritária. NB sofre mais (38%) que LR/SVM (52%) porque NB confia em P(classe) a priori
-- **V5 desbalanceado:** F1 weighted sobe vs V3 (35→47) mas F1 macro CAI (35→33) — modelo treinado em sintético prevê "muita Neutra" (33% no treino), acerta por sorte na distribuição real desbalanceada
-- **Reality gap consistente** (~30 pontos em F1 macro) entre treino sintético e treino real, em qualquer regime de volume
-- **Volume real ajuda muito** (V2 43% → V4 71% em F1w no LR/SVM); volume não compensa o gap de fonte (V3≈V5 em F1 macro)
+- **V5 desbalanceado:** F1 macro ~32% (caiu vs antes); mais sintético no treino aumenta o "viés sintético" e afasta da distribuição real
+- **Reality gap PERSISTENTE:** V1→V3 cai ~50 pontos em F1; V4→V5 cai ~22 pontos; gap não é compensado por volume
+
+**Mudança metodológica 2026-05-10:** N_POR_CLASSE corrigido de 200 para 600 (sintético inteiro = 1800). Entendimento original era "200 por LLM por classe" (que totaliza 600/classe = 1800 total). A escolha errada anterior (200/cl = 600 total) descartava 1200 frases sintéticas sem motivo.
 
 **Arquivos gerados:**
 - `resultados/metricas_5_visoes_movies.csv` (+ alias `metricas_3_visoes_movies.csv`)
