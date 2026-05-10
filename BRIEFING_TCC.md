@@ -285,8 +285,17 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 
 - ✅ **Etapa A:** BRIEFING_TCC.md reescrito centralizando tudo (CLAUDE.md, AGENTS.md, MODO DEFESA). Pointers reduzidos.
 - ✅ **Etapa B:** notebook 03 expandido para **5 visões** (V1/V2/V3 controlados + **V4 Real desbalanceado + V5 Sint→Real desbalanceado**). Função `run_vision()` agora reporta F1 weighted **e** F1 macro. Distribuição real confirmada: 70.77% Pos / 19.98% Neu / 9.25% Neg. NB no V4 mostra Acc 73% × F1 macro 38% (gap de viés de classe majoritária). Detalhes na Seção 8 deste briefing.
-- ✅ **Etapa C:** `04_movies_avancado.ipynb` criado (18 células) — LSTM (PyTorch, embeddings do zero) + BERT (Bertimbau base, fine-tuning) replicando V1..V5. **Célula 1 = auto-setup** (Colab instala silenciosamente; local detecta GPU/CUDA e mostra comando de instalação se faltar — sem ação manual em ambiente já configurado). Constantes configuráveis na **Célula 4** (`MAX_SAMPLES_REAL`, `BERT_EPOCHS`, etc.). Checkpoints intermediários (não perde se travar). `requirements.txt` atualizado com `torch>=2.0`, `transformers>=4.40`, `accelerate`, `tqdm`. **Sintaxe validada (todas as 11 células de código compilam)**, mas NÃO executado — Davi vai rodar overnight com `MAX_SAMPLES_REAL=None` (~7-10h). Saída: `metricas_avancado_movies.csv`, `metricas_consolidado_movies.csv`, `grafico_consolidado_movies_f1weighted.png`, `grafico_consolidado_movies_f1macro.png`.
-- ⏳ **Etapa D (próxima):** padronizar célula 1 dos notebooks 01 e 02 + arquivar `03_real_data_validation.ipynb` e `04_comparativo_3_visoes.ipynb` antigos
+- ✅ **Etapa C:** `04_movies_avancado.ipynb` criado (18 células) — LSTM (PyTorch, embeddings do zero) + BERT (Bertimbau base, fine-tuning) replicando V1..V5. **Célula 1 = auto-setup** (Colab instala silenciosamente; local auto-instala PyTorch+CUDA via subprocess sem precisar reiniciar kernel). Constantes configuráveis na **Célula 4** (`MAX_SAMPLES_REAL`, `BERT_EPOCHS`, etc.). Checkpoints intermediários (não perde se travar). `requirements.txt` atualizado com `torch>=2.0`, `transformers>=4.40`, `accelerate`, `tqdm`. **Sintaxe validada**, mas NÃO executado — Davi vai rodar overnight com `MAX_SAMPLES_REAL=None` (~7-10h). **Conhecido:** auto-instalação do PyTorch+CUDA falha em Python 3.14 (sem wheels disponíveis); resolução pendente — opções: instalar Python 3.11/3.12 ou usar Colab. Saída: `metricas_avancado_movies.csv`, `metricas_consolidado_movies.csv`, `grafico_consolidado_movies_f1weighted.png`, `grafico_consolidado_movies_f1macro.png`.
+- ✅ **Etapa D:** Limpeza ampla (auditoria + reorganização):
+  - Movidos para `archive/notebooks/`: `03_real_data_validation.ipynb`, `04_comparativo_3_visoes.ipynb`
+  - Movidos para `archive/scripts/`: `_update_charts.py`
+  - Movidos para `archive/artigo/`: `artigo_compilado.pdf`, `artigo_TCC.pdf` (raiz)
+  - Criada `archive/resultados/` com: `grafico_redes_neurais.png`, `metricas_redes_neurais.csv`, `analise_3_visoes_movies.csv`
+  - **Deletados (1.4 GB liberados):** `src/utlc_movies.zip` (292 MB), `src/dados_reais_temp/utlc_movies.csv` (1.1 GB), `_backup/` (vazia) — todos reproduzíveis via `kagglehub.dataset_download()`
+  - `.gitignore` atualizado: adicionado `src/dados_reais_temp/`, `src/checkpoints_avancado/`, `src/*.zip`, `src/*.csv`
+  - **Notebooks 01 e 02:** célula de setup padronizada com template light (sem kagglehub, já que só usam sintético) — agora idêntica ao padrão dos notebooks 03 e 04
+  - `archive/README.md` reescrito documentando todos os arquivos arquivados
+- ⏳ **Etapa E (próxima):** geração manual de 1800 frases sintéticas para Apps + criação dos notebooks 05-08 (depende de Davi gerar via LLMs)
 - ✅ Plano completo salvo em `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md`
 
 ### 2026-05-09 (anterior) — 3 visões implementadas
