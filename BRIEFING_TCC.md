@@ -295,10 +295,14 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
   - `.gitignore` atualizado: adicionado `src/dados_reais_temp/`, `src/checkpoints_avancado/`, `src/*.zip`, `src/*.csv`
   - **Notebooks 01 e 02:** célula de setup padronizada com template light (sem kagglehub, já que só usam sintético) — agora idêntica ao padrão dos notebooks 03 e 04
   - `archive/README.md` reescrito documentando todos os arquivos arquivados
-- ✅ **Hotfix 2026-05-09:** notebooks 01 e 02 quebravam no Colab por terem paths relativos hardcoded (`../processado/`, `../../resultados/`, `glob.glob('*.csv')` na pasta atual) — código antigo assumia `cd dados/brutos` antes de rodar.
-  - Notebook 01: 13 substituições aplicadas — todos os paths agora usam `DADOS_BRUTOS_MOVIES`, `DADOS_PROCESSADO`, `RESULTADOS` (variáveis definidas no setup). Adicionado `import glob` no setup.
-  - Notebook 02: já usava `os.path.join`, mas dependia de variável `dir_resultados` que sumiu na padronização — adicionado alias `dir_resultados = RESULTADOS` no setup. Sem outras substituições necessárias.
-  - Sintaxe validada nos dois.
+- ✅ **Hotfix 1 (2026-05-09):** notebooks 01 e 02 quebravam no Colab por paths relativos hardcoded — corrigido com paths absolutos via `DADOS_*`, `RESULTADOS`. Alias `dir_resultados=RESULTADOS` adicionado.
+- ✅ **Hotfix 2 (2026-05-10):** após o hotfix 1, descoberto que a padronização do setup feita na Etapa D **destruiu imports críticos** que existiam nos setups originais (`re`, `matplotlib.pyplot`, `seaborn`, vários módulos `sklearn`, `warnings`) — e no notebook 02 também o **carregamento do dataframe** `df`, `X`, `y`. Erros descobertos sequencialmente:
+  - `NameError: name 're' is not defined` (notebook 01 cell 4)
+  - Provavelmente próximos seriam `NameError: name 'plt' is not defined`, `name 'sns'`, `name 'TfidfVectorizer'`, etc.
+  - Setup dos dois notebooks reescrito mantendo a estrutura padronizada (`BASE_DIR`, `DADOS_*`, `RESULTADOS`, `SEED`) **e** restaurando todos os imports do código original (incluindo `from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_recall_fscore_support`, `from sklearn.pipeline import Pipeline`, etc.)
+  - Notebook 02: setup agora também carrega `df`, `X`, `y` (como o original fazia).
+  - Sintaxe validada e auditoria de imports confirma todos os módulos críticos presentes nos dois notebooks.
+  - **Lição aprendida:** ao padronizar setup de notebooks legados, sempre auditar TODOS os imports usados nas células abaixo antes de substituir — não confiar na "limpeza visual" do template novo.
 - ⏳ **Etapa E (próxima):** geração manual de 1800 frases sintéticas para Apps + criação dos notebooks 05-08 (depende de Davi gerar via LLMs)
 - ✅ Plano completo salvo em `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md`
 
