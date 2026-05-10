@@ -1,0 +1,10 @@
+Modelo,Visão,F1-Score
+Baseline SVM (TF-IDF),V1: Real -> Real,0.5452
+Baseline SVM (TF-IDF),V2: Sint. -> Sint.,0.8915
+Baseline SVM (TF-IDF),V3: Sint. -> Real,0.4024
+MLP (TF-IDF),V1: Real -> Real,0.5749764650326167
+MLP (TF-IDF),V2: Sint. -> Sint.,0.8945217431234789
+MLP (TF-IDF),V3: Sint. -> Real,0.3936110396862177
+LSTM (Embeddings),V1: Real -> Real,0.5240683462021962
+LSTM (Embeddings),V2: Sint. -> Sint.,0.7220590849368117
+LSTM (Embeddings),V3: Sint. -> Real,0.3508495378373161

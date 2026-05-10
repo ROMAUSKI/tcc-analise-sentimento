@@ -737,7 +737,7 @@ a história começa com um prólogo que se passa vinte anos antes dos eventos pr
 diálogos expositivos que interrompem constantemente a ação para explicar coisas que deveriam ser mostradas,Negativa,Claude,Diálogos expositivos que interrompem constantemente a ação para explicar coisas que deveriam ser mostradas.
 cada membro do elenco coral brilha em seus momentos dedicados específicos,Positiva,Claude,Cada membro do elenco coral brilha em seus momentos dedicados específicos.
 a conclusão deixou lágrimas nos meus olhos pela beleza e perfeição,Positiva,Claude,A conclusão deixou lágrimas nos meus olhos pela beleza e perfeição.
-as cenas de ação são mal coreografadas,Negativa,ChatGPT,As cenas de ação são mal coreografadas.
+o roteiro é confuso e previsível com atuações fracas que tornam o filme cansativo e pouco envolvente,Negativa,ChatGPT,"O roteiro é confuso e previsível, com atuações fracas que tornam o filme cansativo e pouco envolvente."
 o elenco inclui atores de diferentes nacionalidades falando seus idiomas nativos com legendas quando necessário,Neutra,Claude,O elenco inclui atores de diferentes nacionalidades falando seus idiomas nativos com legendas quando necessário.
 momentos genuinamente assustadores alternados com leveza na medida exata,Positiva,Claude,Momentos genuinamente assustadores alternados com leveza na medida exata.
 o filme entregou uma experiência deliciosa,Positiva,ChatGPT,O filme entregou uma experiência deliciosa.
@@ -796,6 +796,7 @@ o filme incorpora documentário de bastidores como material extra nas versões d
 o filme prometeu um debate complexo mas ofereceu respostas simplistas,Negativa,Gemini,"O filme prometeu um debate complexo, mas ofereceu respostas simplistas."
 um showrunner é o principal responsável criativo por uma série de tv,Neutra,ChatGPT,Um showrunner é o principal responsável criativo por uma série de TV.
 o filme glorifica violência de forma gratuita sem explorar consequências ou contexto adequado algum,Negativa,Claude,O filme glorifica violência de forma gratuita sem explorar consequências ou contexto adequado algum.
+as cenas de ação são mal coreografadas,Negativa,ChatGPT,As cenas de ação são mal coreografadas.
 o som do trex em jurassic park foi uma combinação de vários sons de animais,Neutra,Gemini,O som do T-Rex em 'Jurassic Park' foi uma combinação de vários sons de animais.
 diálogos naturalizados que capturam como pessoas realmente falam e se comunicam,Positiva,Claude,Diálogos naturalizados que capturam como pessoas realmente falam e se comunicam.
 a direção de fotografia controla luz e enquadramento,Neutra,ChatGPT,A direção de fotografia controla luz e enquadramento.
@@ -1106,6 +1107,7 @@ o globo de ouro premia profissionais do cinema e da televisão,Neutra,Gemini,O G
 a série how i met your mother tem episódios,Neutra,Gemini,A série 'How I Met Your Mother' tem 208 episódios.
 um suspense psicológico que te deixa questionando a realidade,Positiva,Gemini,Um suspense psicológico que te deixa questionando a realidade.
 a série entregou personagens marcantes e momentos inesquecíveis,Positiva,ChatGPT,A série entregou personagens marcantes e momentos inesquecíveis.
+a série se arrasta com episódios repetitivos personagens mal desenvolvidos e um final decepcionante que não compensa o tempo investido,Negativa,ChatGPT,"A série se arrasta com episódios repetitivos, personagens mal desenvolvidos e um final decepcionante que não compensa o tempo investido."
 o plano contraplongée filma de baixo para cima,Neutra,ChatGPT,O plano contra-plongée filma de baixo para cima.
 o filme crepúsculo dos deuses é um clássico de hollywood,Neutra,Gemini,O filme 'Crepúsculo dos Deuses' (1950) é um clássico de Hollywood.
 as atuações parecem ensaio não atuação real,Negativa,ChatGPT,"As atuações parecem ensaio, não atuação real."

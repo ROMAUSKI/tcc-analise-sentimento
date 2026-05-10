@@ -1,0 +1,10 @@
+Modelo,Visão,Acurácia,F1-Score
+Naive Bayes,Visão 1: Real -> Real,0.5859516070783677,0.5828277887864229
+SVM Linear,Visão 1: Real -> Real,0.5624774286746118,0.559420225537822
+Reg. Logística,Visão 1: Real -> Real,0.5812567713976164,0.5791004616053743
+Naive Bayes,Visão 2: Sintético -> Sintético,0.8888888888888888,0.8889509452458381
+SVM Linear,Visão 2: Sintético -> Sintético,0.8861111111111111,0.8857589378476316
+Reg. Logística,Visão 2: Sintético -> Sintético,0.8638888888888889,0.863296063067288
+Naive Bayes,Visão 3: Sintético -> Real,0.4208834471051396,0.3877151219482691
+SVM Linear,Visão 3: Sintético -> Real,0.41817459457507133,0.4014344507381781
+Reg. Logística,Visão 3: Sintético -> Real,0.40806154512948317,0.39549064431266556
