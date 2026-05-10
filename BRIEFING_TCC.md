@@ -196,10 +196,11 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 **Mudança metodológica 2026-05-10:** N_POR_CLASSE corrigido de 200 para 600 (sintético inteiro = 1800). Entendimento original era "200 por LLM por classe" (que totaliza 600/classe = 1800 total). A escolha errada anterior (200/cl = 600 total) descartava 1200 frases sintéticas sem motivo.
 
 **Arquivos gerados:**
-- `resultados/metricas_5_visoes_movies.csv` (+ alias `metricas_3_visoes_movies.csv`)
+- `resultados/metricas_5_visoes_movies.csv`
 - `resultados/grafico_5_visoes_movies.png` (F1 weighted, 5 colunas × 3 modelos)
 - `resultados/grafico_5_visoes_movies_5metricas.png` (painel 2×3 com 5 métricas)
 - `resultados/grafico_5_visoes_movies_{acuracia,precisao,recall,f1score,f1macro}.png` (individuais)
+- **`resultados/comparativo_200_vs_600_movies.{csv,png}`** — evidência do reality gap estrutural: 5 painéis lado a lado mostrando que V3 quase não muda quando o volume sintético triplica (200/cl → 600/cl), enquanto V1 e V2 sobem 4-13 pontos. **Argumento central pro artigo.**
 
 ### Resultados antigos (notebook 01 — sintético puro, split 80/20)
 
