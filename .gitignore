@@ -1,9 +1,16 @@
 # === Backups e ZIPs ===
 _backup/
 
-# Ignorando datasets reais pesados
+# Ignorando datasets reais pesados (reproduzíveis via kagglehub)
 src/dados_reais/
+src/dados_reais_temp/
 src/utlc_movies.zip
+src/*.zip
+src/*.csv
+
+# Modelos/checkpoints pesados de fine-tuning (BERT, LSTM)
+src/checkpoints_avancado/
+src/checkpoints_*/
 
 # === Documentos UTFPR (regulamentos, templates, checklists) ===
 documentos/regulamentos/
@@ -45,6 +52,3 @@ desktop.ini
 .claude
 
 # === Arquivos de contexto de IA ===
-CLAUDE.md
-AGENTS.md
-BRIEFING_TCC.md
