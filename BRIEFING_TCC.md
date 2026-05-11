@@ -253,16 +253,36 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 
 ## 10. Regras de Trabalho
 
+### 🎯 Regra ZERO (a mais importante — definida 2026-05-10)
+
+**O foco é ACABAR a faculdade — apresentar o TCC e tirar entre 6 e 10. Pronto.**
+Davi NÃO está interessado em:
+- Wow factor pra banca
+- Interfaces / demos / deploys
+- Trabalhos futuros expandidos
+- Projetos paralelos
+- "Maravilhar" o orientador
+
+**Toda sugestão fora do escopo mínimo do orientador deve ser DESCARTADA.** Quando Davi perguntar algo (curiosidade, dúvida), responder de forma curta e técnica, sem propor implementação adicional.
+
+**Escopo mínimo explícito do orientador:**
+1. Cinco visões metodológicas (V1..V5) ✅ feito
+2. Modelos clássicos (NB/LR/SVM) ✅ feito
+3. Modelos avançados (LSTM + BERT/Bertimbau) ⏳ rodando no Colab
+4. Segundo nicho (UTLC-Apps) ⏳ Etapa E
+5. Artigo atualizado refletindo o acima ⏳ Etapa G
+
+### Regras operacionais
+
 1. **Passo a passo incremental** — um passo por vez, verificável.
-2. **Bloco-por-bloco com pergunta-teste** — Claude explica + questiona Davi para garantir entendimento.
-3. **Antes de alterar código, checar impacto no pipeline** (`⚠️ SYNC:` se afetar cadeia 01→02→03).
-4. **Nunca inventar métricas** — pedir para executar o notebook.
-5. **seed=42** em todo código com aleatoriedade (numpy, sklearn, torch).
-6. **Artigo formato SBC** — não alterar template (`sbc-template.sty`).
-7. **Skill `escrita-davi-tcc` obrigatória** antes de qualquer adição/edição em `artigo/main.tex`.
-8. **Idioma:** pt-BR.
-9. **Nada deletado** — fora-de-escopo vai para `archive/`.
-10. **Atualizar este BRIEFING ao final de CADA etapa** (Histórico de Execução abaixo).
+2. **Antes de alterar código, checar impacto no pipeline** (`⚠️ SYNC:` se afetar cadeia 01→02→03).
+3. **Nunca inventar métricas** — pedir para executar o notebook.
+4. **seed=42** em todo código com aleatoriedade (numpy, sklearn, torch).
+5. **Artigo formato SBC** — não alterar template (`sbc-template.sty`).
+6. **Skill `escrita-davi-tcc` obrigatória** antes de qualquer adição/edição em `artigo/main.tex`.
+7. **Idioma:** pt-BR.
+8. **Nada deletado** — fora-de-escopo vai para `archive/`.
+9. **Atualizar este BRIEFING ao final de CADA etapa** (Histórico de Execução abaixo).
 
 ---
 
