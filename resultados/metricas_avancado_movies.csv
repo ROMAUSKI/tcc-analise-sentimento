@@ -1,0 +1,11 @@
+Visão,Modelo,Acurácia,Precisão,Recall,F1-Score,F1-Macro,Tempo (s)
+V1: Sintético → Sintético,LSTM,0.8139,0.8216,0.8139,0.814,0.814,4.1
+V2: Real → Real,LSTM,0.4028,0.4068,0.4028,0.3923,0.3923,3.6
+V3: Sintético → Real,LSTM,0.3611,0.3815,0.3611,0.3483,0.3483,2.6
+V4: Real → Real (desbalanceado),LSTM,0.7348,0.7137,0.7348,0.7199,0.5489,135.1
+V5: Sintético → Real (desbalanceado),LSTM,0.3739,0.5876,0.3739,0.4213,0.2713,3.0
+V1: Sintético → Sintético,BERT (Bertimbau),0.975,0.9753,0.975,0.9749,0.9749,134.2
+V2: Real → Real,BERT (Bertimbau),0.6028,0.6068,0.6028,0.6042,0.6042,141.7
+V3: Sintético → Real,BERT (Bertimbau),0.5,0.466,0.5,0.471,0.471,87.9
+V4: Real → Real (desbalanceado),BERT (Bertimbau),0.7788,0.7586,0.7788,0.7646,0.6229,2146.5
+V5: Sintético → Real (desbalanceado),BERT (Bertimbau),0.5716,0.6322,0.5716,0.5895,0.4262,352.0
