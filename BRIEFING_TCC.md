@@ -359,6 +359,10 @@ Davi NÃO está interessado em:
   - **Notebooks 01 e 02:** célula de setup padronizada com template light (sem kagglehub, já que só usam sintético) — agora idêntica ao padrão dos notebooks 03 e 04
   - `archive/README.md` reescrito documentando todos os arquivos arquivados
 - ✅ **Hotfix 1 (2026-05-09):** notebooks 01 e 02 quebravam no Colab por paths relativos hardcoded — corrigido com paths absolutos via `DADOS_*`, `RESULTADOS`. Alias `dir_resultados=RESULTADOS` adicionado.
+- ✅ **2026-05-11 — Etapa E COMPLETA até E.3:**
+  - **E.1 ✅** Prompts isomorfos para Apps redigidos (`dados/brutos_apps/metadata.csv`)
+  - **E.2 ✅** 1800 frases sintéticas geradas (Davi via interfaces web): 9 arquivos × 200 frases (200 por LLM por classe). ChatGPT 5.5 + Gemini 3.1 pro + Claude Sonnet 4.6 adaptativo × Pos/Neg/Neu.
+  - **E.3 ✅** Notebooks 05/06/07/08 clonados de 01/02/03/04 com 28+15+20+27 substituições automáticas (paths, datasets, variáveis, nomes de saída com sufixo `_apps`). Todos validam sintaxe. Aguardando Davi executar (05/06/07 local, 08 no Colab T4).
 - ✅ **2026-05-11 — Notebook 04 EXECUTADO no Colab T4 com sucesso.** Resultados LSTM + BERT × 5 visões integrados em `resultados/`. Detalhes na Seção 8 deste briefing. Insight central: BERT mitiga parcialmente o reality gap (~+11pts em V3, +13pts em V5 vs clássicos); LSTM foi inútil (empata ou perde pros clássicos com 1.440 frases).
 - ✅ **Hotfix 4 (2026-05-10):** Colab estourou RAM no V4 BERT com `MAX_SAMPLES_REAL=None` (1.5M frases). Decisão pragmática (Regra ZERO): reduzir para `MAX_SAMPLES_REAL=100_000`. Mantém distribuição natural (~71% Pos / 20% Neu / 9% Neg) e dá amostragem estatisticamente válida. Tempo total do notebook 04 cai de 7-10h para ~1.5-2h (cabe no free tier). Argumento na banca: "subamostra estratificada por viabilidade computacional, distribuição preservada".
 - ✅ **Hotfix 3 (2026-05-10):** `Trainer(tokenizer=...)` deprecated em transformers 4.46+. Removido (DataCollatorWithPadding já carrega o tokenizer).
