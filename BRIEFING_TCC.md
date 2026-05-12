@@ -223,6 +223,14 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 - `resultados/grafico_consolidado_movies_f1weighted.png` (5 modelos × 5 visões em barras agrupadas)
 - `resultados/grafico_consolidado_movies_f1macro.png` (idem com F1 macro — destaca viés desbalanceado em V4)
 
+### Conclusão preliminar do TCC (parcial — apenas Movies; completar após Apps)
+
+Os resultados obtidos com o nicho de filmes (UTLC-Movies) mostram que dados sintéticos gerados por LLMs não substituem dados reais rotulados em análise de sentimento. Modelos treinados exclusivamente em sintético atingem no máximo 47% de F1 weighted quando avaliados em reviews reais (BERT/Bertimbau na visão V3), contra 76% obtidos pelo mesmo modelo quando treinado com dados reais (V4). Esse gap de aproximadamente 30 pontos percentuais persiste em todos os classificadores avaliados, com magnitude maior nos modelos baseados em TF-IDF e atenuação parcial nos modelos contextuais pré-treinados.
+
+A comparação entre os volumes de 200 e 600 frases por classe confirma que aumentar a quantidade de dados sintéticos não reduz o gap. Esse comportamento indica que a limitação observada não vem da escassez de dados, mas sim de uma diferença estrutural na distribuição entre o texto gerado por LLMs e as reviews escritas por usuários reais. As frases sintéticas tendem a apresentar vocabulário mais regular, polaridade mais explícita e menor incidência de construções complexas como negações compostas e ironia, características frequentes nos dados reais.
+
+A contribuição metodológica do trabalho está em demonstrar empiricamente esse gap e quantificá-lo de forma sistemática, oferecendo evidência consistente de que a viabilidade de dados sintéticos depende tanto do classificador adotado quanto do cenário de aplicação. Para aplicações práticas que exijam acurácia elevada, dados sintéticos isolados ainda não são suficientes. Para cenários de prototipagem rápida ou pesquisa em domínios sem corpora rotulados, a abordagem oferece um ponto de partida funcional, especialmente quando combinada com modelos como o Bertimbau.
+
 **Arquivos gerados:**
 - `resultados/metricas_5_visoes_movies.csv`
 - `resultados/grafico_5_visoes_movies.png` (F1 weighted, 5 colunas × 3 modelos)
