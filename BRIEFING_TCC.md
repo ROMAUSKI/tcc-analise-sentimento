@@ -195,6 +195,34 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 
 **Mudança metodológica 2026-05-10:** N_POR_CLASSE corrigido de 200 para 600 (sintético inteiro = 1800). Entendimento original era "200 por LLM por classe" (que totaliza 600/classe = 1800 total). A escolha errada anterior (200/cl = 600 total) descartava 1200 frases sintéticas sem motivo.
 
+### Movies — Resultados consolidados Clássicos + LSTM + BERT (2026-05-11, notebook 04 no Colab T4)
+
+**F1 weighted / F1 macro (%) — 5 modelos × 5 visões**
+
+| Visão | NB | LR | SVM | LSTM | **BERT (Bertimbau)** |
+|---|---|---|---|---|---|
+| V1: Sint→Sint | 88.07 / 88.07 | 86.93 / 86.93 | 88.33 / 88.33 | 81.40 / 81.40 | **97.49 / 97.49** |
+| V2: Real→Real | 52.10 / 52.10 | 54.45 / 54.45 | 54.80 / 54.80 | 39.23 / 39.23 | **60.42 / 60.42** |
+| V3: Sint→Real | 34.75 / 34.75 | 38.77 / 38.77 | 36.45 / 36.45 | 34.83 / 34.83 | **47.10 / 47.10** |
+| V4: Real desbal | 64.36 / 38.48 | 70.93 / 52.05 | 70.59 / 51.92 | 71.99 / 54.89 | **76.46 / 62.29** |
+| V5: Sint→Real desbal | 47.11 / 32.29 | 45.30 / 32.61 | 45.47 / 32.50 | 42.13 / 27.13 | **58.95 / 42.62** |
+
+**Tempo de treino BERT no Colab T4 (`MAX_SAMPLES_REAL=100_000`):** V1=2.2min, V2=2.4min, V3=1.5min, V4=35.8min, V5=5.9min. Total ~50min.
+
+**Insight refinado para a defesa:**
+- **LSTM foi inútil** — empata ou perde pros clássicos em todas as visões (era esperado: 1.440 frases é pouco para treinar embeddings do zero)
+- **BERT venceu em TODAS as 5 visões** — mostra que classificadores contextuais com pretreino em pt-BR exploram melhor os dados sintéticos
+- **BERT MITIGA parcialmente o reality gap:**
+  - V3: clássicos ~36% → BERT 47% (**+11 pts**)
+  - V5: clássicos ~46% → BERT 59% (**+13 pts**)
+- **Tese refinada:** o reality gap entre dados sintéticos e reais é estrutural para classificadores baseados em TF-IDF (negação, gírias, contexto não capturados), mas modelos contextuais (BERT/Bertimbau) conseguem mitigar parte significativa dessa lacuna ao aproveitar pretreino linguístico em larga escala.
+
+**Arquivos gerados (notebook 04):**
+- `resultados/metricas_avancado_movies.csv` (LSTM + BERT × 5 visões)
+- `resultados/metricas_consolidado_movies.csv` (clássicos + LSTM + BERT — tabela mestre)
+- `resultados/grafico_consolidado_movies_f1weighted.png` (5 modelos × 5 visões em barras agrupadas)
+- `resultados/grafico_consolidado_movies_f1macro.png` (idem com F1 macro — destaca viés desbalanceado em V4)
+
 **Arquivos gerados:**
 - `resultados/metricas_5_visoes_movies.csv`
 - `resultados/grafico_5_visoes_movies.png` (F1 weighted, 5 colunas × 3 modelos)
