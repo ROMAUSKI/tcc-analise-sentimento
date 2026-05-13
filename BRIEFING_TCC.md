@@ -551,6 +551,38 @@ Davi NÃO está interessado em:
 
 ---
 
+## 13.13 Diretrizes para reescrita do artigo (Etapa G)
+
+> Definidas pelo Davi em 2026-05-13 baseado em orientação do Prof. Marlon.
+
+O artigo atual (`artigo/main.tex`) está extenso e formal demais. A reescrita na Etapa G precisa:
+
+**Objetivo principal:** ser mais direto. Foco em três blocos: objetivo, ideias centrais e o que foi concluído. O orientador disse que pode reduzir explicações técnicas que não são essenciais (NB, SVM, F1, TF-IDF, etc.) — manter o mínimo necessário pra contextualizar, sem virar tutorial.
+
+**Estrutura obrigatória de resultados — três blocos bem separados e claros:**
+1. **Domínio sintético** (V1) — desempenho dos modelos treinados e testados em dados gerados por LLMs
+2. **Domínio real** (V2 controlado e V4 desbalanceado natural) — desempenho em reviews reais
+3. **Cross-domínio** (V3 e V5) — generalização sintético → real, o achado central do trabalho
+
+Cada bloco precisa estar nomeado de forma explícita no texto e na tabela. Não misturar visões em parágrafos longos.
+
+**Cortes recomendados (orientador autorizou):**
+- Reduzir as explicações técnicas profundas de NB, SVM, Regressão Logística, TF-IDF (manter referência rápida + citação)
+- Reduzir definições longas de F1, precisão, recall (uma frase de definição já basta)
+- Cortar parágrafos repetitivos que reapresentam o mesmo número em palavras diferentes
+- Eliminar conectivos formais empolados ("destarte", "outrossim", "no bojo de")
+
+**Manter / fortalecer:**
+- Conclusão expandida (Seção 13.X deste briefing) com os quatro argumentos discutidos
+- Tabelas consolidadas (5 visões × 5 modelos × 5 métricas) — Movies + Apps
+- Gráfico comparativo 200 vs 600 (evidência de que volume não fecha o gap)
+- Gráfico consolidado clássicos × LSTM × BERT
+- Análise de comprimento de frases por LLM gerador (faltava no artigo original)
+
+**Tom:** prosa corrida no estilo do Davi (skill `escrita-davi-tcc`), sem inflar resultados, sem "wow factor", admitindo limitações com segurança.
+
+---
+
 ## 14. Plano Ativo
 
 Plano detalhado das próximas etapas:
