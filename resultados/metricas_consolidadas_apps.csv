@@ -1,0 +1,4 @@
+Modelo,Acurácia (%),Precisão (%),Recall (%),F1-Score (%),F1 CV k=5 (%)
+Naive Bayes,86.94,86.98,86.94,86.96,88.83 ± 1.53
+Reg. Logística,85.28,85.21,85.28,85.24,88.16 ± 1.40
+SVM Linear,88.89,88.9,88.89,88.89,90.33 ± 1.13
