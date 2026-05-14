@@ -1,0 +1,7 @@
+Nicho,Fonte (LLM),N frases,Chars média,Chars mediana,Chars desvio,Palavras média,Palavras mediana,Palavras desvio
+Apps,ChatGPT,600,49.7,49.5,6.0,6.8,7.0,1.1
+Apps,Claude,600,64.8,63.0,9.9,9.8,10.0,1.5
+Apps,Gemini,600,66.2,59.0,18.5,10.6,10.0,2.4
+Movies,ChatGPT,600,48.7,46.0,11.2,8.1,8.0,1.8
+Movies,Claude,600,93.9,93.0,16.4,13.5,14.0,1.9
+Movies,Gemini,600,58.4,58.0,7.6,10.1,10.0,1.6
