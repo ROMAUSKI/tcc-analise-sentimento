@@ -401,6 +401,11 @@ Davi NÃO está interessado em:
   - **Notebooks 01 e 02:** célula de setup padronizada com template light (sem kagglehub, já que só usam sintético) — agora idêntica ao padrão dos notebooks 03 e 04
   - `archive/README.md` reescrito documentando todos os arquivos arquivados
 - ✅ **Hotfix 1 (2026-05-09):** notebooks 01 e 02 quebravam no Colab por paths relativos hardcoded — corrigido com paths absolutos via `DADOS_*`, `RESULTADOS`. Alias `dir_resultados=RESULTADOS` adicionado.
+- ✅ **2026-05-14 — Etapa F CONCLUÍDA (consolidação visual + análise de comprimento).** Script único gerou 5 artefatos extras em `resultados/`:
+  - `metricas_consolidado_geral.csv` — 50 linhas (Movies + Apps × 5 modelos × 5 visões)
+  - `comparativo_nichos_f1weighted.png` e `_f1macro.png` — 5 painéis cada, Movies (azul) × Apps (laranja) por visão e modelo
+  - `comprimento_frases_por_llm.csv` e `.png` — tabela e boxplot do comprimento das frases sintéticas por LLM e nicho
+  - **Achado novo (comprimento por LLM):** ChatGPT é consistente em ambos os nichos (~49-50 chars). Claude se adapta ao domínio: 94 chars em Movies (narrativo) e 65 em Apps (técnico). Gemini intermediário (~58-66). Esse comportamento do Claude pode explicar parte da diferença em V5 — frases mais curtas e diretas (como em Apps) se aproximam mais das reviews reais.
 - ✅ **2026-05-14 — Notebook 08 EXECUTADO no Colab T4 com sucesso (35min total).** LSTM + BERT × 5 visões para Apps integrados em `resultados/`. Detalhes na Seção 8 deste briefing. **Insight novo:** Apps mostra padrão semelhante ao Movies em V1/V2/V3, mas V5 (Sint→Real desbalanceado) salta para 80.95% F1w com BERT (vs Movies 58.95%, +22 pts). Isso indica que a viabilidade do treino com dados sintéticos depende do nicho — funciona melhor em domínios com vocabulário regular (avaliação de produto) e pior em domínios com linguagem narrativa elaborada (crítica de mídia).
 - ✅ **2026-05-11 — Etapa E COMPLETA até E.3:**
   - **E.1 ✅** Prompts isomorfos para Apps redigidos (`dados/brutos_apps/metadata.csv`)
