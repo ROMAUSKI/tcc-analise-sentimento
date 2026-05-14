@@ -223,6 +223,42 @@ Forma uma **matriz 2×2** elegante de fonte × volume, com V1 como baseline:
 - `resultados/grafico_consolidado_movies_f1weighted.png` (5 modelos × 5 visões em barras agrupadas)
 - `resultados/grafico_consolidado_movies_f1macro.png` (idem com F1 macro — destaca viés desbalanceado em V4)
 
+### Apps — 5 visões clássicas + LSTM + BERT (notebook 08, executado no Colab T4 em 2026-05-14)
+
+**F1 weighted / F1 macro (%) — 5 modelos × 5 visões**
+
+| Visão | NB | LR | SVM | LSTM | **BERT (Bertimbau)** |
+|---|---|---|---|---|---|
+| V1: Sint→Sint | 88.82 / 88.82 | 89.69 / 89.69 | 91.07 / 91.07 | 85.22 / 85.22 | **97.22 / 97.22** |
+| V2: Real→Real | 62.50 / 62.50 | 61.18 / 61.18 | 58.16 / 58.16 | 56.01 / 56.01 | **66.84 / 66.84** |
+| V3: Sint→Real | 40.42 / 40.42 | 40.24 / 40.24 | 42.17 / 42.17 | 31.66 / 31.66 | **48.21 / 48.21** |
+| V4: Real desbal | 81.16 / 56.13 | 82.84 / 60.04 | 82.36 / 59.39 | 83.86 / **63.11** | **86.27 / 66.59** |
+| V5: Sint→Real desbal | 67.04 / 38.97 | 64.16 / 36.91 | 64.42 / 37.05 | 59.55 / 36.23 | **80.95 / 55.68** ⭐ |
+
+*Distribuição real natural Apps:* 72.15% Pos / 21.05% Neg / 6.80% Neu (n=99.909).
+
+**Tempo BERT no Colab T4 (`MAX_SAMPLES_REAL=100_000`):** V1=56s, V2=205s, V3=176s, V4=1434s (~24min), V5=151s. Total ~35min.
+
+**Comparativo Apps × Movies (insight central da Etapa F)**
+
+| Visão | Apps BERT F1w | Movies BERT F1w | Diferença |
+|---|---|---|---|
+| V1 Sint→Sint | 97.22% | 97.49% | -0.3 |
+| V2 Real→Real | 66.84% | 60.42% | +6.4 |
+| V3 Sint→Real | 48.21% | 47.10% | +1.1 |
+| V4 Real desbal | 86.27% | 76.46% | +9.8 |
+| **V5 Sint→Real desbal** | **80.95%** | **58.95%** | **+22.0** ⭐ |
+
+**Insight novo (Apps muito acima de Movies em V5 desbalanceado):**
+Reviews reais de aplicativos seguem padrão muito mais regular e direto que reviews de filmes — a galera reclama de problemas técnicos objetivos ("trava", "consome bateria", "anúncios excessivos") em vez de fazer análise narrativa, comparações entre obras ou apreciação subjetiva. Esse vocabulário de avaliação de apps tem mais sobreposição com o que LLMs geram naturalmente, o que reduz o reality gap quando o teste é em distribuição natural (V5). A consequência prática é que **a viabilidade do treino com dados sintéticos depende do nicho** — pode funcionar razoavelmente bem em domínios com vocabulário regular (avaliação de produto/serviço), e falha em domínios com linguagem mais elaborada (crítica de mídia, opinião subjetiva extensa).
+
+**Arquivos gerados (notebook 08):**
+- `resultados/metricas_avancado_apps.csv` (LSTM + BERT × 5 visões)
+- `resultados/metricas_avancado_apps_partial.csv` (incremental, salvo a cada visão)
+- `resultados/metricas_consolidado_apps.csv` (clássicos + LSTM + BERT — tabela mestre Apps)
+- `resultados/grafico_consolidado_apps_f1weighted.png` (5 modelos × 5 visões)
+- `resultados/grafico_consolidado_apps_f1macro.png` (idem com F1 macro)
+
 ### Conclusão do TCC (versão para o artigo — Etapa G)
 
 > Texto redigido no estilo do Davi (skill `escrita-davi-tcc`), pronto para ser inserido na seção de Conclusão do artigo. Atualizar se Apps trouxer divergência relevante.
