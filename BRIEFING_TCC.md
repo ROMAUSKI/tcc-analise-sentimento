@@ -401,6 +401,7 @@ Davi NÃO está interessado em:
   - **Notebooks 01 e 02:** célula de setup padronizada com template light (sem kagglehub, já que só usam sintético) — agora idêntica ao padrão dos notebooks 03 e 04
   - `archive/README.md` reescrito documentando todos os arquivos arquivados
 - ✅ **Hotfix 1 (2026-05-09):** notebooks 01 e 02 quebravam no Colab por paths relativos hardcoded — corrigido com paths absolutos via `DADOS_*`, `RESULTADOS`. Alias `dir_resultados=RESULTADOS` adicionado.
+- ✅ **2026-05-14 — Notebook 08 EXECUTADO no Colab T4 com sucesso (35min total).** LSTM + BERT × 5 visões para Apps integrados em `resultados/`. Detalhes na Seção 8 deste briefing. **Insight novo:** Apps mostra padrão semelhante ao Movies em V1/V2/V3, mas V5 (Sint→Real desbalanceado) salta para 80.95% F1w com BERT (vs Movies 58.95%, +22 pts). Isso indica que a viabilidade do treino com dados sintéticos depende do nicho — funciona melhor em domínios com vocabulário regular (avaliação de produto) e pior em domínios com linguagem narrativa elaborada (crítica de mídia).
 - ✅ **2026-05-11 — Etapa E COMPLETA até E.3:**
   - **E.1 ✅** Prompts isomorfos para Apps redigidos (`dados/brutos_apps/metadata.csv`)
   - **E.2 ✅** 1800 frases sintéticas geradas (Davi via interfaces web): 9 arquivos × 200 frases (200 por LLM por classe). ChatGPT 5.5 + Gemini 3.1 pro + Claude Sonnet 4.6 adaptativo × Pos/Neg/Neu.
