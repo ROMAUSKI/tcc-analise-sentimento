@@ -401,6 +401,14 @@ Davi NÃO está interessado em:
   - **Notebooks 01 e 02:** célula de setup padronizada com template light (sem kagglehub, já que só usam sintético) — agora idêntica ao padrão dos notebooks 03 e 04
   - `archive/README.md` reescrito documentando todos os arquivos arquivados
 - ✅ **Hotfix 1 (2026-05-09):** notebooks 01 e 02 quebravam no Colab por paths relativos hardcoded — corrigido com paths absolutos via `DADOS_*`, `RESULTADOS`. Alias `dir_resultados=RESULTADOS` adicionado.
+- ✅ **2026-05-15 — Etapa G CONCLUÍDA (artigo reescrito).** `artigo/main.tex` reescrito do zero seguindo as diretrizes da Seção 13.13 e a skill `escrita-davi-tcc` (versão polimento mínimo). Mudanças:
+  - Estrutura nova: 3 blocos de resultados (V1 sintético, V2/V4 real, V3/V5 cross-domínio) + comparativo nichos + validação cruzada
+  - Conclusão expandida com os 4 argumentos do Davi (inviabilidade, paradoxo de avaliação, prompt sem real, custo) + nuance dos dois nichos
+  - Fundamentação Teórica reduzida (cortes técnicos autorizados pelo orientador)
+  - 7 figuras novas no corpo (5 comparativos por métrica + 200vs600 + comprimento por LLM)
+  - 13 imagens novas copiadas de `resultados/` para `artigo/imagens/`
+  - Compilação OK (`latexmk -pdf`): 13 páginas, sem erros, único warning é `babel brazil` deprecated (cosmético)
+  - Adicionados 3 gráficos comparativos faltantes em `resultados/` (acurácia, precisão, recall) seguindo padrão dos existentes
 - ✅ **2026-05-14 — Etapa F CONCLUÍDA (consolidação visual + análise de comprimento).** Script único gerou 5 artefatos extras em `resultados/`:
   - `metricas_consolidado_geral.csv` — 50 linhas (Movies + Apps × 5 modelos × 5 visões)
   - `comparativo_nichos_f1weighted.png` e `_f1macro.png` — 5 painéis cada, Movies (azul) × Apps (laranja) por visão e modelo
