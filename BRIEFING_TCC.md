@@ -362,6 +362,81 @@ Davi NÃO está interessado em:
 8. **Nada deletado** — fora-de-escopo vai para `archive/`.
 9. **Atualizar este BRIEFING ao final de CADA etapa** (Histórico de Execução abaixo).
 
+### 🧰 Catálogo de Skills para uso automático (mapeado 2026-05-17)
+
+**Princípio:** antes de agir em determinado contexto do TCC, invocar a skill correspondente. Cada skill tem triggers em sua `description:` — o agente seleciona automaticamente quando o prompt do Davi bater. Este catálogo serve como **reforço/priorização** específica para o TCC.
+
+#### 📝 Escrita / Revisão do artigo (`artigo/main.tex`)
+
+| Quando | Skill | Observação |
+|---|---|---|
+| Editar/redigir/polir qualquer trecho do `main.tex` ou texto destinado ao artigo | **`escrita-davi-tcc`** | **OBRIGATÓRIA.** Polimento mínimo (orto/conjugação/preposição). Mantém tom natural do Davi. NUNCA estilizar. |
+| Texto soou "de IA" / "me dá pra naturalizar" / "soa robótico" | **`marketing-content-humanizer`** | Humaniza saídas que ficaram formais demais. |
+| Passada final de gramática depois de edição manual do Davi | **`marketing-copy-editing`** | Só ortografia/coerência, sem reescrever. |
+| Estruturar nova seção do zero ou re-organizar fluxo | **`doc-coauthoring`** | Workflow de co-escrita estruturada. |
+
+#### 🧠 Leitura / Contexto / Síntese cross-fontes
+
+| Quando | Skill |
+|---|---|
+| Sintetizar info de várias fontes (BRIEFING + notebooks + artigo) numa resposta coerente, deduplicando | **`enterprise-search-knowledge-synthesis`** |
+| Overview do projeto, mapeamento inicial, onboarding (sessão nova, agente novo) | **`engineering-codebase-onboarding`** |
+| Navegar estrutura `src/` + `dados/` + `artigo/` + `archive/` | **`engineering-monorepo-navigator`** |
+
+#### 💬 Debate / Defesa / Preparação pra banca
+
+| Quando (frases-gatilho do Davi) | Skill |
+|---|---|
+| "me prepara pra banca", "simula banca", "que perguntas o orientador pode fazer", "argumento contra X", "stress-test essa parte", "pre-mortem" | **`c-level-advisor-executive-mentor`** (adversarial thinking — perfeito pra simular Prof. Marlon) |
+| "qual a contribuição científica disso", "vale a pena pesquisar Y", "como justificar a escolha de Z" | **`bio-research-scientific-problem-selection`** |
+
+#### 📚 Explicação / Ensino / Narrativa
+
+| Quando | Skill |
+|---|---|
+| "explica isso pra mim", "como contar essa parte", verificar se introdução conversa com conclusão | **`c-level-advisor-internal-narrative`** |
+| "me explica como se eu não soubesse", explicação didática de conceito técnico | **`marketing-content-creator`** |
+| Apresentação cross-funcional, comunicado interno (slides defesa) | **`internal-comms`** |
+
+#### 📊 Análise de resultados / ML / Estatística
+
+| Quando | Skill |
+|---|---|
+| Interpretar métricas (F1 weighted vs macro), discutir overfitting, calibração, decisões de modelo | **`data-analytics-data-scientist`** |
+| Testes estatísticos (Kruskal-Wallis, validação cruzada k-fold, IC, p-valor) | **`data-statistical-analysis`** |
+| Questões de LSTM/BERT/transformer, fine-tuning Bertimbau, batch/lr/epochs | **`engineering-senior-ml-engineer`** |
+| Visualizações (matplotlib/seaborn nos notebooks) | **`data-create-viz`** ou **`data-data-visualization`** |
+
+#### 🔗 Coerência entre seções do artigo
+
+| Quando | Skill |
+|---|---|
+| Verificar se Introdução / Resultados / Conclusão estão alinhados antes de envio ao orientador | **`c-level-advisor-strategic-alignment`** |
+| Conferir consistência de números entre tabelas/texto/abstract | **`enterprise-search-knowledge-synthesis`** |
+
+#### 💻 Revisão de código (notebooks)
+
+| Quando | Skill |
+|---|---|
+| Revisão de notebook ou célula Python específica | **`engineering-code-reviewer`** |
+| Simplificação após implementação | **`simplify`** |
+| Reprodutibilidade / seeds / divergência cross-run | **`engineering-tdd-guide`** |
+
+#### 🔧 Manutenção do repo
+
+| Quando | Skill |
+|---|---|
+| Antes de commitar — formatar mensagem | **`git-commit-helper`** |
+| "Resposta curta", "sem enrolação", "modo econômico" | **`token-lean`** |
+| Atualizar `README.md` do projeto | **`readme-updater`** |
+| Auditar se há credenciais expostas antes de push | **`secret-scanner`** |
+
+---
+
+**Localização garantida:** este catálogo vive aqui (Seção 10, `BRIEFING_TCC.md`). `CLAUDE.md` → `BRIEFING_TCC.md` é a chain obrigatória no início de qualquer sessão, então a leitura é garantida.
+
+**Skills NÃO listadas acima** ainda podem ser invocadas pelo agente se o trigger bater fortemente. Este catálogo é a **lista priorizada para o contexto-TCC**, não exaustiva.
+
 ---
 
 ## 11. Histórico de Execução (rolling, mais recente no topo)
