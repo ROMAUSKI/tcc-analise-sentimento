@@ -4,7 +4,7 @@
 > `CLAUDE.md` e `AGENTS.md` são apenas pointers para cá.
 > **Atualize SEMPRE este arquivo** ao final de cada etapa relevante (resultado novo, decisão tomada, arquivo criado/movido).
 
-> **Última atualização:** 2026-05-09 — bootstrap local Python 3.12 + CUDA na célula 1 do notebook 04 + plano LSTM/BERT + V4 desbalanceada
+> **Última atualização:** 2026-05-17 — Catálogo de skills priorizadas (Seção 10) para uso automático em revisão / escrita / debate / contexto / coerência
 
 ---
 
