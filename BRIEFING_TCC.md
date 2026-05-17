@@ -4,7 +4,7 @@
 > `CLAUDE.md` e `AGENTS.md` são apenas pointers para cá.
 > **Atualize SEMPRE este arquivo** ao final de cada etapa relevante (resultado novo, decisão tomada, arquivo criado/movido).
 
-> **Última atualização:** 2026-05-17 — Catálogo de skills priorizadas (Seção 10) para uso automático em revisão / escrita / debate / contexto / coerência
+> **Última atualização:** 2026-05-17 — Polimento final do artigo pré-envio ao orientador (9 tarefas: concordância, padronização "filmes e séries", layout figuras, clareza F1 weighted/macro, quadro de frases-exemplo, custo, matriz de confusão V3-Filmes)
 
 ---
 
