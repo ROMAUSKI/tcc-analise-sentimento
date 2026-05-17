@@ -264,13 +264,12 @@ Neutra & ``O filme tem duração de duas horas e quinze minutos e foi lançado n
 
 Para entender onde o modelo treinado em dados sintéticos se perde quando enfrenta reviews reais, a Figura~\ref{fig:matriz_v3} apresenta a matriz de confusão do SVM Linear em V3 (filmes e séries). A classe Neutra é a mais sacrificada — apenas 108 das 600 frases neutras reais foram classificadas corretamente, com 305 sendo confundidas com Negativa e 187 com Positiva. Reviews reais positivas curtas e informais também acabam sendo classificadas como Negativas em quase um terço dos casos. Esse padrão se repete nos demais modelos clássicos e atinge intensidade menor mas similar no BERTimbau.
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \includegraphics[width=0.62\textwidth]{imagens/matriz_confusao_v3_svm_filmes.png}
 \caption{Matriz de confusão do SVM Linear em V3 (Sintético $\rightarrow$ Real, filmes e séries, 600 frases por classe no teste). A classe Neutra é a mais sacrificada e há transbordamento entre Positiva e Negativa.}
 \label{fig:matriz_v3}
 \end{figure}
-\vspace{-0.8em}
 
 Os números agregados das duas visões cross-domain estão na Tabela~\ref{tab:v3v5}. O tamanho do gap fica imediato: o BERTimbau cai de 97\% (V1) para 47\% em filmes e séries, e 48\% em apps; os modelos clássicos caem para 34-42\%. Esse é o reality gap — os classificadores treinados com dados sintéticos não conseguem reproduzir o desempenho de V1 quando o teste vem de avaliações reais. A diferença entre V1 e V3 é de cerca de 50 pontos para o BERTimbau e 50-55 pontos para os modelos clássicos.
 
