@@ -280,7 +280,7 @@ A Figura~\ref{fig:comparativo_f1m} mostra o mesmo comparativo para o F1 macro, o
 \label{fig:comparativo_f1m}
 \end{figure}
 
-Um experimento adicional foi feito para verificar se aumentar o volume de dados sintéticos reduziria o gap. O dataset sintético foi balanceado em duas configurações: 200 frases por classe e 600 frases por classe (triplicando o volume de treino). A Figura~\ref{fig:200vs600} mostra o resultado para o nicho de filmes. Em V1 (sintético-sintético) e V2 (real-real) o desempenho sobe com mais dados, como esperado. Mas em V3 (sintético-real) o desempenho fica praticamente igual nas duas configurações. Isso indica que o gap em V3 não vem da escassez de dados sintéticos — vem de uma diferença estrutural na distribuição entre o texto gerado por LLMs e as reviews reais.
+Um experimento adicional foi feito para verificar se aumentar o volume de dados sintéticos reduziria o gap. O dataset sintético foi balanceado em duas configurações: 200 frases por classe e 600 frases por classe (triplicando o volume de treino). A Figura~\ref{fig:200vs600} mostra o resultado para o nicho de filmes e séries. Em V1 (sintético-sintético) e V2 (real-real) o desempenho sobe com mais dados, como esperado. Mas em V3 (sintético-real) o desempenho fica praticamente igual nas duas configurações. Isso indica que o gap em V3 não vem da escassez de dados sintéticos — vem de uma diferença estrutural na distribuição entre o texto gerado por LLMs e as reviews reais.
 
 \begin{figure}[H]
 \centering
