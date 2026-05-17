@@ -441,6 +441,13 @@ Davi NÃO está interessado em:
 
 ## 11. Histórico de Execução (rolling, mais recente no topo)
 
+### 2026-05-17 — Catálogo de skills priorizadas para o TCC
+
+- ✅ Adicionada subseção **"🧰 Catálogo de Skills para uso automático"** dentro da Seção 10 (Regras de Trabalho) do `BRIEFING_TCC.md`.
+- ✅ Mapeadas ~25 skills priorizadas por contexto do TCC: escrita do artigo, leitura/contexto, debate/banca, explicação/ensino, análise ML, coerência cross-seções, revisão de código, manutenção repo.
+- ✅ `CLAUDE.md` e `AGENTS.md` ganharam linha-pointer adicional reforçando localização do catálogo.
+- ✅ Contexto: Davi instalou em massa as 197 skills do repo `anthropics/knowledge-work-plugins` em `C:\Users\Davi\.claude\skills\` (~444 skills totais). Catálogo organiza as relevantes pro TCC pra evitar dispersão do agente.
+
 ### 2026-05-09 — Bootstrap local Python 3.12 + CUDA no notebook 04
 
 - ✅ `src/04_movies_avancado.ipynb` recebeu nova lógica na **Célula 1** para modo “GPU first”.
