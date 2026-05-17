@@ -441,6 +441,29 @@ Davi NÃO está interessado em:
 
 ## 11. Histórico de Execução (rolling, mais recente no topo)
 
+### 2026-05-17 — Polimento final do artigo pré-envio ao orientador
+
+Plano: `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md` (9 tarefas A-I).
+
+**Resultado:** PDF de 14 páginas, layout limpo, narrativa coerente.
+
+- ✅ **A** Concordância: `pode ser considerado` → `pode ser considerada` (Fundamentação Teórica)
+- ✅ **B** Padronização **"filmes e séries"** em todo o texto (~17 substituições contextuais; UTLC-Movies preservado como nome do dataset; abstract EN com "movies and series")
+- ✅ **C** Layout figuras: preâmbulo com `\setlength{\textfloatsep}{6pt}`, figuras comparativas em `0.90\textwidth`, `\vspace` negativo após cada
+- ✅ **D** Legendas das Tabelas 4 e 6 com ordem explícita "F1 weighted / F1 macro"
+- ✅ **E** Quadro de frases-exemplo 3x2 (Tabela 5) na Seção 5.3: sintética (Claude) vs real (UTLC-Movies). Inclui "PQP q filme", "Horrivel" (sem acento), "interesante"/"mais" — preservados pra mostrar o reality gap
+- ✅ **F** Parágrafo de custo refinado na Conclusão: declarar custo monetário zero do trabalho (interfaces web free/pro) + estimativa pública via API (~$1 por cenário, maio 2026) + ressalva de escala
+- ✅ **G** Matriz de confusão SVM Linear V3-Filmes (Fig 2) — gerada via novo script `src/_gerar_matriz_v3_svm.py`. Insight: classe Neutra é a mais sacrificada (apenas 108/600 corretas; 305 confundidas com Negativa, 187 com Positiva)
+- ✅ **H** Validação visual: pág 8 e pág 9 (eram as problemáticas) ficaram limpas; reorganização da Seção 5.3 com ordem narrativa Tab5 → Fig2 (matriz) → Tab6 (números)
+- ✅ **I** Commits + push (commit final `dceee71`)
+
+**Arquivos novos:**
+- `src/_gerar_matriz_v3_svm.py` — script reproduzível pra regerar a matriz
+- `resultados/matriz_confusao_v3_svm_filmes.{png,csv}`
+- `artigo/imagens/matriz_confusao_v3_svm_filmes.png`
+
+**Status:** pronto pra envio ao orientador (Prof. Marlon Marcon). Davi vai fazer último review manual e enviar.
+
 ### 2026-05-17 — Catálogo de skills priorizadas para o TCC
 
 - ✅ Adicionada subseção **"🧰 Catálogo de Skills para uso automático"** dentro da Seção 10 (Regras de Trabalho) do `BRIEFING_TCC.md`.
