@@ -167,7 +167,7 @@ A escolha por usar o mesmo conjunto de teste em V2 e V3 é uma decisão de contr
 
 Foram avaliados cinco classificadores. Os três clássicos foram implementados via scikit-learn \cite{pedregosa2011} com hiperparâmetros padrão: Naive Bayes Multinomial (\texttt{MultinomialNB()}), Regressão Logística (\texttt{LogisticRegression(max\_iter=1000)}) e SVM Linear (\texttt{LinearSVC(max\_iter=5000)}). O LSTM foi implementado em PyTorch com uma camada recorrente de 128 unidades, embeddings aprendidos do zero (dimensão 128), dropout de 0,3 e otimizador AdamW com taxa de aprendizado $1\mathrm{e}{-3}$. O BERTimbau \cite{souza2022brazilian} foi utilizado em sua versão base (\texttt{neuralmind/bert-base-portuguese-cased}), com fine-tuning por 3 epochs, batch size de 16, taxa de aprendizado $2\mathrm{e}{-5}$ e tamanho máximo de sequência de 128 tokens.
 
-Para todas as visões usou-se semente aleatória fixa (\texttt{random\_state=42}) para garantir reprodutibilidade. Os experimentos com BERT e LSTM foram executados em GPU NVIDIA T4 via Google Colab, com tempo total de aproximadamente 50 minutos para o nicho de filmes e 35 minutos para o nicho de apps.
+Para todas as visões usou-se semente aleatória fixa (\texttt{random\_state=42}) para garantir reprodutibilidade. Os experimentos com BERT e LSTM foram executados em GPU NVIDIA T4 via Google Colab, com tempo total de aproximadamente 50 minutos para o nicho de filmes e séries, e 35 minutos para o nicho de apps.
 
 \subsection{Pré-processamento e Vetorização}
 
