@@ -242,7 +242,27 @@ V2 mostra que mesmo com dados reais, classificar reviews em três classes com ap
 
 \subsection{Cross-Domínio (V3 e V5)}
 
-As visões V3 e V5 são as mais relevantes do trabalho porque medem se os classificadores treinados com dados sintéticos conseguem generalizar para reviews reais. V3 testa em conjunto controlado (mesmo test set do V2) e V5 testa em conjunto desbalanceado (mesmo test set do V4). A Tabela~\ref{tab:v3v5} apresenta os resultados.
+As visões V3 e V5 são as mais relevantes do trabalho porque medem se os classificadores treinados com dados sintéticos conseguem generalizar para reviews reais. V3 testa em conjunto controlado (mesmo test set do V2) e V5 testa em conjunto desbalanceado (mesmo test set do V4). Antes de apresentar os números, a Tabela~\ref{tab:exemplos} ilustra o tipo de diferença estrutural que aparece entre o texto sintético e o texto real — frases sintéticas tendem a ser bem formadas, com polaridade explícita e vocabulário regular, enquanto reviews reais trazem informalidade, abreviações, erros de digitação, gírias e pontuação não-convencional.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Exemplos lado a lado de frases sintéticas (Claude) e reais (UTLC-Movies) por classe. O contraste estrutural ajuda a entender o reality gap quantificado adiante.}
+\label{tab:exemplos}
+\begin{tabular}{p{1.4cm}p{5.4cm}p{5.4cm}}
+\toprule
+\textbf{Classe} & \textbf{Sintética (Claude)} & \textbf{Real (UTLC-Movies)} \\
+\midrule
+Positiva & ``Nunca vi atuações tão intensas e verdadeiras, este filme merece todos os prêmios possíveis.'' & ``Estou sem xão sem ar sem vida PQP q filme'' \\
+\addlinespace
+Negativa & ``A história é completamente previsível e sem originalidade, consegui adivinhar o final nos primeiros dez minutos.'' & ``Horrivel com péssimas interpretações.'' \\
+\addlinespace
+Neutra & ``O filme tem duração de duas horas e quinze minutos e foi lançado nos cinemas em março.'' & ``é bem interesante! mais ainda sim não deixa de ser sessão da tarde'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:v3v5} apresenta os resultados quantitativos das duas visões.
 
 \begin{table}[h]
 \centering
