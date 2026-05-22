@@ -315,6 +315,50 @@ Um experimento adicional foi feito para verificar se aumentar o volume de dados 
 \end{figure}
 \vspace{-0.8em}
 
+Para fechar a análise do cross-domínio, a Tabela~\ref{tab:detalhado} detalha as visões desbalanceadas V4 e V5 com três métricas — acurácia, precisão e F1 macro — nos dois nichos. O contraste entre a acurácia e o F1 macro é o que mais chama atenção: em V4, vários modelos passam de 70-80\% de acurácia mas ficam abaixo de 60\% no F1 macro. Isso acontece porque a acurácia é puxada pela classe Positiva, que domina o conjunto real, enquanto o F1 macro cobra acerto em todas as classes igualmente. Comparar a V4 (treino real) com a V5 (treino sintético), usando o mesmo conjunto de teste, deixa explícita a queda ao trocar a fonte do treino.
+
+Um ponto que pode parecer estranho à primeira vista é a precisão ficar acima da acurácia na V5. Isso acontece porque o modelo treinado em dados sintéticos é relativamente preciso quando aposta na classe Positiva, mas erra ao cobrir as classes minoritárias — o que derruba a acurácia e o F1 macro sem afetar tanto a precisão.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{Métricas detalhadas nas visões desbalanceadas V4 (Real $\rightarrow$ Real) e V5 (Sintético $\rightarrow$ Real), por nicho.}
+\label{tab:detalhado}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{Acurácia} & \textbf{Precisão} & \textbf{F1-macro} \\
+\midrule
+\multicolumn{4}{l}{\textit{Filmes e séries — V4 (Real $\rightarrow$ Real)}} \\
+Naive Bayes         & 72,71 & 68,77 & 38,48 \\
+Regressão Logística & 74,72 & 70,99 & 52,05 \\
+SVM Linear          & 74,40 & 70,49 & 51,92 \\
+LSTM                & 73,48 & 71,37 & 54,89 \\
+BERTimbau           & 77,88 & 75,86 & 62,29 \\
+\midrule
+\multicolumn{4}{l}{\textit{Filmes e séries — V5 (Sintético $\rightarrow$ Real)}} \\
+Naive Bayes         & 42,42 & 61,27 & 32,29 \\
+Regressão Logística & 39,99 & 60,34 & 32,61 \\
+SVM Linear          & 40,19 & 60,65 & 32,50 \\
+LSTM                & 37,39 & 58,76 & 27,13 \\
+BERTimbau           & 57,16 & 63,22 & 42,62 \\
+\midrule
+\multicolumn{4}{l}{\textit{Apps — V4 (Real $\rightarrow$ Real)}} \\
+Naive Bayes         & 83,99 & 81,30 & 54,83 \\
+Regressão Logística & 85,09 & 82,40 & 58,44 \\
+SVM Linear          & 84,59 & 81,51 & 57,35 \\
+LSTM                & 84,64 & 83,25 & 63,11 \\
+BERTimbau           & 87,17 & 85,65 & 66,59 \\
+\midrule
+\multicolumn{4}{l}{\textit{Apps — V5 (Sintético $\rightarrow$ Real)}} \\
+Naive Bayes         & 65,71 & 72,79 & 45,02 \\
+Regressão Logística & 63,06 & 70,99 & 43,04 \\
+SVM Linear          & 62,70 & 71,60 & 43,35 \\
+LSTM                & 59,77 & 59,62 & 36,23 \\
+BERTimbau           & 82,48 & 81,13 & 55,68 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Comparativo entre Nichos}
 
 Comparando os dois nichos, apps tende a apresentar desempenho maior do que filmes e séries nas visões com dados reais (V2, V4 e V5); já no domínio sintético (V1) e no cross-domínio controlado (V3) os dois nichos ficam praticamente empatados. A diferença mais marcante está em V5: o BERTimbau alcança 55,68\% de F1 macro em apps contra 42,62\% em filmes e séries — uma diferença de 13 pontos. Mesmo nos modelos clássicos a diferença em V5 fica entre 10 e 13 pontos a favor de apps.
