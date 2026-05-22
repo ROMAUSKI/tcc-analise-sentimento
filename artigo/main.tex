@@ -277,20 +277,20 @@ Os números agregados das duas visões cross-domain estão na Tabela~\ref{tab:v3
 
 \begin{table}[H]
 \centering
-\caption{F1-Score (\%) nas visões V3 e V5: Sintético $\rightarrow$ Real. Em V5 o formato é F1 weighted / F1 macro (nessa ordem).}
+\caption{F1-Score macro (\%) nas visões V3 e V5: Sintético $\rightarrow$ Real.}
 \label{tab:v3v5}
 \small
 \begin{tabular}{lcccc}
 \toprule
-& \multicolumn{2}{c}{\textbf{V3: F1 weighted}} & \multicolumn{2}{c}{\textbf{V5: F1 weighted / F1 macro}} \\
+& \multicolumn{2}{c}{\textbf{V3}} & \multicolumn{2}{c}{\textbf{V5}} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
 \textbf{Modelo} & \textbf{Filmes} & \textbf{Apps} & \textbf{Filmes} & \textbf{Apps} \\
 \midrule
-Naive Bayes         & 34,75 & 40,42 & 47,11 / 32,29 & 67,04 / 38,97 \\
-Regressão Logística & 38,77 & 40,24 & 45,30 / 32,61 & 64,16 / 36,91 \\
-SVM Linear          & 36,45 & 42,17 & 45,47 / 32,50 & 64,42 / 37,05 \\
-LSTM                & 34,83 & 31,66 & 42,13 / 27,13 & 59,55 / 36,23 \\
-BERTimbau           & 47,10 & 48,21 & 58,95 / 42,62 & 80,95 / 55,68 \\
+Naive Bayes         & 34,75 & 40,42 & 32,29 & 45,02 \\
+Regressão Logística & 38,77 & 40,24 & 32,61 & 43,04 \\
+SVM Linear          & 36,45 & 42,17 & 32,50 & 43,35 \\
+LSTM                & 34,83 & 31,66 & 27,13 & 36,23 \\
+BERTimbau           & 47,10 & 48,21 & 42,62 & 55,68 \\
 \bottomrule
 \end{tabular}
 \end{table}
