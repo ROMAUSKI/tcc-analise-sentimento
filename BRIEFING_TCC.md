@@ -441,6 +441,27 @@ Davi NÃO está interessado em:
 
 ## 11. Histórico de Execução (rolling, mais recente no topo)
 
+### 2026-05-21 — Migração para F1-macro + tabela complementar + correções de coerência
+
+Decisão metodológica central (confirmada após revisão massiva): **o artigo passa a reportar F1-macro como métrica principal** (mais honesto em cenários desbalanceados). Plano: `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md`.
+
+**Mudanças no `artigo/main.tex`:**
+- Tabelas 3 (V1), 4 (V2/V4), 6 (V3/V5): agora em **F1-macro**, formato limpo (sem "weighted / macro"). V1/V2/V3 não mudaram de valor (balanceado: macro = weighted); V4/V5 passaram a mostrar macro.
+- **Nova Tabela 7 (complementar)**: V4 vs V5 nos dois nichos, com Acurácia + Precisão + F1-macro (sem Recall, que = acurácia). Fim da Seção 5.3. Tabela 8 = validação cruzada (renumerada).
+- Cross-domain no abstract/conclusão passou a usar **V5 (realista) para ambos os nichos: 43% filmes e séries / 56% apps** (antes "47%/80%" misturava visões). 97% (V1) mantém.
+- Figura comparativa weighted **removida**; mantida só a macro. Gráfico 200vs600 **regenerado em F1-macro** (`src/_gerar_200vs600_macro.py`).
+- Fundamentação: nota de que recall ponderado = acurácia + adoção do macro como principal.
+- Narrativa de nichos ajustada: vantagem de Apps **restrita ao desbalanceado** (V1/V3 quase empatam).
+
+**⚠️ Correção de dados importante (achada na revisão massiva):** os clássicos (NB/LR/SVM) de **V4 e V5 no nicho Apps** estavam **desatualizados** no artigo (ex: V4 Apps NB tabela 81,16/56,13 vs CSV real 80,97/54,83). A tabela tinha números de uma execução antiga. **Corrigido para os valores do `metricas_consolidado_geral.csv`** (fonte consistente). Movies, V1/V2/V3 e neurais já estavam corretos.
+
+**Correções de coerência (existiam antes):**
+- Metodologia 4.4: "controlado em 200 frases por classe" → **600** (alinha com Tabela 2 e dataset real 600/classe).
+- Validação cruzada: "1.798 frases" → **1.800** (dataset tem exatamente 600/classe = 1.800, confirmado).
+- Tabela 1: "Filmes (Movies)" → **Filmes**.
+
+**Verificação:** PDF compila limpo (15 páginas, zero refs/citações indefinidas). `grep weighted` só retorna as explicações intencionais (Fundamentação + justificativa em 5.2).
+
 ### 2026-05-17 — Polimento final do artigo pré-envio ao orientador
 
 Plano: `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md` (9 tarefas A-I).
