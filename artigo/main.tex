@@ -238,7 +238,7 @@ BERTimbau           & 60,42 & 66,84 & 62,29 & 66,59 \\
 \end{tabular}
 \end{table}
 
-V2 mostra que mesmo com dados reais, classificar reviews em três classes com apenas 600 amostras por classe não é trivial — os modelos clássicos ficam entre 52 e 62\% de F1, e o BERTimbau alcança 60-67\%. V4 mostra um cenário diferente: com o dataset real completo, todos os modelos sobem para 64-86\% no F1 weighted. Essa subida acompanha o que a literatura prevê — mais dados ajudam, especialmente os modelos discriminativos. Mas o F1 macro revela um efeito importante: enquanto o weighted está entre 64 e 86\%, o macro fica entre 38 e 67\%. Essa diferença vem do desbalanceamento natural — a classe Positiva domina (71-72\% das amostras), e o modelo acerta muito nela mas erra mais nas classes minoritárias. O F1 macro, que dá o mesmo peso a cada classe, expõe esse comportamento.
+V2 mostra que mesmo com dados reais, classificar reviews em três classes com apenas 600 amostras por classe não é trivial — os modelos clássicos ficam entre 52 e 62\% e o BERTimbau alcança 60-67\%. Já a V4 usa o dataset real completo, e aqui a escolha da métrica faz diferença. Se olhássemos o F1 weighted, os modelos apareceriam na faixa de 64 a 86\%, o que pareceria um ótimo resultado. Mas esse valor é inflado pelo desbalanceamento natural — a classe Positiva domina 71-72\% das amostras, então o modelo acerta muito nela e erra mais nas minoritárias. O F1 macro, que dá o mesmo peso a cada classe, mostra o cenário real: fica entre 38 e 67\%. É por isso que adotamos o macro como métrica principal nas tabelas.
 
 \subsection{Cross-Domínio (V3 e V5)}
 
