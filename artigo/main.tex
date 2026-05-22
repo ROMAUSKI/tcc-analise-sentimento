@@ -220,20 +220,20 @@ As visões V2 e V4 usam dados reais tanto no treino quanto no teste, com regimes
 
 \begin{table}[h]
 \centering
-\caption{F1-Score (\%) nas visões V2 (controlada) e V4 (desbalanceada). Em V4 o formato é F1 weighted / F1 macro (nessa ordem) — duas métricas porque a distribuição é desbalanceada.}
+\caption{F1-Score macro (\%) nas visões V2 (controlada) e V4 (desbalanceada).}
 \label{tab:v2v4}
 \small
 \begin{tabular}{lcccc}
 \toprule
-& \multicolumn{2}{c}{\textbf{V2: F1 weighted}} & \multicolumn{2}{c}{\textbf{V4: F1 weighted / F1 macro}} \\
+& \multicolumn{2}{c}{\textbf{V2}} & \multicolumn{2}{c}{\textbf{V4}} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
 \textbf{Modelo} & \textbf{Filmes} & \textbf{Apps} & \textbf{Filmes} & \textbf{Apps} \\
 \midrule
-Naive Bayes         & 52,10 & 62,50 & 64,36 / 38,48 & 81,16 / 56,13 \\
-Regressão Logística & 54,45 & 61,18 & 70,93 / 52,05 & 82,84 / 60,04 \\
-SVM Linear          & 54,80 & 58,16 & 70,59 / 51,92 & 82,36 / 59,39 \\
-LSTM                & 39,23 & 56,01 & 71,99 / 54,89 & 83,86 / 63,11 \\
-BERTimbau           & 60,42 & 66,84 & 76,46 / 62,29 & 86,27 / 66,59 \\
+Naive Bayes         & 52,10 & 62,50 & 38,48 & 54,83 \\
+Regressão Logística & 54,45 & 61,18 & 52,05 & 58,44 \\
+SVM Linear          & 54,80 & 58,16 & 51,92 & 57,35 \\
+LSTM                & 39,23 & 56,01 & 54,89 & 63,11 \\
+BERTimbau           & 60,42 & 66,84 & 62,29 & 66,59 \\
 \bottomrule
 \end{tabular}
 \end{table}
