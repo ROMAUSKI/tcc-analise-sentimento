@@ -81,19 +81,19 @@ Esta seção revisa trabalhos que abordam análise de sentimento com aprendizado
 
 \subsection{Análise de Sentimento com Aprendizado de Máquina}
 
-O trabalho pioneiro de \cite{pang2002} estabeleceu que abordagens baseadas em aprendizado de máquina — especialmente Naive Bayes, SVM e Máxima Entropia — superam métodos baseados em regras para classificação de sentimento em resenhas de filmes. Os autores utilizaram o corpus de críticas do IMDb e observaram que o SVM com representação unigrama atingiu cerca de 82,9\% de acurácia, enquanto o Naive Bayes apresentou desempenho competitivo com menor custo computacional.
+Diversos trabalhos aplicaram aprendizado de máquina à análise de sentimento, sempre treinando os classificadores com dados reais rotulados manualmente. O estudo pioneiro de \cite{pang2002} mostrou que classificadores como Naive Bayes e SVM superam os métodos baseados em regras — abordagens que dependem de listas de palavras com polaridade fixa e regras definidas manualmente —, atingindo cerca de 82,9\% de acurácia em resenhas do IMDb. A partir desse trabalho, a análise de sentimento passou a ser tratada como um problema de classificação supervisionada, em que o modelo aprende os padrões a partir dos exemplos em vez de seguir regras escritas por humanos.
 
-No contexto brasileiro, \cite{kansaon2019} realizaram análise de sentimento em tweets em português com múltiplas variantes do Naive Bayes e reportaram acurácias entre 79\% e 85\%. \cite{souza2021} propuseram um sistema em tempo real para notícias do mercado financeiro em português, utilizando TF-IDF combinado com Naive Bayes, e atingiram acurácia de 76,8\%. \cite{rossi2019} comparou classificadores como Regressão Logística, Naive Bayes, SVM linear e Random Forest sobre representações BoW e TF-IDF e demonstrou que o TF-IDF apresenta ganhos consistentes sobre o BoW na maioria dos cenários. \cite{souza2022brazilian} unificaram cinco datasets de análise de sentimento em português brasileiro e evidenciaram a escassez de recursos anotados para o idioma.
+Em português brasileiro, os trabalhos seguem essa mesma linha e ajudam a situar a faixa de desempenho esperada para a tarefa. \cite{kansaon2019}, \cite{souza2021} e \cite{rossi2019} combinaram TF-IDF com classificadores clássicos sobre datasets reais e alcançaram acurácias entre 76\% e 85\%, variando conforme o domínio e a técnica. \cite{rossi2019} mostrou ainda que o TF-IDF tende a apresentar ganhos consistentes sobre representações mais simples como o Bag-of-Words, o que justifica sua adoção como vetorização padrão neste trabalho. Todos esses estudos têm um ponto em comum: dependem de bases reais anotadas por humanos. É justamente essa dependência que \cite{souza2022brazilian} apontam ao unificarem cinco datasets em português e mostrarem a escassez de recursos anotados para o idioma — a lacuna que motiva a geração de dados sintéticos investigada neste trabalho.
 
 \subsection{Dados Sintéticos e LLMs para Geração de Dados de Treinamento}
 
 A utilização de dados sintéticos gerados por LLMs para treinamento de modelos é uma área recente. \cite{zhang2024sentiment} avaliaram o desempenho de LLMs em tarefas de análise de sentimento e indicaram que os modelos vão bem em classificação simples de polaridade, mas ficam atrás em tarefas que exigem compreensão mais profunda como detecção de ironia. \cite{hellwig2025exploring} usaram GPT-3.5-turbo e Llama-3-70B para gerar dados anotados para análise baseada em aspectos em cenários de poucos recursos, e mostraram que mesmo pequenas quantidades de dados sintéticos podem complementar datasets escassos. \cite{li2023synthetic} avaliaram a geração de dados com GPT-3.5-Turbo para classificação de texto e reportaram que a efetividade varia conforme a subjetividade da tarefa.
 
-Do ponto de vista metodológico, \cite{liu2024best} compilaram boas práticas para uso de dados sintéticos no treinamento de modelos de linguagem, incluindo técnicas de filtragem e refinamento iterativo, além de discutir riscos como amplificação de viés. \cite{nadas2025synthetic} apresentaram um survey recente sobre o tema e destacaram que a abordagem é especialmente promissora para tarefas com poucos recursos em idiomas que não o inglês. \cite{araujo2024chatgpt} investigaram especificamente as capacidades do ChatGPT para análise de sentimento zero-shot em português brasileiro e demonstraram que o modelo se destaca na determinação de polaridade.
+Do ponto de vista metodológico, \cite{liu2024best} compilaram boas práticas para uso de dados sintéticos no treinamento de modelos de linguagem, incluindo técnicas de filtragem e refinamento iterativo, além de discutir riscos como amplificação de viés. \cite{nadas2025synthetic} apresentaram recentemente uma revisão de literatura sobre o tema e destacaram que a abordagem é especialmente promissora para tarefas com poucos recursos em idiomas que não o inglês. \cite{araujo2024chatgpt} investigaram especificamente as capacidades do ChatGPT para análise de sentimento zero-shot em português brasileiro e demonstraram que o modelo se destaca na determinação de polaridade.
 
 \subsection{Posicionamento deste Trabalho}
 
-A maioria dos trabalhos revisados utiliza LLMs como classificadores diretos em cenários zero-shot ou few-shot, e não como geradores de dados de treinamento para modelos próprios. Além disso, a maior parte foca no inglês e usa um único LLM como fonte. Este trabalho se diferencia em quatro aspectos: utiliza dados 100\% sintéticos gerados por três LLMs distintos (ChatGPT, Gemini e Claude), foca em português brasileiro, avalia explicitamente o cross-domain comparando treino sintético com teste em dados reais, e analisa dois nichos diferentes (filmes e séries, e aplicativos móveis) para entender em que contextos a abordagem é mais ou menos viável.
+A maioria dos trabalhos revisados usa os LLMs como classificadores diretos — entregando a frase e pedindo a classe no mesmo momento, ou seja, sem nenhum exemplo (zero-shot) ou com poucos exemplos no próprio prompt (few-shot) — e não como geradores de dados de treinamento para modelos próprios. Além disso, a maior parte foca no inglês e usa um único LLM como fonte. Este trabalho se diferencia em quatro aspectos: utiliza dados 100\% sintéticos gerados por três LLMs distintos (ChatGPT, Gemini e Claude), foca em português brasileiro, avalia explicitamente o cross-domain comparando treino sintético com teste em dados reais, e analisa dois nichos diferentes (filmes e séries, e aplicativos móveis) para entender em que contextos a abordagem é mais ou menos viável.
 
 
 % ====================================================================
@@ -125,7 +125,7 @@ A Tabela~\ref{tab:comprimento} mostra o comprimento médio das frases por LLM em
 \toprule
 \textbf{Nicho} & \textbf{ChatGPT} & \textbf{Claude} & \textbf{Gemini} \\
 \midrule
-Filmes (Movies) & 49 & 94 & 58 \\
+Filmes & 49 & 94 & 58 \\
 Apps            & 50 & 65 & 66 \\
 \bottomrule
 \end{tabular}
@@ -159,7 +159,7 @@ A análise é estruturada em cinco visões que combinam a fonte do treino (sint�
 V1 & Sintético & Sintético & 600/classe (controlado) \\
 V2 & Real      & Real      & 600/classe (controlado) \\
 V3 & Sintético & Real      & 600/classe (mesmo test set do V2) \\
-V4 & Real      & Real      & Natural desbalanceado (~80k/classe) \\
+V4 & Real      & Real      & Natural desbalanceado (~100k total) \\
 V5 & Sintético & Real      & Sint. controlado, real desbalanceado (mesmo test set do V4) \\
 \bottomrule
 \end{tabular}
@@ -175,7 +175,7 @@ Para todas as visões usou-se semente aleatória fixa (\texttt{random\_state=42}
 
 \subsection{Pré-processamento e Vetorização}
 
-Os textos sintéticos passaram por quatro operações de limpeza: conversão para minúsculas, remoção de pontuação e caracteres especiais, normalização de espaços e remoção de duplicatas. Para os modelos clássicos, a vetorização foi feita com \texttt{TfidfVectorizer} do scikit-learn (parâmetros padrão, sem remoção explícita de stopwords). Para o LSTM, a tokenização foi por palavra (split em espaço) com vocabulário construído a partir do treino de cada visão. Para o BERTimbau, foi usado o tokenizer próprio do modelo (\texttt{AutoTokenizer.from\_pretrained}).
+Os textos sintéticos passaram por quatro operações de limpeza: conversão para minúsculas, remoção de pontuação e caracteres especiais, normalização de espaços e remoção de eventuais duplicatas. Para os modelos clássicos, a vetorização foi feita com \texttt{TfidfVectorizer} do scikit-learn (parâmetros padrão, sem remoção explícita de stopwords). Para o LSTM, a tokenização foi por palavra (split em espaço) com vocabulário construído a partir do treino de cada visão. Para o BERTimbau, foi usado o tokenizer próprio do modelo (\texttt{AutoTokenizer.from\_pretrained}).
 
 \subsection{Ambiente Experimental}
 
