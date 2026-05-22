@@ -295,22 +295,12 @@ BERTimbau           & 47,10 & 48,21 & 42,62 & 55,68 \\
 \end{tabular}
 \end{table}
 
-A Figura~\ref{fig:comparativo_f1w} mostra o comparativo lado a lado dos dois nichos para todas as visões e todos os modelos, com F1 weighted. O padrão fica visualmente claro: V1 muito alto, V2 e V4 razoáveis, V3 e V5 ruins.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.90\textwidth]{imagens/comparativo_nichos_f1weighted.png}
-\caption{F1-Score weighted nas cinco visões para os dois nichos (Filmes e séries / Apps).}
-\label{fig:comparativo_f1w}
-\end{figure}
-\vspace{-0.8em}
-
-A Figura~\ref{fig:comparativo_f1m} mostra o mesmo comparativo para o F1 macro, onde fica evidente o impacto do desbalanceamento em V4 e V5. As demais métricas (acurácia, precisão e recall) seguem padrão similar e estão disponíveis no repositório do trabalho.
+A Figura~\ref{fig:comparativo_f1m} mostra o comparativo lado a lado dos dois nichos, em F1 macro, para todas as visões e todos os modelos. O padrão fica visualmente claro: V1 muito alto, V2 e V4 intermediários, V3 e V5 ruins. As demais métricas (acurácia e precisão) seguem padrão similar e estão disponíveis no repositório do trabalho.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.90\textwidth]{imagens/comparativo_nichos_f1macro.png}
-\caption{F1-Score macro nas cinco visões para os dois nichos. A diferença em relação ao F1 weighted nas visões V4 e V5 expõe o viés de classe majoritária.}
+\caption{F1-Score macro nas cinco visões para os dois nichos (Filmes e séries / Apps).}
 \label{fig:comparativo_f1m}
 \end{figure}
 \vspace{-0.8em}
