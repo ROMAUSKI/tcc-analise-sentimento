@@ -125,8 +125,8 @@ A Tabela~\ref{tab:comprimento} mostra o comprimento médio das frases por LLM em
 \toprule
 \textbf{Nicho} & \textbf{ChatGPT} & \textbf{Claude} & \textbf{Gemini} \\
 \midrule
-Filmes & 49 & 94 & 58 \\
-Apps            & 50 & 65 & 66 \\
+Filmes & 50 & 95 & 61 \\
+Apps            & 51 & 66 & 67 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -238,13 +238,13 @@ BERTimbau           & 60,42 & 66,84 & 62,29 & 66,59 \\
 \end{tabular}
 \end{table}
 
-V2 mostra que mesmo com dados reais, classificar reviews em três classes com apenas 600 amostras por classe não é trivial — os modelos clássicos ficam entre 52 e 62\% e o BERTimbau alcança 60-67\%. Já a V4 usa as cerca de 100 mil reviews reais desbalanceadas, e aqui a escolha da métrica faz diferença. Se olhássemos o F1 weighted, os modelos apareceriam na faixa de 64 a 86\%, o que pareceria um ótimo resultado. Mas esse valor é inflado pelo desbalanceamento natural — a classe Positiva domina 71-72\% das amostras, então o modelo acerta muito nela e erra mais nas minoritárias. O F1 macro, que dá o mesmo peso a cada classe, mostra o cenário real: fica entre 38 e 67\%. É por isso que adotamos o macro como métrica principal nas tabelas.
+V2 mostra que mesmo com dados reais, classificar reviews em três classes com apenas 600 amostras por classe não é trivial — os modelos clássicos ficam entre 52 e 62\% e o BERTimbau alcança 60-67\%. Já a V4 usa as cerca de 100 mil reviews reais, e aqui a escolha da métrica faz diferença. Se olhássemos o F1 weighted, os modelos apareceriam na faixa de 64 a 86\%, o que pareceria um ótimo resultado. Mas esse valor é inflado pelo desbalanceamento natural — a classe Positiva domina 71-72\% das amostras, então o modelo acerta muito nela e erra mais nas minoritárias. O F1 macro, que dá o mesmo peso a cada classe, mostra o cenário real: fica entre 38 e 67\%. É por isso que adotamos o macro como métrica principal nas tabelas.
 
 \subsection{Cross-Domínio (V3 e V5)}
 
-As visões V3 e V5 são as mais relevantes do trabalho porque medem se os classificadores treinados com dados sintéticos conseguem generalizar para reviews reais. V3 testa em conjunto controlado (mesmo test set do V2) e V5 testa em conjunto desbalanceado (mesmo test set do V4). Antes de apresentar os números, a Tabela~\ref{tab:exemplos} ilustra o tipo de diferença estrutural que aparece entre o texto sintético e o texto real — frases sintéticas tendem a ser bem formadas, com polaridade explícita e vocabulário regular, enquanto reviews reais trazem informalidade, abreviações, erros de digitação, gírias e pontuação não-convencional.
+As visões V3 e V5 são as mais relevantes do trabalho porque medem se os modelos de classificadores treinados com dados sintéticos são aplicáveis a reviews reais. V3 testa no conjunto controlado (o mesmo do V2) e V5 testa no conjunto desbalanceado (o mesmo do V4). Antes de apresentar os números, a Tabela~\ref{tab:exemplos} ilustra o tipo de diferença estrutural que aparece entre o texto sintético e o texto real — frases sintéticas tendem a ser bem formadas, com polaridade explícita e vocabulário regular, enquanto reviews reais trazem informalidade, abreviações, erros de digitação, gírias e pontuação não-convencional.
 
-\begin{table}[!t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Exemplos lado a lado de frases sintéticas (Claude) e reais (UTLC-Movies) por classe. O contraste estrutural ajuda a entender o reality gap quantificado adiante.}
