@@ -41,7 +41,7 @@ def main():
     fig.suptitle(
         "Comparação 200 vs 600 frases sintéticas por classe — Filmes e séries (F1-macro)\n"
         "(volume não fecha o gap em V3)",
-        fontsize=12, fontweight="bold",
+        fontsize=15, fontweight="bold",
     )
     axes = axes.flatten()
 
