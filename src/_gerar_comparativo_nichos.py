@@ -40,7 +40,7 @@ def main():
 
     fig, axes = plt.subplots(2, 3, figsize=(15, 9))
     fig.suptitle("Comparativo Movies × Apps — F1-Score (macro)",
-                 fontsize=14, fontweight="bold")
+                 fontsize=15, fontweight="bold")
     axes = axes.flatten()
 
     x = np.arange(len(MODELOS_CSV))
