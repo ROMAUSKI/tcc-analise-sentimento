@@ -63,13 +63,13 @@ def main():
                 ax.annotate(f"{h:.0f}",
                             xy=(bar.get_x() + bar.get_width() / 2, h),
                             xytext=(0, 2), textcoords="offset points",
-                            ha="center", fontsize=9)
+                            ha="center", fontsize=10)
 
-        ax.set_title(titulo, fontsize=11, fontweight="bold")
+        ax.set_title(titulo, fontsize=12, fontweight="bold")
         ax.set_ylim(0, 113)
         ax.set_xticks(x)
-        ax.set_xticklabels(MODELOS_LBL, rotation=22, ha="right", fontsize=9)
-        ax.set_ylabel("F1-Score macro (%)", fontsize=10)
+        ax.set_xticklabels(MODELOS_LBL, rotation=22, ha="right", fontsize=10)
+        ax.set_ylabel("F1-Score macro (%)", fontsize=11)
         ax.grid(axis="y", alpha=0.3)
 
     # 6º painel = legenda grande
