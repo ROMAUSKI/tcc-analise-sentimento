@@ -52,24 +52,24 @@ def main():
         for m in MODELOS_CSV:
             rm = df[(df["Nicho"] == "Movies") & (df["Visão"] == visao_csv) & (df["Modelo"] == m)]
             ra = df[(df["Nicho"] == "Apps") & (df["Visão"] == visao_csv) & (df["Modelo"] == m)]
-            mov.append(float(rm["F1-Macro"].iloc[0]) if len(rm) else 0)
-            app.append(float(ra["F1-Macro"].iloc[0]) if len(ra) else 0)
+            mov.append(float(rm["F1-Macro"].iloc[0]) * 100 if len(rm) else 0)
+            app.append(float(ra["F1-Macro"].iloc[0]) * 100 if len(ra) else 0)
 
         b1 = ax.bar(x - width / 2, mov, width, label="Movies", color=COR_MOVIES)
         b2 = ax.bar(x + width / 2, app, width, label="Apps", color=COR_APPS)
         for bars in (b1, b2):
             for bar in bars:
                 h = bar.get_height()
-                ax.annotate(f"{h:.2f}".replace(".", ","),
+                ax.annotate(f"{h:.0f}",
                             xy=(bar.get_x() + bar.get_width() / 2, h),
                             xytext=(0, 2), textcoords="offset points",
                             ha="center", fontsize=9)
 
         ax.set_title(titulo, fontsize=11, fontweight="bold")
-        ax.set_ylim(0, 1.13)
+        ax.set_ylim(0, 113)
         ax.set_xticks(x)
         ax.set_xticklabels(MODELOS_LBL, rotation=22, ha="right", fontsize=9)
-        ax.set_ylabel("F1-Score (macro)", fontsize=10)
+        ax.set_ylabel("F1-Score macro (%)", fontsize=10)
         ax.grid(axis="y", alpha=0.3)
 
     # 6º painel = legenda grande
