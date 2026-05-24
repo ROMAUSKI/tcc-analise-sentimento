@@ -63,18 +63,22 @@ def main():
         for bars in (b1, b2):
             for bar in bars:
                 h = bar.get_height()
-                ax.annotate(f"{h:.0f}".replace(".", ","), xy=(bar.get_x() + bar.get_width() / 2, h),
-                            xytext=(0, 2), textcoords="offset points", ha="center", fontsize=7)
-        ax.set_title(visao, fontsize=10)
-        ax.set_ylim(0, 100)
+                ax.annotate(f"{h:.0f}", xy=(bar.get_x() + bar.get_width() / 2, h),
+                            xytext=(0, 2), textcoords="offset points", ha="center", fontsize=10)
+        ax.set_title(visao, fontsize=12)
+        ax.set_ylim(0, 113)
         ax.set_xticks(x)
-        ax.set_xticklabels(MODELOS_CURTO, rotation=20, ha="right", fontsize=8)
-        ax.set_ylabel("F1-Score (macro)", fontsize=9)
-        if i == 0:
-            ax.legend(fontsize=7, loc="upper right", title="Volume sintético", title_fontsize=7)
+        ax.set_xticklabels(MODELOS_CURTO, rotation=20, ha="right", fontsize=10)
+        ax.set_ylabel("F1-Score macro (%)", fontsize=11)
 
-    # 6o painel oculto
-    axes[5].axis("off")
+    # 6o painel = legenda grande
+    legenda_ax = axes[5]
+    legenda_ax.axis("off")
+    handles = [Patch(facecolor="#9aa0a6", label="200/classe (600 total)"),
+               Patch(facecolor="#1f77b4", label="600/classe (1800 total — sintético inteiro)")]
+    legenda_ax.legend(handles=handles, loc="center", fontsize=12,
+                      title="Volume sintético", title_fontsize=13, frameon=True,
+                      handlelength=2.0, borderpad=1.2, labelspacing=1.2)
 
     plt.tight_layout(rect=[0, 0, 1, 0.94])
     plt.savefig(OUT_RES, dpi=160, bbox_inches="tight")
