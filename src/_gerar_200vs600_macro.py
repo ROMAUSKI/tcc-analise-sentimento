@@ -11,6 +11,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 
 ROOT = Path(__file__).resolve().parent.parent
 CSV = ROOT / "resultados" / "comparativo_200_vs_600_movies.csv"
