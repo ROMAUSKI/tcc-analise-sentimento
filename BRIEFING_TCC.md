@@ -441,6 +441,18 @@ Davi NÃO está interessado em:
 
 ## 11. Histórico de Execução (rolling, mais recente no topo)
 
+### 2026-05-21 — Revisão Final BOSS do artigo
+
+Auditoria completa do `artigo/main.tex` (leitura integral + cross-check de números contra `metricas_consolidado_geral.csv`). **Todos os dados batem** (Tabelas 3/4/6/7/8, abstract, conclusão, figuras). Correções aplicadas:
+- **Português:** concordância na Introdução ("modelos... têm um bom resultado ao serem submetidos"); "minerações de opiniões" → "mineração de opinião".
+- **Nomenclatura padronizada:** "F1 macro"/"F1 weighted" → **F1-macro**/**F1-weighted** (hífen) no texto e cabeçalhos; captions mantêm "F1-Score macro (%)".
+- **cross-domain:** padronizado para o termo em inglês **em itálico** (`\textit{cross-domain}`) no corpo PT; abstract EN e títulos de seção sem itálico.
+- **.bib limpo:** removidas 3 refs não citadas (`lecun2015deep`, `sokolova2009`, `kohavi1995`).
+- **Figuras (rodadas anteriores):** Fig 1 sem outliers + médias legíveis; Fig 3 e 4 com legenda no 6º painel, escala em %, fontes maiores; Fig 2 matriz de confusão. Todos os geradores versionados em `src/_gerar_*.py`.
+- PDF recompilado com ciclo BibTeX completo: 15 páginas, zero refs/citações indefinidas.
+
+
+
 ### 2026-05-21 — Migração para F1-macro + tabela complementar + correções de coerência
 
 Decisão metodológica central (confirmada após revisão massiva): **o artigo passa a reportar F1-macro como métrica principal** (mais honesto em cenários desbalanceados). Plano: `~/.claude/plans/adicione-as-observa-es-que-witty-catmull.md`.
