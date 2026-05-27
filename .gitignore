@@ -56,3 +56,7 @@ desktop.ini
 
 # === IDE / Editor ===
 .vscode/
+
+# === Documentos internos (contexto/IA — não publicar no repo) ===
+BRIEFING_TCC.md
+CLAUDE.md
