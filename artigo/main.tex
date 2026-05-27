@@ -240,7 +240,7 @@ BERTimbau           & 60,42 & 66,84 & 62,29 & 66,59 \\
 
 V2 mostra que mesmo com dados reais, classificar reviews em três classes com apenas 600 amostras por classe não é trivial — os modelos clássicos ficam entre 52 e 62\% e o BERTimbau alcança 60-67\%. Já a V4 usa as cerca de 100 mil reviews reais, e aqui a escolha da métrica faz diferença. Se olhássemos o F1-weighted, os modelos apareceriam na faixa de 64 a 86\%, o que pareceria um ótimo resultado. Mas esse valor é inflado pelo desbalanceamento natural — a classe Positiva domina 71-72\% das amostras, então o modelo acerta muito nela e erra mais nas minoritárias. O F1-macro, que dá o mesmo peso a cada classe, mostra o cenário real: fica entre 38 e 67\%. É por isso que adotamos o macro como métrica principal nas tabelas.
 
-\subsection{Cross-Domínio (V3 e V5)}
+\subsection{Cross-Domain (V3 e V5)}
 
 As visões V3 e V5 são as mais relevantes do trabalho porque medem se os modelos de classificadores treinados com dados sintéticos são aplicáveis a reviews reais. V3 testa no conjunto controlado (o mesmo do V2) e V5 testa no conjunto desbalanceado (o mesmo do V4). Antes de apresentar os números, a Tabela~\ref{tab:exemplos} ilustra o tipo de diferença estrutural que aparece entre o texto sintético e o texto real — frases sintéticas tendem a ser bem formadas, com polaridade explícita e vocabulário regular, enquanto reviews reais trazem informalidade, abreviações, erros de digitação, gírias e pontuação não-convencional.
 
