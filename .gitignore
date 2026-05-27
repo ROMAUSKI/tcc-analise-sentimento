@@ -45,6 +45,9 @@ venv/
 Thumbs.db
 desktop.ini
 
+# === Google Drive (pasta temporária de sincronização) ===
+.tmp.driveupload/
+
 # === OS ===
 .DS_Store
 Thumbs.db
