@@ -144,6 +144,10 @@ Apps            & 51 & 66 & 67 \\
 \label{fig:comprimento}
 \end{figure}
 
+O diagrama de caixa (\textit{boxplot}) da Figura~\ref{fig:comprimento} permite enxergar não só a média, mas a dispersão de cada LLM em cada nicho. ChatGPT aparece com caixas estreitas nos dois nichos, o que indica que ele tende a manter um padrão de comprimento bem regular independentemente do contexto pedido no prompt. Claude é o oposto em filmes e séries — caixa larga, com frases curtas e longas convivendo no mesmo conjunto — e fica visivelmente mais contido em apps, onde a tarefa é mais objetiva. Gemini ocupa uma faixa intermediária, mas com dispersão maior em apps do que em filmes e séries.
+
+Esse padrão sugere que a regularidade do texto sintético depende tanto do LLM quanto do nicho. Em apps, que pedem frases mais técnicas e diretas, os três geradores tendem a se aproximar; em filmes e séries, que admitem narrativa, Claude se distancia dos outros dois. Essa diferença de estilo dentro do conjunto sintético é uma das hipóteses que ajudam a explicar por que o desempenho \textit{cross-domain} muda tanto de um nicho para o outro nos resultados discutidos na Seção~\ref{sec:resultados}.
+
 \subsection{Dados Reais para Validação Cross-Domain}
 
 Para os experimentos \textit{cross-domain}, foram utilizados subconjuntos do dataset \texttt{ptbr-sentiment-analysis-datasets} \cite{souza2022brazilian} disponível no Kaggle. Cada nicho usou seu arquivo correspondente (\texttt{utlc\_movies.csv} e \texttt{utlc\_apps.csv}), com aproximadamente 100 mil reviews por nicho carregadas via \texttt{kagglehub}. O dataset original traz a coluna \texttt{rating} com notas de 1 a 5, que foi mapeada para as três classes do trabalho: ratings 4 e 5 viraram Positiva, 1 e 2 viraram Negativa e 3 virou Neutra. A distribuição natural após o mapeamento ficou bastante desbalanceada — em filmes e séries, 71\% Positiva, 20\% Neutra e 9\% Negativa; em apps, 72\% Positiva, 21\% Negativa e 7\% Neutra.
