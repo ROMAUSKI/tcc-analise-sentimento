@@ -256,31 +256,31 @@ for ri, row in enumerate(dados):
             cell.fill.fore_color.rgb = BRANCO if ri % 2 else CINZA
 
 # ---------- SLIDE 9 - RESULTADOS (1/4): dominio sintetico e real ----------
-decorate_title(S[8], )
-set_title(S[8], "Resultados (1/4): Domínio Sintético e Real")
-set_body(S[8], [
+decorate_title(s_r1)
+set_title(s_r1, "Resultados (1/4): Domínio Sintético e Real")
+set_body(s_r1, [
     ("No mundo sintético, a classificação é quase perfeita.", 0),
     ("Nos dados reais, o desempenho fica no esperado para a tarefa.", 0),
 ], size=16)
-shrink_body(S[8], 1.18, 1.62, 11.0, 1.0)
-stat_card(S[8], 1.7, 3.0, 4.2, 3.0, "97%", "Sintético → Sintético\n(V1, BERTimbau)")
-stat_card(S[8], 7.4, 3.0, 4.2, 3.0, "60–67%", "Dados reais\n(V2 e V4)")
+shrink_body(s_r1, 1.18, 1.62, 11.0, 1.0)
+stat_card(s_r1, 1.7, 3.0, 4.2, 3.0, "97%", "Sintético → Sintético\n(V1, BERTimbau)")
+stat_card(s_r1, 7.4, 3.0, 4.2, 3.0, "60–67%", "Dados reais\n(V2 e V4)")
 
 # ---------- SLIDE 10 - RESULTADOS (2/4): cross-domain ----------
-decorate_title(S[9])
-set_title(S[9], "Resultados (2/4): Cross-domain — a Queda")
-set_body(S[9], [
+decorate_title(s_r2)
+set_title(s_r2, "Resultados (2/4): Cross-domain — a Queda")
+set_body(s_r2, [
     ("Treino sintético, teste real: o desempenho despenca.", 0),
     ("O modelo acerta a classe dominante e erra as minoritárias.", 0),
     ("A Neutra é confundida com Positiva e Negativa.", 0),
 ], size=15)
-shrink_body(S[9], 1.18, 1.6, 5.5, 1.6)
-stat_card(S[9], 1.18, 3.4, 2.55, 2.7, "43%", "Filmes e séries\n(V5)")
-stat_card(S[9], 4.0, 3.4, 2.55, 2.7, "56%", "Aplicativos\n(V5)")
-add_img(S[9], f"{IMG}/matriz_confusao_v3_svm_filmes.png", left=7.15, top=2.0, width=5.0)
+shrink_body(s_r2, 1.18, 1.6, 5.5, 1.6)
+stat_card(s_r2, 1.18, 3.4, 2.55, 2.7, "43%", "Filmes e séries\n(V5)")
+stat_card(s_r2, 4.0, 3.4, 2.55, 2.7, "56%", "Aplicativos\n(V5)")
+add_img(s_r2, f"{IMG}/matriz_confusao_v3_svm_filmes.png", left=7.15, top=2.0, width=5.0)
 
 # ---------- SLIDE 11 (NOVO) - RESULTADOS (3/4): reality gap ----------
-layout_conteudo = S[2].slide_layout
+layout_conteudo = s_intro.slide_layout
 novo = prs.slides.add_slide(layout_conteudo)
 # reordenar para a posicao 11 (apos o slide 10, index 9 -> nova posicao index 10)
 sldIdLst = prs.slides._sldIdLst
