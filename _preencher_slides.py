@@ -178,11 +178,11 @@ for ri, row in enumerate(dados):
 # ---------- SLIDE 9 - RESULTADOS (1/3) ----------
 set_title(S[8], "Resultados (1/3): Domínio Sintético e Real")
 set_body(S[8], [
-    ("No cenário sintético → sintético (V1), o BERTimbau chega a 97% de F1-macro: os LLMs geram dados internamente coerentes.", 0),
-    ("Nos dados reais (V2 e V4), o desempenho fica entre 60% e 67%, dentro do esperado para a tarefa.", 0),
-])
-shrink_body(S[8], 0.59, 1.7, 12.16, 1.15)
-add_img(S[8], f"{IMG}/comparativo_nichos_f1macro.png", left=3.10, top=2.85, width=7.14)
+    ("V1 (sintético → sintético): BERTimbau atinge 97% de F1-macro — dados internamente coerentes.", 0),
+    ("V2 e V4 (dados reais): desempenho entre 60% e 67%, dentro do esperado para a tarefa.", 0),
+], size=16)
+shrink_body(S[8], 0.59, 1.65, 12.16, 1.15)
+add_img(S[8], f"{IMG}/comparativo_nichos_f1macro.png", left=3.46, top=2.95, width=6.4)
 
 # ---------- SLIDE 10 - RESULTADOS (2/3) ----------
 set_title(S[9], "Resultados (2/3): Cross-domain — a Queda")
