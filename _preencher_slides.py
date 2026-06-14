@@ -196,7 +196,7 @@ shrink_body(S[9], 0.59, 2.0, 6.3, 4.6)
 add_img(S[9], f"{IMG}/matriz_confusao_v3_svm_filmes.png", left=7.5, top=2.2, width=4.76)
 
 # ---------- SLIDE 11 - RESULTADOS (3/3) ----------
-set_title(S[10], "Resultados (3/3): Volume e Diferença entre Nichos")
+set_title(S[10], "Resultados (3/3): Volume e Nichos")
 set_body(S[10], [
     ("Triplicar o volume sintético (200 → 600 frases/classe) não fecha o gap no cross-domain.", 0),
     ("A limitação é estrutural (diferença de distribuição), não falta de dados.", 0),
