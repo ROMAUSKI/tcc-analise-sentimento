@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
-"""Preenche o template institucional UTFPR com o conteudo do TCC, preservando o design."""
+"""Preenche e enriquece o template UTFPR com o conteudo do TCC (versao visual)."""
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.enum.shapes import MSO_SHAPE
 
 SRC = "Modelo de Apresentação para Banca de TCC.pptx"
 OUT = "Apresentacao_TCC_Davi.pptx"
 IMG = "artigo/imagens"
 VINHO = RGBColor(0x8C, 0x23, 0x32)
+VINHO2 = RGBColor(0xB0, 0x3A, 0x48)
 BRANCO = RGBColor(0xFF, 0xFF, 0xFF)
 PRETO = RGBColor(0x22, 0x22, 0x22)
 CINZA = RGBColor(0xEC, 0xEC, 0xEC)
+CINZAESC = RGBColor(0x5A, 0x5A, 0x5A)
 
 prs = Presentation(SRC)
 
@@ -72,6 +75,69 @@ def add_img(slide, path, left, top, width):
     return slide.shapes.add_picture(path, Inches(left), Inches(top), width=Inches(width))
 
 
+def decorate_title(slide):
+    """Marcador geometrico vinho ao lado do titulo + desloca o titulo."""
+    t = ph(slide, 0)
+    t.left = Inches(1.18)
+    t.width = Inches(11.0)
+    mk = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), Inches(0.82), Inches(0.42), Inches(0.42))
+    mk.fill.solid()
+    mk.fill.fore_color.rgb = VINHO
+    mk.line.fill.background()
+    mk.shadow.inherit = False
+
+
+def stat_card(slide, left, top, w, h, number, label):
+    box = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(left), Inches(top), Inches(w), Inches(h))
+    box.fill.solid()
+    box.fill.fore_color.rgb = BRANCO
+    box.line.color.rgb = VINHO
+    box.line.width = Pt(1.5)
+    box.shadow.inherit = False
+    tf = box.text_frame
+    tf.word_wrap = True
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    tf.margin_top = Pt(4)
+    tf.margin_bottom = Pt(4)
+    p1 = tf.paragraphs[0]
+    p1.alignment = PP_ALIGN.CENTER
+    r1 = p1.add_run()
+    r1.text = number
+    r1.font.size = Pt(50)
+    r1.font.bold = True
+    r1.font.color.rgb = VINHO
+    p2 = tf.add_paragraph()
+    p2.alignment = PP_ALIGN.CENTER
+    r2 = p2.add_run()
+    r2.text = label
+    r2.font.size = Pt(13)
+    r2.font.color.rgb = PRETO
+
+
+def chevron(slide, left, top, w, h, title, sub, fill):
+    ch = slide.shapes.add_shape(MSO_SHAPE.CHEVRON, Inches(left), Inches(top), Inches(w), Inches(h))
+    ch.fill.solid()
+    ch.fill.fore_color.rgb = fill
+    ch.line.fill.background()
+    ch.shadow.inherit = False
+    tf = ch.text_frame
+    tf.word_wrap = True
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    r = p.add_run()
+    r.text = title
+    r.font.bold = True
+    r.font.size = Pt(14)
+    r.font.color.rgb = BRANCO
+    p2 = tf.add_paragraph()
+    p2.alignment = PP_ALIGN.CENTER
+    r2 = p2.add_run()
+    r2.text = sub
+    r2.font.size = Pt(10)
+    r2.font.color.rgb = BRANCO
+
+
 S = prs.slides
 
 # ---------- SLIDE 1 - CAPA ----------
@@ -82,68 +148,80 @@ set_lines(ph(S[0], 1), [
     "Orientador: Prof. Marlon Marcon",
 ])
 
-# ---------- SLIDE 2 - SUMARIO (mantem) ----------
+# ---------- SLIDE 2 - SUMARIO ----------
+decorate_title(S[1])
 
 # ---------- SLIDE 3 - INTRODUCAO ----------
+decorate_title(S[2])
 set_body(S[2], [
-    ("A análise de sentimento identifica a polaridade — positiva, negativa ou neutra — de uma opinião expressa em texto.", 0),
-    ("Treinar classificadores para essa tarefa depende de datasets rotulados, cuja construção manual é cara e demorada.", 0),
-    ("Em português brasileiro, a disponibilidade de recursos anotados é bem menor do que em inglês.", 0),
-    ("LLMs como ChatGPT, Gemini e Claude surgem como possível fonte de dados sintéticos já rotulados.", 0),
-    ("Este trabalho investiga se esses dados sintéticos servem para treinar classificadores usados em um cenário real.", 0),
+    ("Análise de sentimento: classificar opiniões em positiva, negativa ou neutra.", 0),
+    ("Treinar modelos exige datasets rotulados — caros e demorados de construir.", 0),
+    ("Em português brasileiro, faltam recursos anotados.", 0),
+    ("LLMs podem gerar esses dados já rotulados — mas funcionam no mundo real?", 0),
 ])
 
 # ---------- SLIDE 4 - OBJETIVOS ----------
+decorate_title(S[3])
 set_body(S[3], [
     ("Objetivo geral:", 0),
-    ("Avaliar a viabilidade prática de treinar classificadores de sentimento em português usando dados sintéticos gerados por LLMs.", 1),
+    ("Avaliar a viabilidade prática de treinar classificadores de sentimento com dados sintéticos de LLMs.", 1),
     ("Objetivos específicos:", 0),
-    ("Medir a assertividade de classificadores treinados apenas com dados sintéticos.", 1),
-    ("Verificar a coerência entre os dados gerados por diferentes LLMs.", 1),
-    ("Avaliar o desempenho cross-domain (treino sintético, teste em dados reais).", 1),
-    ("Comparar dois nichos com graus diferentes de subjetividade.", 1),
+    ("Medir a assertividade com treino apenas sintético.", 1),
+    ("Verificar a coerência entre os LLMs geradores.", 1),
+    ("Avaliar o cross-domain: treino sintético, teste real.", 1),
+    ("Comparar dois nichos com subjetividade diferente.", 1),
 ])
 
 # ---------- SLIDE 5 - JUSTIFICATIVA ----------
+decorate_title(S[4])
 set_body(S[4], [
-    ("A construção manual de datasets rotulados é cara e demorada, e o português brasileiro tem poucos recursos anotados.", 0),
-    ("LLMs conseguem gerar texto rotulado sem anotação humana, o que poderia reduzir esse custo.", 0),
-    ("Usar três LLMs distintos reduz o viés associado a uma única fonte de geração.", 0),
-    ("Avaliar dois nichos e o cenário cross-domain mostra em quais contextos a abordagem realmente funciona.", 0),
+    ("Datasets rotulados são caros, e o português tem poucos recursos.", 0),
+    ("LLMs geram texto rotulado sem anotação humana.", 0),
+    ("Três LLMs reduzem o viés de uma fonte única.", 0),
+    ("Dois nichos e o cross-domain revelam onde a abordagem funciona.", 0),
 ])
 
 # ---------- SLIDE 6 - REFERENCIAL TEORICO ----------
+decorate_title(S[5])
 set_body(S[5], [
-    ("Análise de sentimento tratada como classificação supervisionada de texto (Pang et al., 2002).", 0),
-    ("Vetorização TF-IDF com classificadores clássicos: Naive Bayes, Regressão Logística e SVM Linear.", 0),
-    ("Modelos neurais: LSTM e BERTimbau, um BERT pré-treinado em português brasileiro.", 0),
-    ("Dados sintéticos gerados por LLMs: área recente, promissora em cenários de poucos recursos.", 0),
-    ("Avaliação por F1-macro, mais informativo que a acurácia quando as classes estão desbalanceadas.", 0),
+    ("Análise de sentimento = classificação supervisionada de texto (Pang, 2002).", 0),
+    ("TF-IDF com classificadores clássicos: Naive Bayes, Regressão Logística e SVM.", 0),
+    ("Modelos neurais: LSTM e BERTimbau (BERT pré-treinado em português).", 0),
+    ("Geração de dados sintéticos por LLMs: área de pesquisa recente.", 0),
+    ("Métrica principal: F1-macro, justo com classes desbalanceadas.", 0),
 ])
 
 # ---------- SLIDE 7 - MATERIAIS ----------
+decorate_title(S[6])
 set_body(S[6], [
-    ("LLMs geradores: ChatGPT (OpenAI), Gemini (Google) e Claude (Anthropic).", 0),
-    ("Classificadores: Naive Bayes, Regressão Logística, SVM Linear, LSTM e BERTimbau.", 0),
-    ("Bibliotecas: Python, scikit-learn, PyTorch e Hugging Face Transformers.", 0),
-    ("Dados reais: UTLC-Movies e UTLC-Apps (Kaggle), carregados via kagglehub.", 0),
-    ("Execução dos modelos neurais em Google Colab com GPU NVIDIA T4.", 0),
+    ("LLMs geradores: ChatGPT, Gemini e Claude.", 0),
+    ("Classificadores: Naive Bayes, Reg. Logística, SVM, LSTM e BERTimbau.", 0),
+    ("Stack: Python, scikit-learn, PyTorch e Hugging Face Transformers.", 0),
+    ("Dados reais: UTLC-Movies e UTLC-Apps (Kaggle), via kagglehub.", 0),
+    ("Execução dos modelos neurais em Google Colab (GPU NVIDIA T4).", 0),
 ])
 
-# ---------- SLIDE 8 - METODOS (texto + tabela das 5 visoes) ----------
-set_body(S[7], [
-    ("Geração de 1.800 frases sintéticas por nicho (3 LLMs × 3 classes × 200 frases), em dois nichos: filmes e séries e aplicativos móveis.", 0),
-    ("Dados reais: cerca de 100 mil reviews por nicho, com a nota mapeada para as três classes.", 0),
-    ("Pré-processamento, vetorização TF-IDF e treino com semente fixa (42); avaliação nas cinco visões abaixo.", 0),
-])
-shrink_body(S[7], 0.59, 1.7, 12.16, 1.9)
-rows, cols = 6, 4
-tbl_shape = S[7].shapes.add_table(rows, cols, Inches(1.7), Inches(3.75), Inches(9.9), Inches(2.9))
+# ---------- SLIDE 8 - METODOS (pipeline + tabela) ----------
+decorate_title(S[7])
+set_body(S[7], [("Pipeline em quatro etapas, avaliado sob cinco visões metodológicas:", 0)])
+shrink_body(S[7], 1.18, 1.55, 11.0, 0.55)
+# pipeline de chevrons
+cw, cstep, ctop, ch_h = 3.25, 2.78, 2.25, 1.05
+etapas = [
+    ("1. Geração", "3 LLMs · 1.800 frases", VINHO),
+    ("2. Pré-proc.", "limpeza · TF-IDF", CINZAESC),
+    ("3. Treino", "5 classificadores", VINHO),
+    ("4. Avaliação", "5 visões · F1-macro", CINZAESC),
+]
+for i, (tt, sub, fill) in enumerate(etapas):
+    chevron(S[7], 0.55 + i * cstep, ctop, cw, ch_h, tt, sub, fill)
+# tabela 5 visoes
+tbl_shape = S[7].shapes.add_table(6, 4, Inches(1.85), Inches(3.7), Inches(9.6), Inches(2.7))
 tbl = tbl_shape.table
-tbl.columns[0].width = Inches(1.5)
-tbl.columns[1].width = Inches(2.8)
-tbl.columns[2].width = Inches(2.8)
-tbl.columns[3].width = Inches(2.8)
+tbl.columns[0].width = Inches(1.4)
+tbl.columns[1].width = Inches(2.73)
+tbl.columns[2].width = Inches(2.73)
+tbl.columns[3].width = Inches(2.74)
 dados = [
     ["Visão", "Treino", "Teste", "Volume"],
     ["V1", "Sintético", "Sintético", "Controlado"],
@@ -156,15 +234,15 @@ for ri, row in enumerate(dados):
     for ci, val in enumerate(row):
         cell = tbl.cell(ri, ci)
         cell.vertical_anchor = MSO_ANCHOR.MIDDLE
-        cell.margin_top = Pt(2)
-        cell.margin_bottom = Pt(2)
+        cell.margin_top = Pt(1)
+        cell.margin_bottom = Pt(1)
         tfc = cell.text_frame
         tfc.clear()
         p = tfc.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
         r = p.add_run()
         r.text = val
-        r.font.size = Pt(15)
+        r.font.size = Pt(14)
         if ri == 0:
             r.font.bold = True
             r.font.color.rgb = BRANCO
@@ -175,45 +253,114 @@ for ri, row in enumerate(dados):
             cell.fill.solid()
             cell.fill.fore_color.rgb = BRANCO if ri % 2 else CINZA
 
-# ---------- SLIDE 9 - RESULTADOS (1/3) ----------
-set_title(S[8], "Resultados (1/3): Domínio Sintético e Real")
+# ---------- SLIDE 9 - RESULTADOS (1/4): dominio sintetico e real ----------
+decorate_title(S[8], )
+set_title(S[8], "Resultados (1/4): Domínio Sintético e Real")
 set_body(S[8], [
-    ("V1 (sintético → sintético): BERTimbau atinge 97% de F1-macro — dados internamente coerentes.", 0),
-    ("V2 e V4 (dados reais): desempenho entre 60% e 67%, dentro do esperado para a tarefa.", 0),
+    ("No mundo sintético, a classificação é quase perfeita.", 0),
+    ("Nos dados reais, o desempenho fica no esperado para a tarefa.", 0),
 ], size=16)
-shrink_body(S[8], 0.59, 1.65, 12.16, 1.15)
-add_img(S[8], f"{IMG}/comparativo_nichos_f1macro.png", left=3.46, top=2.95, width=6.4)
+shrink_body(S[8], 1.18, 1.62, 11.0, 1.0)
+stat_card(S[8], 1.7, 3.0, 4.2, 3.0, "97%", "Sintético → Sintético\n(V1, BERTimbau)")
+stat_card(S[8], 7.4, 3.0, 4.2, 3.0, "60–67%", "Dados reais\n(V2 e V4)")
 
-# ---------- SLIDE 10 - RESULTADOS (2/3) ----------
-set_title(S[9], "Resultados (2/3): Cross-domain — a Queda")
+# ---------- SLIDE 10 - RESULTADOS (2/4): cross-domain ----------
+decorate_title(S[9])
+set_title(S[9], "Resultados (2/4): Cross-domain — a Queda")
 set_body(S[9], [
-    ("No cenário mais realista (V5, desbalanceado), o F1-macro cai para 43% em filmes e séries e 56% em aplicativos.", 0),
-    ("O modelo treinado em sintético acerta a classe dominante, mas erra as minoritárias (viés de classe majoritária).", 0),
-    ("A matriz de confusão mostra a classe Neutra sendo confundida com Positiva e Negativa.", 0),
-    ("Reality gap: a frase sintética é mais limpa e direta do que a review escrita por um usuário real.", 0),
-])
-shrink_body(S[9], 0.59, 2.0, 6.3, 4.6)
-add_img(S[9], f"{IMG}/matriz_confusao_v3_svm_filmes.png", left=7.5, top=2.2, width=4.76)
+    ("Treino sintético, teste real: o desempenho despenca.", 0),
+    ("O modelo acerta a classe dominante e erra as minoritárias.", 0),
+    ("A Neutra é confundida com Positiva e Negativa.", 0),
+], size=15)
+shrink_body(S[9], 1.18, 1.6, 5.5, 1.6)
+stat_card(S[9], 1.18, 3.4, 2.55, 2.7, "43%", "Filmes e séries\n(V5)")
+stat_card(S[9], 4.0, 3.4, 2.55, 2.7, "56%", "Aplicativos\n(V5)")
+add_img(S[9], f"{IMG}/matriz_confusao_v3_svm_filmes.png", left=7.15, top=2.0, width=5.0)
 
-# ---------- SLIDE 11 - RESULTADOS (3/3) ----------
-set_title(S[10], "Resultados (3/3): Volume e Nichos")
+# ---------- SLIDE 11 (NOVO) - RESULTADOS (3/4): reality gap ----------
+layout_conteudo = S[2].slide_layout
+novo = prs.slides.add_slide(layout_conteudo)
+# reordenar para a posicao 11 (apos o slide 10, index 9 -> nova posicao index 10)
+sldIdLst = prs.slides._sldIdLst
+ids = list(sldIdLst)
+mover = ids[-1]
+sldIdLst.remove(mover)
+sldIdLst.insert(10, mover)
+decorate_title(novo)
+set_title(novo, "Resultados (3/4): Reality Gap")
+try:
+    set_body(novo, [("A frase do LLM é limpa e direta; a review real tem gíria, erro e ironia.", 0)], size=16)
+    shrink_body(novo, 1.18, 1.6, 11.0, 0.7)
+except KeyError:
+    pass
+# tabela de exemplos 4x3
+ex_shape = novo.shapes.add_table(4, 3, Inches(0.8), Inches(2.5), Inches(11.7), Inches(3.8))
+ex = ex_shape.table
+ex.columns[0].width = Inches(1.5)
+ex.columns[1].width = Inches(5.1)
+ex.columns[2].width = Inches(5.1)
+exdata = [
+    ["Classe", "Sintética (Claude)", "Real (UTLC-Movies)"],
+    ["Positiva", "Nunca vi atuações tão intensas e verdadeiras; merece todos os prêmios.", "Estou sem xão sem ar sem vida PQP q filme"],
+    ["Negativa", "A história é completamente previsível; adivinhei o final nos dez primeiros minutos.", "Horrivel com péssimas interpretações."],
+    ["Neutra", "O filme tem duas horas e quinze minutos e estreou em março.", "é bem interesante! mais ainda sim não deixa de ser sessão da tarde"],
+]
+for ri, row in enumerate(exdata):
+    for ci, val in enumerate(row):
+        cell = ex.cell(ri, ci)
+        cell.vertical_anchor = MSO_ANCHOR.MIDDLE
+        cell.margin_left = Pt(6)
+        cell.margin_right = Pt(6)
+        cell.margin_top = Pt(3)
+        cell.margin_bottom = Pt(3)
+        tfc = cell.text_frame
+        tfc.word_wrap = True
+        tfc.clear()
+        p = tfc.paragraphs[0]
+        r = p.add_run()
+        r.text = val
+        if ri == 0:
+            p.alignment = PP_ALIGN.CENTER
+            r.font.bold = True
+            r.font.size = Pt(14)
+            r.font.color.rgb = BRANCO
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = VINHO
+        elif ci == 0:
+            p.alignment = PP_ALIGN.CENTER
+            r.font.bold = True
+            r.font.size = Pt(13)
+            r.font.color.rgb = VINHO
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = CINZA
+        else:
+            r.font.size = Pt(12)
+            r.font.color.rgb = PRETO
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = BRANCO if ri % 2 else CINZA
+
+# ---------- SLIDE 12 - RESULTADOS (4/4): volume e nichos ----------
+decorate_title(S[10])
+set_title(S[10], "Resultados (4/4): Volume e Nichos")
 set_body(S[10], [
-    ("Triplicar o volume sintético (200 → 600 frases/classe) não fecha o gap no cross-domain.", 0),
-    ("A limitação é estrutural (diferença de distribuição), não falta de dados.", 0),
-    ("Apps supera filmes e séries no desbalanceado: vocabulário mais regular e objetivo.", 0),
+    ("Triplicar o volume sintético (200 → 600 frases/classe) não fecha o gap.", 0),
+    ("A limitação é estrutural (distribuição), não falta de dados.", 0),
+    ("Apps supera filmes e séries no desbalanceado: vocabulário mais objetivo.", 0),
 ], size=16)
-shrink_body(S[10], 0.59, 1.55, 12.16, 1.5)
+shrink_body(S[10], 1.18, 1.55, 11.0, 1.5)
 add_img(S[10], f"{IMG}/comparativo_200_vs_600_movies.png", left=3.56, top=3.2, width=6.2)
 
-# ---------- SLIDE 12 - CONCLUSAO ----------
+# ---------- SLIDE 13 - CONCLUSAO ----------
+decorate_title(S[11])
 set_body(S[11], [
-    ("Dados sintéticos gerados por LLMs ainda não são uma alternativa viável para treinar classificadores de uso prático.", 0),
-    ("A limitação vem da diferença estrutural entre o texto do LLM e a review real, e não da quantidade de dados.", 0),
-    ("A abordagem mantém valor em prototipagem, pesquisa exploratória e cenários sem dados reais disponíveis.", 0),
-    ("Trabalhos futuros: técnicas de adaptação de domínio, combinando pouco dado real com bastante dado sintético.", 0),
+    ("Dados sintéticos de LLMs ainda não substituem dados reais para uso prático.", 0),
+    ("A limitação é estrutural: o texto do LLM difere da review real.", 0),
+    ("Continuam úteis para protótipo, pesquisa e cenários sem dados reais.", 0),
+    ("Trabalhos futuros: adaptação de domínio (pouco dado real + muito sintético).", 0),
 ])
 
-# ---------- SLIDE 13 - REFERENCIAS ----------
+# ---------- SLIDE 14 - REFERENCIAS ----------
+decorate_title(S[12])
 set_body(S[12], [
     ("PANG, B.; LEE, L.; VAITHYANATHAN, S. Thumbs up? Sentiment classification using machine learning techniques. EMNLP, 2002.", 0),
     ("SOUZA, F.; FILHO, J. A. Sentiment analysis on Brazilian Portuguese user reviews. IEEE LA-CCI, 2022.", 0),
@@ -223,7 +370,7 @@ set_body(S[12], [
     ("HELLWIG, N. C.; FEHLE, J.; WOLFF, C. Exploring LLMs for the generation of synthetic training samples for aspect-based sentiment analysis. Expert Systems with Applications, 2025.", 0),
 ], size=14)
 
-# ---------- SLIDE 14 - ENCERRAMENTO ----------
+# ---------- SLIDE 15 - ENCERRAMENTO ----------
 set_title(S[13], "Obrigado pela atenção!")
 set_lines(ph(S[13], 1), [
     "Davi Romauski Meurer",
@@ -232,4 +379,4 @@ set_lines(ph(S[13], 1), [
 ])
 
 prs.save(OUT)
-print("Salvo:", OUT)
+print("Salvo:", OUT, "| total de slides:", len(prs.slides._sldIdLst))
