@@ -216,9 +216,9 @@ etapas = [
     ("4. Avaliação", "5 visões · F1-macro", CINZAESC),
 ]
 for i, (tt, sub, fill) in enumerate(etapas):
-    chevron(S[7], 0.55 + i * cstep, ctop, cw, ch_h, tt, sub, fill)
+    chevron(s_met, 0.55 + i * cstep, ctop, cw, ch_h, tt, sub, fill)
 # tabela 5 visoes
-tbl_shape = S[7].shapes.add_table(6, 4, Inches(1.85), Inches(3.7), Inches(9.6), Inches(2.7))
+tbl_shape = s_met.shapes.add_table(6, 4, Inches(1.85), Inches(3.7), Inches(9.6), Inches(2.7))
 tbl = tbl_shape.table
 tbl.columns[0].width = Inches(1.4)
 tbl.columns[1].width = Inches(2.73)
