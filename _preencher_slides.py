@@ -76,11 +76,15 @@ def add_img(slide, path, left, top, width):
 
 
 def decorate_title(slide):
-    """Marcador geometrico vinho ao lado do titulo + desloca o titulo."""
+    """Marcador geometrico vinho ao lado do titulo + desloca o titulo.
+    Define os QUATRO valores de geometria: ao materializar o xfrm, o python-pptx
+    zera os que nao forem setados (top iria a 0 e cortaria o titulo)."""
     t = ph(slide, 0)
     t.left = Inches(1.18)
+    t.top = Inches(0.4)
     t.width = Inches(11.0)
-    mk = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), Inches(0.82), Inches(0.42), Inches(0.42))
+    t.height = Inches(1.45)
+    mk = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), Inches(0.92), Inches(0.42), Inches(0.42))
     mk.fill.solid()
     mk.fill.fore_color.rgb = VINHO
     mk.line.fill.background()
