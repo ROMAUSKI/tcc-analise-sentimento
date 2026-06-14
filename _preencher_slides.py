@@ -362,8 +362,8 @@ set_body(s_conc, [
 ])
 
 # ---------- SLIDE 14 - REFERENCIAS ----------
-decorate_title(S[12])
-set_body(S[12], [
+decorate_title(s_refs)
+set_body(s_refs, [
     ("PANG, B.; LEE, L.; VAITHYANATHAN, S. Thumbs up? Sentiment classification using machine learning techniques. EMNLP, 2002.", 0),
     ("SOUZA, F.; FILHO, J. A. Sentiment analysis on Brazilian Portuguese user reviews. IEEE LA-CCI, 2022.", 0),
     ("ARAÚJO, G.; MELO, T.; FIGUEIREDO, C. M. S. Is ChatGPT an effective solver of sentiment analysis tasks in Portuguese? PROPOR, 2024.", 0),
