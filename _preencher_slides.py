@@ -373,8 +373,8 @@ set_body(s_refs, [
 ], size=14)
 
 # ---------- SLIDE 15 - ENCERRAMENTO ----------
-set_title(S[13], "Obrigado pela atenção!")
-set_lines(ph(S[13], 1), [
+set_title(s_fim, "Obrigado pela atenção!")
+set_lines(ph(s_fim, 1), [
     "Davi Romauski Meurer",
     "davimeurer@alunos.utfpr.edu.br",
     "Orientador: Prof. Marlon Marcon",
