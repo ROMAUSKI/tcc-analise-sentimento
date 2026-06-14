@@ -198,12 +198,12 @@ add_img(S[9], f"{IMG}/matriz_confusao_v3_svm_filmes.png", left=7.5, top=2.2, wid
 # ---------- SLIDE 11 - RESULTADOS (3/3) ----------
 set_title(S[10], "Resultados (3/3): Volume e Diferença entre Nichos")
 set_body(S[10], [
-    ("Triplicar o volume sintético (de 200 para 600 frases por classe) não fecha o gap no cross-domain.", 0),
-    ("Isso indica que a limitação é estrutural (diferença de distribuição), e não falta de dados.", 0),
-    ("Apps supera filmes e séries no cenário desbalanceado: vocabulário mais regular e objetivo.", 0),
-])
-shrink_body(S[10], 0.59, 1.7, 12.16, 1.5)
-add_img(S[10], f"{IMG}/comparativo_200_vs_600_movies.png", left=2.95, top=3.2, width=7.44)
+    ("Triplicar o volume sintético (200 → 600 frases/classe) não fecha o gap no cross-domain.", 0),
+    ("A limitação é estrutural (diferença de distribuição), não falta de dados.", 0),
+    ("Apps supera filmes e séries no desbalanceado: vocabulário mais regular e objetivo.", 0),
+], size=16)
+shrink_body(S[10], 0.59, 1.55, 12.16, 1.5)
+add_img(S[10], f"{IMG}/comparativo_200_vs_600_movies.png", left=3.56, top=3.2, width=6.2)
 
 # ---------- SLIDE 12 - CONCLUSAO ----------
 set_body(S[11], [
