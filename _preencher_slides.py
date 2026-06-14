@@ -204,9 +204,9 @@ set_body(s_mat, [
 ])
 
 # ---------- SLIDE 8 - METODOS (pipeline + tabela) ----------
-decorate_title(S[7])
-set_body(S[7], [("Pipeline em quatro etapas, avaliado sob cinco visões metodológicas:", 0)])
-shrink_body(S[7], 1.18, 1.55, 11.0, 0.55)
+decorate_title(s_met)
+set_body(s_met, [("Pipeline em quatro etapas, avaliado sob cinco visões metodológicas:", 0)])
+shrink_body(s_met, 1.18, 1.55, 11.0, 0.55)
 # pipeline de chevrons
 cw, cstep, ctop, ch_h = 3.25, 2.78, 2.25, 1.05
 etapas = [
