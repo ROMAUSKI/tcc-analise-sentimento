@@ -342,19 +342,19 @@ for ri, row in enumerate(exdata):
             cell.fill.fore_color.rgb = BRANCO if ri % 2 else CINZA
 
 # ---------- SLIDE 12 - RESULTADOS (4/4): volume e nichos ----------
-decorate_title(S[10])
-set_title(S[10], "Resultados (4/4): Volume e Nichos")
-set_body(S[10], [
+decorate_title(s_vol)
+set_title(s_vol, "Resultados (4/4): Volume e Nichos")
+set_body(s_vol, [
     ("Triplicar o volume sintético (200 → 600 frases/classe) não fecha o gap.", 0),
     ("A limitação é estrutural (distribuição), não falta de dados.", 0),
     ("Apps supera filmes e séries no desbalanceado: vocabulário mais objetivo.", 0),
 ], size=16)
-shrink_body(S[10], 1.18, 1.55, 11.0, 1.5)
-add_img(S[10], f"{IMG}/comparativo_200_vs_600_movies.png", left=3.56, top=3.2, width=6.2)
+shrink_body(s_vol, 1.18, 1.55, 11.0, 1.5)
+add_img(s_vol, f"{IMG}/comparativo_200_vs_600_movies.png", left=3.56, top=3.2, width=6.2)
 
 # ---------- SLIDE 13 - CONCLUSAO ----------
-decorate_title(S[11])
-set_body(S[11], [
+decorate_title(s_conc)
+set_body(s_conc, [
     ("Dados sintéticos de LLMs ainda não substituem dados reais para uso prático.", 0),
     ("A limitação é estrutural: o texto do LLM difere da review real.", 0),
     ("Continuam úteis para protótipo, pesquisa e cenários sem dados reais.", 0),
