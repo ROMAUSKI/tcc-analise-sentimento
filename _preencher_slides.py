@@ -138,22 +138,24 @@ def chevron(slide, left, top, w, h, title, sub, fill):
     r2.font.color.rgb = BRANCO
 
 
-S = prs.slides
+# Snapshot das referencias estaveis (a reordenacao do sldIdLst nao as afeta)
+(s_capa, s_sum, s_intro, s_obj, s_just, s_refteo, s_mat, s_met,
+ s_r1, s_r2, s_vol, s_conc, s_refs, s_fim) = list(prs.slides)
 
 # ---------- SLIDE 1 - CAPA ----------
-set_title(S[0], "Utilização de LLMs para Geração de Bases de Treinamento em Classificação de Sentimento: Uma Análise de Viabilidade Prática", size=28)
-set_lines(ph(S[0], 1), [
+set_title(s_capa, "Utilização de LLMs para Geração de Bases de Treinamento em Classificação de Sentimento: Uma Análise de Viabilidade Prática", size=28)
+set_lines(ph(s_capa, 1), [
     "Trabalho de Conclusão de Curso 2",
     "Discente: Davi Romauski Meurer",
     "Orientador: Prof. Marlon Marcon",
 ])
 
 # ---------- SLIDE 2 - SUMARIO ----------
-decorate_title(S[1])
+decorate_title(s_sum)
 
 # ---------- SLIDE 3 - INTRODUCAO ----------
-decorate_title(S[2])
-set_body(S[2], [
+decorate_title(s_intro)
+set_body(s_intro, [
     ("Análise de sentimento: classificar opiniões em positiva, negativa ou neutra.", 0),
     ("Treinar modelos exige datasets rotulados — caros e demorados de construir.", 0),
     ("Em português brasileiro, faltam recursos anotados.", 0),
