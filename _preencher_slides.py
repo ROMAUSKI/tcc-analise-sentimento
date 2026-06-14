@@ -184,8 +184,8 @@ set_body(s_just, [
 ])
 
 # ---------- SLIDE 6 - REFERENCIAL TEORICO ----------
-decorate_title(S[5])
-set_body(S[5], [
+decorate_title(s_refteo)
+set_body(s_refteo, [
     ("Análise de sentimento = classificação supervisionada de texto (Pang, 2002).", 0),
     ("TF-IDF com classificadores clássicos: Naive Bayes, Regressão Logística e SVM.", 0),
     ("Modelos neurais: LSTM e BERTimbau (BERT pré-treinado em português).", 0),
