@@ -163,8 +163,8 @@ set_body(s_intro, [
 ])
 
 # ---------- SLIDE 4 - OBJETIVOS ----------
-decorate_title(S[3])
-set_body(S[3], [
+decorate_title(s_obj)
+set_body(s_obj, [
     ("Objetivo geral:", 0),
     ("Avaliar a viabilidade prática de treinar classificadores de sentimento com dados sintéticos de LLMs.", 1),
     ("Objetivos específicos:", 0),
