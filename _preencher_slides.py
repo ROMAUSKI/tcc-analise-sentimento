@@ -175,8 +175,8 @@ set_body(s_obj, [
 ])
 
 # ---------- SLIDE 5 - JUSTIFICATIVA ----------
-decorate_title(S[4])
-set_body(S[4], [
+decorate_title(s_just)
+set_body(s_just, [
     ("Datasets rotulados são caros, e o português tem poucos recursos.", 0),
     ("LLMs geram texto rotulado sem anotação humana.", 0),
     ("Três LLMs reduzem o viés de uma fonte única.", 0),
