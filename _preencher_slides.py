@@ -194,8 +194,8 @@ set_body(s_refteo, [
 ])
 
 # ---------- SLIDE 7 - MATERIAIS ----------
-decorate_title(S[6])
-set_body(S[6], [
+decorate_title(s_mat)
+set_body(s_mat, [
     ("LLMs geradores: ChatGPT, Gemini e Claude.", 0),
     ("Classificadores: Naive Bayes, Reg. Logística, SVM, LSTM e BERTimbau.", 0),
     ("Stack: Python, scikit-learn, PyTorch e Hugging Face Transformers.", 0),
