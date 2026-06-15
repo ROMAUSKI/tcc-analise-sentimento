@@ -4,6 +4,7 @@ texto enxuto + visual (pipeline, cards, reality gap), sem data no rodape,
 Metodos em 2 slides, Conclusao em 3, e notas explicativas (de fixacao) em cada slide.
 Tambem gera Roteiro_Apresentacao.md com as mesmas notas."""
 import os
+import glob
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -11,10 +12,12 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(BASE, "Modelo de Apresentação para Banca de TCC.pptx")
+# localizar por glob para evitar problemas de normalizacao Unicode (acentos) no Windows
+SRC = glob.glob(os.path.join(BASE, "Modelo*Banca*.pptx"))[0]
+PASTA_APR = [p for p in glob.glob(os.path.join(BASE, "Apresenta*")) if os.path.isdir(p)][0]
 OUT_ROOT = os.path.join(BASE, "Apresentacao_TCC_Davi.pptx")
-OUT_PASTA = os.path.join(BASE, "Apresentação", "Apresentacao_TCC_Davi.pptx")
-ROTEIRO = os.path.join(BASE, "Apresentação", "Roteiro_Apresentacao.md")
+OUT_PASTA = os.path.join(PASTA_APR, "Apresentacao_TCC_Davi.pptx")
+ROTEIRO = os.path.join(PASTA_APR, "Roteiro_Apresentacao.md")
 IMG = os.path.join(BASE, "artigo", "imagens")
 VINHO = RGBColor(0x8C, 0x23, 0x32)
 BRANCO = RGBColor(0xFF, 0xFF, 0xFF)
