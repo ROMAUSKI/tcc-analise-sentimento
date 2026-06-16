@@ -300,12 +300,11 @@ decorate_title(s_met2)
 set_title(s_met2, "Métodos (2/2): Avaliação")
 set_body(s_met2, [
     ("Pré-processamento: minúsculas, remoção de pontuação e deduplicação.", 0),
-    ("Vetorização TF-IDF (clássicos); tokenizer próprio para LSTM e BERTimbau.", 0),
+    ("Vetorização TF-IDF (clássicos) e tokenizer próprio (LSTM/BERTimbau).", 0),
     ("Cinco classificadores, semente fixa (42), split 80/20 estratificado.", 0),
-    ("Avaliação em cinco visões metodológicas:", 0),
-])
-shrink_body(s_met2, 1.18, 1.6, 11.2, 1.9)
-visoes_table(s_met2, 3.75)
+], size=16)
+shrink_body(s_met2, 1.18, 1.6, 11.2, 1.35)
+visoes_table(s_met2, 3.25)
 
 # 10 RESULTADOS 1/4
 decorate_title(s_r1)
