@@ -13,10 +13,10 @@ from pptx.enum.shapes import MSO_SHAPE
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 # localizar por glob para evitar problemas de normalizacao Unicode (acentos) no Windows
-SRC = glob.glob(os.path.join(BASE, "Modelo*Banca*.pptx"))[0]
 PASTA_APR = [p for p in glob.glob(os.path.join(BASE, "Apresenta*")) if os.path.isdir(p)][0]
-OUT_ROOT = os.path.join(BASE, "Apresentacao_TCC_Davi.pptx")
+SRC = glob.glob(os.path.join(PASTA_APR, "Modelo*Banca*.pptx"))[0]
 OUT_PASTA = os.path.join(PASTA_APR, "Apresentacao_TCC_Davi.pptx")
+OUT_ROOT = os.path.join(BASE, "Apresentacao_TCC_Davi.pptx")
 ROTEIRO = os.path.join(PASTA_APR, "Roteiro_Apresentacao.md")
 IMG = os.path.join(BASE, "artigo", "imagens")
 VINHO = RGBColor(0x8C, 0x23, 0x32)
