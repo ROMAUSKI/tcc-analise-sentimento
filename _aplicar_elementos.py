@@ -97,11 +97,21 @@ def conceito_intro(slide):  # slide 3 (NAO usado — Davi ajustou)
         ("Testa", "reviews reais"), ("Funciona?", "cross-domain")], "intro", h=0.95)
 
 
+def _set_body_font(slide, size):
+    sh = _body(slide)
+    if sh is None:
+        return
+    for p in sh.text_frame.paragraphs:
+        for r in p.runs:
+            r.font.size = Pt(size)
+
+
 def sumario(slide):  # slide 2 — roteiro macro embaixo
-    mover_texto(slide, 1.65, 3.8)
-    chevrons_row(slide, 5.6, [
+    mover_texto(slide, 1.5, 4.0)
+    _set_body_font(slide, 20)
+    chevrons_row(slide, 5.75, [
         ("Contexto", "intro · objetivos"), ("Método", "5 visões"),
-        ("Resultados", "sintético × real"), ("Conclusão", "viabilidade")], "sum")
+        ("Resultados", "sintético × real"), ("Conclusão", "viabilidade")], "sum", h=0.8)
 
 
 def objetivos(slide):  # slide 4
