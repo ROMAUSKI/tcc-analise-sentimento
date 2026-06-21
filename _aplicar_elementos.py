@@ -165,8 +165,17 @@ def limpar(slide):
             sh._element.getparent().remove(sh._element)
 
 
-# idx 0-based -> funcao construtora.  DEMO: so o slide 3.
-MAPA = {2: conceito_intro}
+# idx 0-based -> funcao construtora.  (slide 3 / idx 2 ficou de fora: Davi ajustou)
+MAPA = {
+    1: sumario,
+    3: objetivos,
+    4: justificativa,
+    5: referencial,
+    6: materiais,
+    13: conclusao_objetivo,
+    14: conclusao_dificuldades,
+    15: conclusao_futuros,
+}
 
 
 def main():
