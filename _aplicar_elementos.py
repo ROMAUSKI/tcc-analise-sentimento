@@ -51,18 +51,112 @@ def mover_texto(slide, top, height):
         sh.height = Inches(height)
 
 
-def conceito_intro(slide):
-    """Pipeline conceitual do trabalho (slide 3): elemento no topo, texto desce."""
+def stat_card(slide, left, top, w, h, number, label, n):
+    box = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(left), Inches(top), Inches(w), Inches(h))
+    box.fill.solid(); box.fill.fore_color.rgb = BRANCO
+    box.line.color.rgb = VINHO; box.line.width = Pt(1.5); box.shadow.inherit = False
+    tf = box.text_frame; tf.word_wrap = True; tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p1 = tf.paragraphs[0]; p1.alignment = PP_ALIGN.CENTER
+    r1 = p1.add_run(); r1.text = number; r1.font.size = Pt(40); r1.font.bold = True; r1.font.color.rgb = VINHO
+    p2 = tf.add_paragraph(); p2.alignment = PP_ALIGN.CENTER
+    r2 = p2.add_run(); r2.text = label; r2.font.size = Pt(12); r2.font.color.rgb = PRETO
+    _tag(box, n)
+
+
+def info_card(slide, left, top, w, h, titulo, desc, n, fill=None):
+    box = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(left), Inches(top), Inches(w), Inches(h))
+    box.fill.solid()
+    if fill is not None:
+        box.fill.fore_color.rgb = fill; box.line.fill.background()
+        tcol_t, tcol_d = BRANCO, BRANCO
+    else:
+        box.fill.fore_color.rgb = BRANCO; box.line.color.rgb = VINHO; box.line.width = Pt(1.5)
+        tcol_t, tcol_d = VINHO, PRETO
+    box.shadow.inherit = False
+    tf = box.text_frame; tf.word_wrap = True; tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p1 = tf.paragraphs[0]; p1.alignment = PP_ALIGN.CENTER
+    r1 = p1.add_run(); r1.text = titulo; r1.font.size = Pt(15); r1.font.bold = True; r1.font.color.rgb = tcol_t
+    p2 = tf.add_paragraph(); p2.alignment = PP_ALIGN.CENTER
+    r2 = p2.add_run(); r2.text = desc; r2.font.size = Pt(10.5); r2.font.color.rgb = tcol_d
+    _tag(box, n)
+
+
+def chevrons_row(slide, top, items, tag, h=0.9):
+    cw, cstep = 3.25, 2.78
+    for i, (tt, sub) in enumerate(items):
+        fill = VINHO if i % 2 == 0 else CINZAESC
+        chevron(slide, 0.55 + i * cstep, top, cw, h, tt, sub, fill, f"{tag}{i}")
+
+
+# ---------------- construtores por slide ----------------
+
+def conceito_intro(slide):  # slide 3 (NAO usado — Davi ajustou)
     mover_texto(slide, 2.85, 3.85)
-    etapas = [
-        ("LLMs geram", "frases rotuladas", VINHO),
-        ("Treina", "classificador", CINZAESC),
-        ("Testa", "reviews reais", VINHO),
-        ("Funciona?", "cross-domain", CINZAESC),
-    ]
-    cw, cstep, h, top = 3.25, 2.78, 0.95, 1.62
-    for i, (tt, sub, fill) in enumerate(etapas):
-        chevron(slide, 0.55 + i * cstep, top, cw, h, tt, sub, fill, f"intro{i}")
+    chevrons_row(slide, 1.62, [
+        ("LLMs geram", "frases rotuladas"), ("Treina", "classificador"),
+        ("Testa", "reviews reais"), ("Funciona?", "cross-domain")], "intro", h=0.95)
+
+
+def sumario(slide):  # slide 2 — roteiro macro embaixo
+    mover_texto(slide, 1.65, 3.8)
+    chevrons_row(slide, 5.6, [
+        ("Contexto", "intro · objetivos"), ("Método", "5 visões"),
+        ("Resultados", "sintético × real"), ("Conclusão", "viabilidade")], "sum")
+
+
+def objetivos(slide):  # slide 4
+    mover_texto(slide, 1.65, 3.75)
+    chevrons_row(slide, 5.6, [
+        ("Assertividade", "treino sintético"), ("Coerência", "entre LLMs"),
+        ("Cross-domain", "sintético → real"), ("Dois nichos", "subjetividade")], "obj")
+
+
+def justificativa(slide):  # slide 5 — contraste
+    mover_texto(slide, 1.65, 2.8)
+    info_card(slide, 0.7, 4.6, 5.6, 1.9,
+              "Anotação humana", "cara, lenta e escassa em português", "ju0", fill=CINZAESC)
+    info_card(slide, 7.05, 4.6, 5.6, 1.9,
+              "LLMs", "geram texto já rotulado, sem anotação manual", "ju1", fill=VINHO)
+
+
+def referencial(slide):  # slide 6 — evolução dos modelos
+    mover_texto(slide, 1.65, 3.75)
+    chevrons_row(slide, 5.6, [
+        ("TF-IDF", "clássicos"), ("LSTM", "rede neural"),
+        ("BERTimbau", "pré-treino pt-BR"), ("LLMs", "geração de dados")], "ref")
+
+
+def materiais(slide):  # slide 7 — 3 categorias
+    mover_texto(slide, 1.65, 3.2)
+    info_card(slide, 0.46, 5.05, 3.9, 1.45,
+              "3 LLMs", "ChatGPT · Gemini · Claude", "mat0")
+    info_card(slide, 4.71, 5.05, 3.9, 1.45,
+              "5 classificadores", "NB · LR · SVM · LSTM · BERT", "mat1")
+    info_card(slide, 8.96, 5.05, 3.9, 1.45,
+              "2 nichos reais", "UTLC-Movies · UTLC-Apps", "mat2")
+
+
+def conclusao_objetivo(slide):  # slide 14 — stat cards
+    mover_texto(slide, 1.65, 3.1)
+    stat_card(slide, 1.16, 4.95, 5.0, 1.65, "97%", "Sintético (V1, BERTimbau)", "co0")
+    stat_card(slide, 7.16, 4.95, 5.0, 1.65, "43–56%", "Cross-domain real (V5)", "co1")
+
+
+def conclusao_dificuldades(slide):  # slide 15 — 3 cards
+    mover_texto(slide, 1.65, 3.2)
+    info_card(slide, 0.46, 5.05, 3.9, 1.45,
+              "Geração manual", "~3–4 h por nicho, via interface web", "cd0")
+    info_card(slide, 4.71, 5.05, 3.9, 1.45,
+              "RAM do Colab", "subamostra estratificada de 100 mil", "cd1")
+    info_card(slide, 8.96, 5.05, 3.9, 1.45,
+              "Paradoxo", "calibrar o sintético exige dado real", "cd2")
+
+
+def conclusao_futuros(slide):  # slide 16 — 4 chevrons
+    mover_texto(slide, 1.65, 3.75)
+    chevrons_row(slide, 5.6, [
+        ("Adaptação", "domínio: real + sint."), ("Outros nichos", "+ subjetividade"),
+        ("Prompts", "refino iterativo"), ("API", "temperatura · + LLMs")], "cf")
 
 
 def limpar(slide):
