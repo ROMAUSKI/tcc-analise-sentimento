@@ -39,10 +39,9 @@ def chevron(slide, left, top, w, h, title, sub, fill, n):
 
 
 def _body(slide):
-    for sh in slide.shapes:
-        if sh.is_placeholder and sh.placeholder_format.idx == 1:
-            return sh
-    return None
+    # o corpo e o placeholder de maior altura (titulo e n. do slide sao menores)
+    cands = [sh for sh in slide.shapes if sh.is_placeholder and sh.height]
+    return max(cands, key=lambda s: s.height) if cands else None
 
 
 def mover_texto(slide, top, height):
