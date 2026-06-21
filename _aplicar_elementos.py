@@ -38,15 +38,30 @@ def chevron(slide, left, top, w, h, title, sub, fill, n):
     _tag(ch, n)
 
 
+def _body(slide):
+    for sh in slide.shapes:
+        if sh.is_placeholder and sh.placeholder_format.idx == 1:
+            return sh
+    return None
+
+
+def mover_texto(slide, top, height):
+    sh = _body(slide)
+    if sh is not None:
+        sh.top = Inches(top)
+        sh.height = Inches(height)
+
+
 def conceito_intro(slide):
-    """Pipeline conceitual do trabalho (slide 3)."""
+    """Pipeline conceitual do trabalho (slide 3): elemento no topo, texto desce."""
+    mover_texto(slide, 2.85, 3.85)
     etapas = [
         ("LLMs geram", "frases rotuladas", VINHO),
         ("Treina", "classificador", CINZAESC),
         ("Testa", "reviews reais", VINHO),
         ("Funciona?", "cross-domain", CINZAESC),
     ]
-    cw, cstep, h, top = 3.25, 2.78, 1.0, 5.15
+    cw, cstep, h, top = 3.25, 2.78, 0.95, 1.62
     for i, (tt, sub, fill) in enumerate(etapas):
         chevron(slide, 0.55 + i * cstep, top, cw, h, tt, sub, fill, f"intro{i}")
 
