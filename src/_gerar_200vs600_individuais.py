@@ -84,7 +84,7 @@ def main():
     handles = [Patch(facecolor=COR_200, label=LAB_200),
                Patch(facecolor=COR_600, label=LAB_600)]
     ax.legend(handles=handles, loc="center", fontsize=12,
-              title="Volume sintético", title_fontsize=13, frameon=True,
+              title="Volume de treino sintético", title_fontsize=13, frameon=True,
               handlelength=2.0, borderpad=1.2, labelspacing=1.4)
     fig.tight_layout()
     out = OUT / "legenda.png"
