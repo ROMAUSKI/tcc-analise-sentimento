@@ -32,8 +32,8 @@ MODELOS_LABEL = ["Naive\nBayes", "Regressão\nLogística", "SVM\nLinear"]
 
 COR_200 = "#9aa0a6"
 COR_600 = "#1f77b4"
-LAB_200 = "200/classe (600 total)"
-LAB_600 = "600/classe (1800 total — sintético inteiro)"
+LAB_200 = "Reduzido — 600 frases no nicho"
+LAB_600 = "Completo — 1.800 frases no nicho"
 FIGSIZE = (5.0, 3.2)   # aspecto fixo 0.64 (altura/largura)
 DPI = 160
 
