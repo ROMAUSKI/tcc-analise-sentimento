@@ -60,3 +60,7 @@ desktop.ini
 # === Documentos internos (contexto/IA — não publicar no repo) ===
 BRIEFING_TCC.md
 CLAUDE.md
+
+# === Apresentacao: backups e exemplos de colegas (nao publicar) ===
+_backups/
+Exemplo *.pptx
